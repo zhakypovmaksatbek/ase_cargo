@@ -15,7 +15,7 @@ class AppConstants {
   final String saleNotification = 'saleNotification';
   final String otherNotification = 'otherNotification';
   final String mapApiKey = 'AIzaSyD9R6ile4rLR7zI_Msc2rQafNsxjnKdF10';
-  final String baseUrl = 'https://www.steakdream.kg/api/';
+  final String baseUrl = 'https://www.asecourier.kg/api/';
   final String showSnowAnimation = 'show_snow_animation';
   final String firstVisit = 'first_visit';
   final String playStoreUrl =

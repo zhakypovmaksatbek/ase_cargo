@@ -1,5 +1,4 @@
 import 'package:ase/generated/locale_keys.g.dart';
-import 'package:ase/main.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
 import 'package:ase/presentation/pages/auth/login/login_mixin.dart';
@@ -7,12 +6,12 @@ import 'package:ase/presentation/widgets/buttons/def_elevated_button.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:ase/presentation/widgets/text_fields/password_text_filed.dart';
+import 'package:ase/presentation/widgets/text_fields/phone_number_text_field.dart';
 import 'package:ase/router/app_router.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:country_code_picker_plus/country_code_picker_plus.dart';
+// import 'package:country_code_picker_plus/country_code_picker_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 @RoutePage(name: "LoginRoute")
 class LoginPage extends StatefulWidget {
@@ -30,6 +29,7 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
     super.dispose();
   }
 
+  final focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -58,13 +58,8 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
                       title: LocaleKeys.button_login.tr(),
                       textType: TextType.header),
                   SizedBox(height: 0),
-                  _buildTextField(
-                    CountryCodePicker(
-                      initialSelection: 'kg',
-                      showFlag: false,
-                      showFlagDialog: true,
-                      onChanged: (value) {},
-                    ),
+                  PhoneNumberTextField(
+                    focusNode: focusNode,
                   ),
                   PasswordTextField(
                     hintText: LocaleKeys.form_password.tr(),
@@ -73,10 +68,13 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: AppText(
-                      title: LocaleKeys.button_forgot_password.tr(),
-                      textType: TextType.subtitle,
-                      color: ColorConstants.grey,
+                    child: GestureDetector(
+                      onTap: () => router.push(ResetPasswordRoute()),
+                      child: AppText(
+                        title: LocaleKeys.button_forgot_password.tr(),
+                        textType: TextType.subtitle,
+                        color: ColorConstants.grey,
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -102,26 +100,6 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildTextField(Widget prefixIcon) {
-    return TextFormField(
-      keyboardType: TextInputType.phone,
-      textInputAction: TextInputAction.next,
-      controller: phoneController,
-      validator: validate.validateGeneral,
-      inputFormatters: [
-        FilteringTextInputFormatter.digitsOnly,
-        PhoneNumberFormatter(),
-      ],
-      onTapOutside: (event) => FocusScope.of(context).unfocus(),
-      textAlign: TextAlign.start,
-      textAlignVertical: TextAlignVertical.center,
-      decoration: InputDecoration(
-        prefixIcon: prefixIcon,
-        hintText: '(xxx) xxx-xxx',
       ),
     );
   }

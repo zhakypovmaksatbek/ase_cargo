@@ -22,6 +22,7 @@ abstract class  LocaleKeys {
   static const button_skip = 'button.skip';
   static const button_confirm = 'button.confirm';
   static const button_forgot_password = 'button.forgot_password';
+  static const button_resend_code = 'button.resend_code';
   static const button = 'button';
   static const form_phone_number = 'form.phone_number';
   static const form_password = 'form.password';
@@ -39,12 +40,21 @@ abstract class  LocaleKeys {
   static const form_have_account = 'form.have_account';
   static const form_no_account = 'form.no_account';
   static const form_confirm_phone_number = 'form.confirm_phone_number';
+  static const form_restore_access = 'form.restore_access';
   static const form = 'form';
   static const exception_cannot_be_empty = 'exception.cannot_be_empty';
   static const exception_password_min_character = 'exception.password_min_character';
   static const exception_password_not_match = 'exception.password_not_match';
+  static const exception_invalid_phone_number = 'exception.invalid_phone_number';
   static const exception = 'exception';
   static const notification_we_sent_code_to_your_phone = 'notification.we_sent_code_to_your_phone';
   static const notification = 'notification';
+  static const general_seconds = 'general.seconds';
+  static const general_create_new_password = 'general.create_new_password';
+  static const general = 'general';
+  static const navigation_verify = 'navigation.verify';
+  static const navigation_reset_password = 'navigation.reset_password';
+  static const navigation_home = 'navigation.home';
+  static const navigation = 'navigation';
 
 }

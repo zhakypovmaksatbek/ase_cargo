@@ -11,6 +11,22 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [HomePage]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute({List<PageRouteInfo>? children})
+    : super(HomeRoute.name, initialChildren: children);
+
+  static const String name = 'HomeRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const HomePage();
+    },
+  );
+}
+
+/// generated route for
 /// [LoginPage]
 class LoginRoute extends PageRouteInfo<void> {
   const LoginRoute({List<PageRouteInfo>? children})
@@ -28,35 +44,51 @@ class LoginRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [RegisterPage]
-class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
-  RegisterRoute({Key? key, List<PageRouteInfo>? children})
-    : super(
-        RegisterRoute.name,
-        args: RegisterRouteArgs(key: key),
-        initialChildren: children,
-      );
+class RegisterRoute extends PageRouteInfo<void> {
+  const RegisterRoute({List<PageRouteInfo>? children})
+    : super(RegisterRoute.name, initialChildren: children);
 
   static const String name = 'RegisterRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<RegisterRouteArgs>(
-        orElse: () => const RegisterRouteArgs(),
-      );
-      return RegisterPage(key: args.key);
+      return const RegisterPage();
     },
   );
 }
 
-class RegisterRouteArgs {
-  const RegisterRouteArgs({this.key});
+/// generated route for
+/// [ResetPasswordPage]
+class ResetPasswordRoute extends PageRouteInfo<ResetPasswordRouteArgs> {
+  ResetPasswordRoute({Key? key, List<PageRouteInfo>? children})
+    : super(
+        ResetPasswordRoute.name,
+        args: ResetPasswordRouteArgs(key: key),
+        initialChildren: children,
+      );
+
+  static const String name = 'ResetPasswordRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ResetPasswordRouteArgs>(
+        orElse: () => const ResetPasswordRouteArgs(),
+      );
+      return ResetPasswordPage(key: args.key);
+    },
+  );
+}
+
+class ResetPasswordRouteArgs {
+  const ResetPasswordRouteArgs({this.key});
 
   final Key? key;
 
   @override
   String toString() {
-    return 'RegisterRouteArgs{key: $key}';
+    return 'ResetPasswordRouteArgs{key: $key}';
   }
 }
 
@@ -81,12 +113,12 @@ class SplashRoute extends PageRouteInfo<void> {
 class VerifyRoute extends PageRouteInfo<VerifyRouteArgs> {
   VerifyRoute({
     Key? key,
-    required String phone,
-    String? code,
+    required VerifyModel model,
+    required String title,
     List<PageRouteInfo>? children,
   }) : super(
          VerifyRoute.name,
-         args: VerifyRouteArgs(key: key, phone: phone, code: code),
+         args: VerifyRouteArgs(key: key, model: model, title: title),
          initialChildren: children,
        );
 
@@ -96,22 +128,22 @@ class VerifyRoute extends PageRouteInfo<VerifyRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<VerifyRouteArgs>();
-      return VerifyPage(key: args.key, phone: args.phone, code: args.code);
+      return VerifyPage(key: args.key, model: args.model, title: args.title);
     },
   );
 }
 
 class VerifyRouteArgs {
-  const VerifyRouteArgs({this.key, required this.phone, this.code});
+  const VerifyRouteArgs({this.key, required this.model, required this.title});
 
   final Key? key;
 
-  final String phone;
+  final VerifyModel model;
 
-  final String? code;
+  final String title;
 
   @override
   String toString() {
-    return 'VerifyRouteArgs{key: $key, phone: $phone, code: $code}';
+    return 'VerifyRouteArgs{key: $key, model: $model, title: $title}';
   }
 }

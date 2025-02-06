@@ -1,4 +1,5 @@
 import 'package:ase/core/localization_service.dart';
+import 'package:ase/init_main.dart';
 import 'package:ase/presentation/constants/app_constants.dart';
 import 'package:ase/presentation/theme/app_theme.dart';
 import 'package:ase/router/app_router.dart';
@@ -11,7 +12,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await EasyLocalization.ensureInitialized();
-  runApp(ProductLocalizationService(child: MyApp()));
+  runApp(ProductLocalizationService(child: await InitMain.init()));
 }
 
 class MyApp extends StatelessWidget {

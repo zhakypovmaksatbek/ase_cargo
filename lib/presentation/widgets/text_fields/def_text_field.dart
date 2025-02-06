@@ -9,6 +9,8 @@ class DefTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final String hintText;
   final String? Function(String?)? validator;
+  final String? errorText;
+  final void Function(String)? onChanged;
 
   const DefTextField({
     super.key,
@@ -19,12 +21,15 @@ class DefTextField extends StatelessWidget {
     this.inputFormatters,
     required this.hintText,
     this.validator,
+    this.errorText,
+    this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      onChanged: onChanged  ,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       validator: validator,
@@ -32,6 +37,7 @@ class DefTextField extends StatelessWidget {
       inputFormatters: inputFormatters,
       decoration: decoration ??
           InputDecoration(
+            errorText: errorText  ,
             hintText: hintText,
           ),
     );

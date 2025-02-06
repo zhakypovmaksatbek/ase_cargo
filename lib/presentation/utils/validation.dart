@@ -27,13 +27,8 @@ final class InputValidate {
   }
 
   String? validatePassword(String? value) {
-    final passNonNullValue = value ?? '';
     if (value!.isEmpty) {
       return LocaleKeys.exception_cannot_be_empty.tr();
-    } else if (passNonNullValue.length < 6) {
-      return LocaleKeys.exception_password_min_character.tr();
-    } else if (!regexPassword.hasMatch(passNonNullValue)) {
-      return LocaleKeys.exception_password_min_character.tr();
     }
     return null;
   }

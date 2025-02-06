@@ -18,7 +18,8 @@
         "apply": "Применить",
         "skip": "Пропустить",
         "confirm": "Подтвердить",
-        "forgot_password": "Забыли пароль?"
+        "forgot_password": "Забыли пароль?",
+        "resend_code": "Отправить код повторно"
     },
     "form": {
         "phone_number": "Номер телефона",
@@ -36,15 +37,26 @@
         "signup_policy_text": "Нажимая Зарегистрироваться вы принимаете Политику конфиденциальности",
         "have_account": "Есть аккаунт? Войдите",
         "no_account": "Нет аккаунта? Зарегистрируйтесь",
-        "confirm_phone_number": "Подтвердите номер телефона"
+        "confirm_phone_number": "Подтвердите номер телефона",
+        "restore_access": "Восстоновление доступа"
     },
     "exception": {
         "cannot_be_empty": "Не может быть пустым",
         "password_min_character": "Минимальное количество символов 6",
-        "password_not_match": "Пароли не совпадают"
+        "password_not_match": "Пароли не совпадают",
+        "invalid_phone_number": "Неверный номер телефона"
     },
     "notification": {
         "we_sent_code_to_your_phone": "Мы отправили код на указанный вами номер"
+    },
+    "general": {
+        "seconds": "сек",
+        "create_new_password": "Придумайте новый пароль"
+    },
+    "navigation": {
+        "verify": "Подтверждение",
+        "reset_password": "Изменение пароля",
+        "home": "Главная"
     }
 
 }

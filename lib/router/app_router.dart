@@ -1,6 +1,9 @@
+import 'package:ase/data/models/verify_model.dart';
 import 'package:ase/presentation/pages/auth/login/login_page.dart';
 import 'package:ase/presentation/pages/auth/register/register_page.dart';
+import 'package:ase/presentation/pages/auth/reset_password/reset_password.dart';
 import 'package:ase/presentation/pages/auth/verify/verify_page.dart';
+import 'package:ase/presentation/pages/home/home_page.dart';
 import 'package:ase/presentation/pages/splash/splash_page.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -15,5 +18,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: LoginRoute.page, path: "/login"),
         AutoRoute(page: RegisterRoute.page, path: "/register"),
         AutoRoute(page: VerifyRoute.page, path: "/verify"),
+        AutoRoute(page: ResetPasswordRoute.page, path: "/reset_password"),
+        AutoRoute(page: HomeRoute.page, path: "/home"),
       ];
 }

@@ -9,11 +9,13 @@ class AppTheme {
         scaffoldBackgroundColor: ColorConstants.white,
         hintColor: ColorConstants.grey,
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          error: ColorConstants.red,
-        ),
+            error: ColorConstants.red, surface: ColorConstants.lightGrey),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: ColorConstants.lightGrey,
+          hintStyle: TextStyle(
+            color: ColorConstants.grey,
+          ),
           errorMaxLines: 2,
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(14),
