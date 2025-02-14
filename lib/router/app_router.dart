@@ -4,7 +4,12 @@ import 'package:ase/presentation/pages/auth/register/register_page.dart';
 import 'package:ase/presentation/pages/auth/reset_password/reset_password.dart';
 import 'package:ase/presentation/pages/auth/verify/verify_page.dart';
 import 'package:ase/presentation/pages/home/home_page.dart';
+import 'package:ase/presentation/pages/main/main_page.dart';
+import 'package:ase/presentation/pages/order/create_order_page.dart';
+import 'package:ase/presentation/pages/profile/profile_page.dart';
 import 'package:ase/presentation/pages/splash/splash_page.dart';
+import 'package:ase/presentation/pages/support/support_page.dart';
+import 'package:ase/presentation/pages/tracking/tracking_page.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +24,23 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: RegisterRoute.page, path: "/register"),
         AutoRoute(page: VerifyRoute.page, path: "/verify"),
         AutoRoute(page: ResetPasswordRoute.page, path: "/reset_password"),
-        AutoRoute(page: HomeRoute.page, path: "/home"),
+        AutoRoute(page: MainRoute.page, path: "/main", children: [
+          AutoRoute(page: HomeRoute.page, path: "home", initial: true),
+          AutoRoute(page: CreateOrderRoute.page, path: "create_order"),
+          AutoRoute(page: SupportRoute.page, path: "support"),
+          AutoRoute(page: TrackingRoute.page, path: "tracking"),
+          AutoRoute(
+              page: ProfileRouterRoute.page,
+              path: "profileRouter",
+              children: [
+                AutoRoute(
+                    page: ProfileRoute.page, path: "profile", initial: true),
+              ]),
+        ]),
       ];
+}
+
+@RoutePage()
+class ProfileRouterPage extends AutoRouter {
+  const ProfileRouterPage({super.key});
 }

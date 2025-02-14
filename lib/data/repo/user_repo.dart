@@ -15,6 +15,7 @@ class UserRepo implements IUserRepo {
     );
     final token = TokenModel.fromJson(response.data);
     await AppManager.instance.setToken(accessToken: token.access ?? "");
+    await AppManager.instance.setIsLogin(true);
   }
 
   @override

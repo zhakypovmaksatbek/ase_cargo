@@ -33,7 +33,7 @@ class CashedImages extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return ClipRRect(
-      borderRadius: borderRadius ?? BorderRadius.circular(imageRadius ?? 10),
+      borderRadius: borderRadius ?? BorderRadius.circular(imageRadius ?? 0),
       child: imageUrl.isNotEmpty
           ? CachedNetworkImage(
               fit: fit ?? BoxFit.cover,

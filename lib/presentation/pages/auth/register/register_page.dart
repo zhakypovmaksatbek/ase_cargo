@@ -51,6 +51,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
           error = state.message;
         }
         return Scaffold(
+          appBar: AppBar(),
           body: Center(
             child: SingleChildScrollView(
               child: Padding(
@@ -180,7 +181,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
     } else if (state is RegisterError) {
       if (state.message.detail != null) {
         CherryToast.error(
-          title: Text(state.message.detail ?? ""),
+          title: Text(LocaleKeys.exception_exception.tr()),
           description: Text(state.message.detail ?? ""),
           animationType: AnimationType.fromTop,
         ).show(context);

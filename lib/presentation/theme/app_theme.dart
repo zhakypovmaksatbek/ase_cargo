@@ -6,8 +6,19 @@ class AppTheme {
         fontFamily: "EuclidCircular",
         useMaterial3: true,
         primaryColor: ColorConstants.primary,
-        scaffoldBackgroundColor: ColorConstants.white,
+        scaffoldBackgroundColor: ColorConstants.backgroundLight,
         hintColor: ColorConstants.grey,
+        appBarTheme: AppBarTheme(
+          backgroundColor: ColorConstants.backgroundLight,
+          surfaceTintColor: ColorConstants.backgroundLight,
+          centerTitle: true,
+          elevation: 0,
+          titleTextStyle: TextStyle(
+            color: ColorConstants.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
             error: ColorConstants.red, surface: ColorConstants.lightGrey),
         inputDecorationTheme: InputDecorationTheme(

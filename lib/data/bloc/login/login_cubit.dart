@@ -1,4 +1,3 @@
-
 import 'package:ase/data/models/login_model.dart';
 import 'package:ase/data/repo/user_repo.dart';
 import 'package:dio/dio.dart';
@@ -17,7 +16,7 @@ class LoginCubit extends Cubit<LoginState> {
       await _userRepo.login(model);
       emit(LoginSuccess());
     } on DioException catch (e) {
-      emit(LoginError(e.response?.data['detail'] ?? ""));
+      emit(LoginError(LoginErrorModel.fromJson(e.response?.data)));
     }
   }
 }

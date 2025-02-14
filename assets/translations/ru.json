@@ -19,7 +19,9 @@
         "skip": "Пропустить",
         "confirm": "Подтвердить",
         "forgot_password": "Забыли пароль?",
-        "resend_code": "Отправить код повторно"
+        "resend_code": "Отправить код повторно",
+        "read_more": "Читать ещё",
+        "read_less": "Читать меньше"
     },
     "form": {
         "phone_number": "Номер телефона",
@@ -44,19 +46,32 @@
         "cannot_be_empty": "Не может быть пустым",
         "password_min_character": "Минимальное количество символов 6",
         "password_not_match": "Пароли не совпадают",
-        "invalid_phone_number": "Неверный номер телефона"
+        "invalid_phone_number": "Неверный номер телефона",
+        "exception": "Ошибка",
+        "something_went_wrong_try_again": "Что-то пошло не так, попробуйте еще раз"
     },
     "notification": {
         "we_sent_code_to_your_phone": "Мы отправили код на указанный вами номер"
     },
     "general": {
         "seconds": "сек",
-        "create_new_password": "Придумайте новый пароль"
+        "create_new_password": "Придумайте новый пароль",
+        "news": "Новости",
+        "our_services": "Наши услуги",
+        "read_reviews": "Читайте отзывы о нас",
+        "questions_and_answers": "Вопросы и ответы",
+        "reviews": "Отзывы"
+        
     },
     "navigation": {
         "verify": "Подтверждение",
         "reset_password": "Изменение пароля",
-        "home": "Главная"
+        "home": "Главная",
+        "notifications": "Уведомления",
+        "profile": "Профиль",
+        "tracking": "Трекинг",
+        "cabinet": "Кабинет",
+        "support": "Поддержка"
     }
 
 }

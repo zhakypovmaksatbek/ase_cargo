@@ -11,6 +11,22 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [CreateOrderPage]
+class CreateOrderRoute extends PageRouteInfo<void> {
+  const CreateOrderRoute({List<PageRouteInfo>? children})
+    : super(CreateOrderRoute.name, initialChildren: children);
+
+  static const String name = 'CreateOrderRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CreateOrderPage();
+    },
+  );
+}
+
+/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -38,6 +54,54 @@ class LoginRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const LoginPage();
+    },
+  );
+}
+
+/// generated route for
+/// [MainPage]
+class MainRoute extends PageRouteInfo<void> {
+  const MainRoute({List<PageRouteInfo>? children})
+    : super(MainRoute.name, initialChildren: children);
+
+  static const String name = 'MainRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const MainPage();
+    },
+  );
+}
+
+/// generated route for
+/// [ProfilePage]
+class ProfileRoute extends PageRouteInfo<void> {
+  const ProfileRoute({List<PageRouteInfo>? children})
+    : super(ProfileRoute.name, initialChildren: children);
+
+  static const String name = 'ProfileRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ProfilePage();
+    },
+  );
+}
+
+/// generated route for
+/// [ProfileRouterPage]
+class ProfileRouterRoute extends PageRouteInfo<void> {
+  const ProfileRouterRoute({List<PageRouteInfo>? children})
+    : super(ProfileRouterRoute.name, initialChildren: children);
+
+  static const String name = 'ProfileRouterRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ProfileRouterPage();
     },
   );
 }
@@ -104,6 +168,38 @@ class SplashRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const SplashPage();
+    },
+  );
+}
+
+/// generated route for
+/// [SupportPage]
+class SupportRoute extends PageRouteInfo<void> {
+  const SupportRoute({List<PageRouteInfo>? children})
+    : super(SupportRoute.name, initialChildren: children);
+
+  static const String name = 'SupportRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SupportPage();
+    },
+  );
+}
+
+/// generated route for
+/// [TrackingPage]
+class TrackingRoute extends PageRouteInfo<void> {
+  const TrackingRoute({List<PageRouteInfo>? children})
+    : super(TrackingRoute.name, initialChildren: children);
+
+  static const String name = 'TrackingRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TrackingPage();
     },
   );
 }

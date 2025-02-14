@@ -16,3 +16,19 @@ class LoginModel {
     return data;
   }
 }
+
+class LoginErrorModel {
+  String? detail;
+  List<String>? phone;
+  List<String>? password;
+
+  LoginErrorModel({this.detail, this.phone, this.password});
+
+  LoginErrorModel.fromJson(Map<String, dynamic> json) {
+    detail = json['detail'];
+    phone =
+        (json['phone'] as List<dynamic>?)?.map((e) => e.toString()).toList();
+    password =
+        (json['password'] as List<dynamic>?)?.map((e) => e.toString()).toList();
+  }
+}

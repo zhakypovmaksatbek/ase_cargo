@@ -4,7 +4,7 @@ final class ColorConstants {
   static const Color primary = Color(0xff05028D);
   static const Color orange = Color(0xffF7BC00);
   static const Color orangeWithOpacity = Color.fromARGB(136, 240, 152, 28);
-  static const Color background = Color(0xff121212);
+  static const Color backgroundLight = Color(0xfff3f3f3);
   static const Color black = Color(0xff0a0a0a);
   static const Color yellow = Color(0xffF2BE0B);
   static const Color white = Color(0xffFFFFFF);

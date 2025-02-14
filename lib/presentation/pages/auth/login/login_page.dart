@@ -1,3 +1,4 @@
+import 'package:ase/data/bloc/login/login_cubit.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
@@ -9,9 +10,12 @@ import 'package:ase/presentation/widgets/text_fields/password_text_filed.dart';
 import 'package:ase/presentation/widgets/text_fields/phone_number_text_field.dart';
 import 'package:ase/router/app_router.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
 // import 'package:country_code_picker_plus/country_code_picker_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage(name: "LoginRoute")
 class LoginPage extends StatefulWidget {
@@ -24,7 +28,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> with LoginMixin {
   @override
   void dispose() {
-    phoneController.dispose();
     passwordController.dispose();
     super.dispose();
   }
@@ -33,74 +36,98 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: formKey,
-              onChanged: validateForm,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                spacing: 14,
-                children: [
-                  Center(
-                    child: CustomAssetImage(
-                      path: AssetConstants.icon.png,
-                      width: 120,
-                      height: 120,
-                    ),
-                  ),
-                  SizedBox(height: size.height * 0.04),
-                  AppText(
-                      title: LocaleKeys.button_login.tr(),
-                      textType: TextType.header),
-                  SizedBox(height: 0),
-                  PhoneNumberTextField(
-                    focusNode: focusNode,
-                  ),
-                  PasswordTextField(
-                    hintText: LocaleKeys.form_password.tr(),
-                    controller: passwordController,
-                    validator: validate.validatePassword,
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: GestureDetector(
-                      onTap: () => router.push(ResetPasswordRoute()),
-                      child: AppText(
-                        title: LocaleKeys.button_forgot_password.tr(),
-                        textType: TextType.subtitle,
-                        color: ColorConstants.grey,
+    return BlocListener<LoginCubit, LoginState>(
+      listener: listener,
+      child: Scaffold(
+        body: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: formKey,
+                onChanged: validateForm,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  spacing: 14,
+                  children: [
+                    Center(
+                      child: CustomAssetImage(
+                        path: AssetConstants.icon.png,
+                        width: 120,
+                        height: 120,
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ValueListenableBuilder(
-                        valueListenable: ready,
-                        builder: (context, value, child) {
-                          return DefElevatedButton(
-                            text: LocaleKeys.button_login.tr(),
-                            onPressed: value ? () {} : null,
-                          );
-                        }),
-                  ),
-                  SizedBox(height: 0),
-                  GestureDetector(
-                    onTap: () => router.push(RegisterRoute()),
-                    child: AppText(
-                        title: LocaleKeys.form_no_account.tr(),
-                        textType: TextType.body),
-                  )
-                ],
+                    SizedBox(height: size.height * 0.04),
+                    AppText(
+                        title: LocaleKeys.button_login.tr(),
+                        textType: TextType.header),
+                    SizedBox(height: 0),
+                    PhoneNumberTextField(
+                      focusNode: focusNode,
+                      onChanged: (p0) {
+                        phone = p0;
+                      },
+                    ),
+                    PasswordTextField(
+                      hintText: LocaleKeys.form_password.tr(),
+                      controller: passwordController,
+                      validator: validate.validatePassword,
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () => router.push(ResetPasswordRoute()),
+                        child: AppText(
+                          title: LocaleKeys.button_forgot_password.tr(),
+                          textType: TextType.subtitle,
+                          color: ColorConstants.grey,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ValueListenableBuilder(
+                          valueListenable: ready,
+                          builder: (context, value, child) {
+                            return DefElevatedButton(
+                              text: LocaleKeys.button_login.tr(),
+                              onPressed: value
+                                  ? () {
+                                      login(context);
+                                    }
+                                  : null,
+                            );
+                          }),
+                    ),
+                    SizedBox(height: 0),
+                    GestureDetector(
+                      onTap: () => router.push(RegisterRoute()),
+                      child: AppText(
+                          title: LocaleKeys.form_no_account.tr(),
+                          textType: TextType.body),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
         ),
       ),
     );
+  }
+
+  void listener(context, state) {
+    if (state is LoginError) {
+      if (state.message.detail != null) {
+        CherryToast.error(
+          title: Text(LocaleKeys.exception_exception.tr()),
+          description: Text(state.message.detail ?? ""),
+          animationType: AnimationType.fromTop,
+        ).show(context);
+      }
+    } else if (state is LoginSuccess) {
+      router.replaceAll([HomeRoute()]);
+    }
   }
 }

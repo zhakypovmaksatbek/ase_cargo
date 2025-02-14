@@ -23,6 +23,8 @@ abstract class  LocaleKeys {
   static const button_confirm = 'button.confirm';
   static const button_forgot_password = 'button.forgot_password';
   static const button_resend_code = 'button.resend_code';
+  static const button_read_more = 'button.read_more';
+  static const button_read_less = 'button.read_less';
   static const button = 'button';
   static const form_phone_number = 'form.phone_number';
   static const form_password = 'form.password';
@@ -46,15 +48,27 @@ abstract class  LocaleKeys {
   static const exception_password_min_character = 'exception.password_min_character';
   static const exception_password_not_match = 'exception.password_not_match';
   static const exception_invalid_phone_number = 'exception.invalid_phone_number';
+  static const exception_exception = 'exception.exception';
+  static const exception_something_went_wrong_try_again = 'exception.something_went_wrong_try_again';
   static const exception = 'exception';
   static const notification_we_sent_code_to_your_phone = 'notification.we_sent_code_to_your_phone';
   static const notification = 'notification';
   static const general_seconds = 'general.seconds';
   static const general_create_new_password = 'general.create_new_password';
+  static const general_news = 'general.news';
+  static const general_our_services = 'general.our_services';
+  static const general_read_reviews = 'general.read_reviews';
+  static const general_questions_and_answers = 'general.questions_and_answers';
+  static const general_reviews = 'general.reviews';
   static const general = 'general';
   static const navigation_verify = 'navigation.verify';
   static const navigation_reset_password = 'navigation.reset_password';
   static const navigation_home = 'navigation.home';
+  static const navigation_notifications = 'navigation.notifications';
+  static const navigation_profile = 'navigation.profile';
+  static const navigation_tracking = 'navigation.tracking';
+  static const navigation_cabinet = 'navigation.cabinet';
+  static const navigation_support = 'navigation.support';
   static const navigation = 'navigation';
 
 }

@@ -1,3 +1,4 @@
+import 'package:ase/core/app_manager.dart';
 import 'package:ase/main.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
@@ -22,8 +23,13 @@ class _SplashPageState extends State<SplashPage> {
 
   final router = getIt<AppRouter>();
   Future<void> _navigateToLogin() async {
+    bool isLogin = await AppManager.instance.getIsLogin();
     await Future.delayed(const Duration(seconds: 3), () {
-      router.replace(const LoginRoute());
+      if (isLogin) {
+        router.replace(const MainRoute());
+      } else {
+        router.replace(const LoginRoute());
+      }
     });
   }
 
