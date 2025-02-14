@@ -68,7 +68,7 @@ class _MainPageState extends State<MainPage> {
                     LocaleKeys.navigation_home.tr(), 0, tabsRouter),
                 _buildNavItem(AssetConstants.search.svg,
                     LocaleKeys.navigation_tracking.tr(), 1, tabsRouter),
-                const SizedBox(width: 50), // FAB için boşluk
+                const SizedBox(width: 50),
                 _buildNavItem(AssetConstants.support.svg,
                     LocaleKeys.navigation_support.tr(), 3, tabsRouter),
                 _buildNavItem(AssetConstants.profile.svg,
