@@ -29,7 +29,7 @@ class CustomAssetImage extends StatelessWidget {
             ? SvgPicture.asset(path,
                 colorFilter: svgColor != null
                     ? ColorFilter.mode(
-                        theme.iconTheme.color!,
+                        svgColor ?? theme.iconTheme.color!,
                         BlendMode.srcIn,
                       )
                     : null,

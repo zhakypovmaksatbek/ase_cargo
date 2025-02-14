@@ -7,22 +7,27 @@ class CustomBoxDecoration extends BoxDecoration {
             color: ColorConstants.white,
             borderRadius: BorderRadius.circular(16));
 
-  static BoxDecoration bodyContainerDecoration() {
+  static BoxDecoration circleDecoration() {
     return const BoxDecoration(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(30),
-        ),
-        color: ColorConstants.white);
+        shape: BoxShape.circle, color: ColorConstants.white);
   }
 }
 
 class BoxDecorationValues {
-  static final List<BoxShadow> boxShadow = [
+  static final List<BoxShadow> defBoxShadow = [
     BoxShadow(
       color: ColorConstants.grey.withValues(alpha: 0.5),
       blurRadius: 20,
       spreadRadius: 2,
       offset: const Offset(0, 6),
     ),
+  ];
+  static final List<BoxShadow> listTileBoxShadow = [
+    BoxShadow(
+        color: ColorConstants.grey.withValues(alpha: .3),
+        blurRadius: 14,
+        spreadRadius: 0.5,
+        offset: Offset(0, 0),
+        blurStyle: BlurStyle.normal)
   ];
 }

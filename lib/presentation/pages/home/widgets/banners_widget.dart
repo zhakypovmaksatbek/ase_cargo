@@ -9,9 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class BannersWidget extends StatelessWidget {
-  BannersWidget({super.key});
+class BannersWidget extends StatefulWidget {
+  const BannersWidget({super.key});
+
+  @override
+  State<BannersWidget> createState() => _BannersWidgetState();
+}
+
+class _BannersWidgetState extends State<BannersWidget> {
   List<Banners>? banners = [];
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -30,10 +37,11 @@ class BannersWidget extends StatelessWidget {
             ),
             sliver: SliverToBoxAdapter(
                 child: SizedBox(
-              height: 132,
+              height: size.width * .35,
               child: PageView.builder(
                   itemCount: banners?.length ?? 0,
                   scrollDirection: Axis.horizontal,
+                  pageSnapping: true,
                   itemBuilder: (context, index) {
                     final banner = banners?[index];
                     return InkWell(
@@ -59,6 +67,7 @@ class BannersWidget extends StatelessWidget {
   }
 
   final router = getIt<AppRouter>();
+
   Future<void> _navigate(Banners? banner) async {
     switch (banner?.type) {
       case "link":

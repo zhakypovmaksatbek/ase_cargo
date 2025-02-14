@@ -27,7 +27,7 @@ class QuestionsWidget extends StatelessWidget {
                 color: ColorConstants.white,
                 borderRadius: BorderRadius.circular(16),
                 boxShadow:
-                    BoxDecorationValues.boxShadow, // Gölgeyi burada ekledik
+                    BoxDecorationValues.defBoxShadow, // Gölgeyi burada ekledik
               ),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

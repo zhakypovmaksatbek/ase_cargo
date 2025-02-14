@@ -5,6 +5,7 @@ import 'package:ase/presentation/constants/color_constants.dart';
 import 'package:ase/presentation/pages/auth/login/login_mixin.dart';
 import 'package:ase/presentation/widgets/buttons/def_elevated_button.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
+import 'package:ase/presentation/widgets/loading/loading_widget.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:ase/presentation/widgets/text_fields/password_text_filed.dart';
 import 'package:ase/presentation/widgets/text_fields/phone_number_text_field.dart';
@@ -85,21 +86,29 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ValueListenableBuilder(
-                          valueListenable: ready,
-                          builder: (context, value, child) {
-                            return DefElevatedButton(
-                              text: LocaleKeys.button_login.tr(),
-                              onPressed: value
-                                  ? () {
-                                      login(context);
-                                    }
-                                  : null,
-                            );
-                          }),
-                    ),
+                    ValueListenableBuilder(
+                        valueListenable: ready,
+                        builder: (context, value, child) {
+                          return BlocBuilder<LoginCubit, LoginState>(
+                            builder: (context, state) {
+                              if (state is LoginLoading) {
+                                return LoadingWidget();
+                              } else {
+                                return SizedBox(
+                                  width: double.infinity,
+                                  child: DefElevatedButton(
+                                    text: LocaleKeys.button_login.tr(),
+                                    onPressed: value
+                                        ? () {
+                                            login(context);
+                                          }
+                                        : null,
+                                  ),
+                                );
+                              }
+                            },
+                          );
+                        }),
                     SizedBox(height: 0),
                     GestureDetector(
                       onTap: () => router.push(RegisterRoute()),

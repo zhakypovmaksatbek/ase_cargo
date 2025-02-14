@@ -25,6 +25,8 @@ abstract class  LocaleKeys {
   static const button_resend_code = 'button.resend_code';
   static const button_read_more = 'button.read_more';
   static const button_read_less = 'button.read_less';
+  static const button_logout = 'button.logout';
+  static const button_delete_account = 'button.delete_account';
   static const button = 'button';
   static const form_phone_number = 'form.phone_number';
   static const form_password = 'form.password';
@@ -69,6 +71,13 @@ abstract class  LocaleKeys {
   static const navigation_tracking = 'navigation.tracking';
   static const navigation_cabinet = 'navigation.cabinet';
   static const navigation_support = 'navigation.support';
+  static const navigation_requests = 'navigation.requests';
+  static const navigation_my_reviews = 'navigation.my_reviews';
+  static const navigation_language = 'navigation.language';
+  static const navigation_userInfo = 'navigation.userInfo';
+  static const navigation_aboutApp = 'navigation.aboutApp';
+  static const navigation_termsOfUse = 'navigation.termsOfUse';
+  static const navigation_order_history = 'navigation.order_history';
   static const navigation = 'navigation';
 
 }

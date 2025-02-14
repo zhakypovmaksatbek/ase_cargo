@@ -11,7 +11,12 @@ enum AssetConstants {
   search,
   support,
   profile,
-  add
+  add,
+  request,
+  history,
+  myReview,
+  language,
+  userInfo
 }
 
 extension AssetConstantsExtension on AssetConstants {

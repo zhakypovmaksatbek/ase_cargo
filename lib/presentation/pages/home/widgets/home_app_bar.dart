@@ -34,6 +34,7 @@ class HomeAppBar extends StatelessWidget {
               border: Border.all(color: ColorConstants.grey)),
           child: CustomAssetImage(
             path: AssetConstants.notification.svg,
+            svgColor: ColorConstants.primary,
             isSvg: true,
           ),
         ),

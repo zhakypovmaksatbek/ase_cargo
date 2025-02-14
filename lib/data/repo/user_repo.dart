@@ -19,12 +19,12 @@ class UserRepo implements IUserRepo {
   }
 
   @override
-  Future<RegisterResponceModel> register(RegisterModel model) async {
+  Future<RegisterResponseModel> register(RegisterModel model) async {
     final response = await dio.post(
       "v1/auth/register/",
       model.toJson(),
     );
-    return RegisterResponceModel.fromJson(response.data);
+    return RegisterResponseModel.fromJson(response.data);
   }
 
   @override
@@ -37,18 +37,18 @@ class UserRepo implements IUserRepo {
   }
 
   @override
-  Future<RegisterResponceModel> resentCode(String phone) async {
+  Future<RegisterResponseModel> resentCode(String phone) async {
     final response = await dio.post(
       "v1/auth/verification/otp/send/",
       {"phone": phone},
     );
-    return RegisterResponceModel.fromJson(response.data);
+    return RegisterResponseModel.fromJson(response.data);
   }
 }
 
 abstract class IUserRepo {
-  Future<RegisterResponceModel> register(RegisterModel model);
+  Future<RegisterResponseModel> register(RegisterModel model);
   Future<void> login(LoginModel model);
   Future<VerifyModel> verify(VerifyModel model);
-  Future<RegisterResponceModel> resentCode(String phone);
+  Future<RegisterResponseModel> resentCode(String phone);
 }

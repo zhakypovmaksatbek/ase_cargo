@@ -52,9 +52,15 @@ class _MainPageState extends State<MainPage> {
           ),
           bottomNavigationBar: BottomAppBar(
             notchMargin: 0,
-            elevation: 8,
+            elevation: 18,
             shadowColor: ColorConstants.black,
-            
+            shape: const AutomaticNotchedShape(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(32),
+                ),
+              ),
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

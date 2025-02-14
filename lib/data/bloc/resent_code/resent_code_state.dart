@@ -12,7 +12,7 @@ final class ResentCodeInitial extends ResentCodeState {}
 final class ResentCodeLoading extends ResentCodeState {}
 
 final class ResentCodeSuccess extends ResentCodeState {
-  final RegisterResponceModel model;
+  final RegisterResponseModel model;
 
   const ResentCodeSuccess(this.model);
 

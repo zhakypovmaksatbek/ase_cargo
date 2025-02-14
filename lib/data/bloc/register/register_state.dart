@@ -12,7 +12,7 @@ final class RegisterInitial extends RegisterState {}
 final class RegisterLoading extends RegisterState {}
 
 final class RegisterSuccess extends RegisterState {
-  final RegisterResponceModel model;
+  final RegisterResponseModel model;
   const RegisterSuccess(this.model);
 }
 

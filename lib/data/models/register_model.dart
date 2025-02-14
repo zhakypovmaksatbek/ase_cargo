@@ -27,13 +27,13 @@ class RegisterModel {
   }
 }
 
-class RegisterResponceModel {
+class RegisterResponseModel {
   String? verifyToken;
   String? testCode;
 
-  RegisterResponceModel({this.verifyToken, this.testCode});
+  RegisterResponseModel({this.verifyToken, this.testCode});
 
-  RegisterResponceModel.fromJson(Map<String, dynamic> json) {
+  RegisterResponseModel.fromJson(Map<String, dynamic> json) {
     verifyToken = json['verify_token'];
     testCode = json['test_code'];
   }

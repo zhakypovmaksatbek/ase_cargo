@@ -7,6 +7,7 @@ import 'package:ase/presentation/pages/auth/register/register_mixin.dart';
 import 'package:ase/presentation/utils/validation.dart';
 import 'package:ase/presentation/widgets/buttons/def_elevated_button.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
+import 'package:ase/presentation/widgets/loading/loading_widget.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:ase/presentation/widgets/text_fields/def_text_field.dart';
 import 'package:ase/presentation/widgets/text_fields/password_text_filed.dart';
@@ -146,17 +147,24 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                           context.read<RegisterCubit>().clearError("password");
                         },
                       ),
-                      Container(
-                        margin: EdgeInsets.only(top: 6),
-                        width: double.infinity,
-                        child: ValueListenableBuilder(
-                            valueListenable: ready,
-                            builder: (context, value, child) {
-                              return DefElevatedButton(
-                                text: LocaleKeys.button_signup.tr(),
-                                onPressed: value ? onReady : null,
-                              );
-                            }),
+                      BlocBuilder<RegisterCubit, RegisterState>(
+                        builder: (context, state) {
+                          if (state is RegisterLoading) {
+                            return LoadingWidget();
+                          }
+                          return Container(
+                            margin: EdgeInsets.only(top: 6),
+                            width: double.infinity,
+                            child: ValueListenableBuilder(
+                                valueListenable: ready,
+                                builder: (context, value, child) {
+                                  return DefElevatedButton(
+                                    text: LocaleKeys.button_signup.tr(),
+                                    onPressed: value ? onReady : null,
+                                  );
+                                }),
+                          );
+                        },
                       ),
                     ],
                   ),

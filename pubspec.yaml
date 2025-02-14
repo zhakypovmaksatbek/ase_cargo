@@ -69,6 +69,8 @@ dependencies:
 
   #Bloc
   flutter_bloc: ^9.0.0
+
+  # Equatable
   equatable: ^2.0.7
   nested: ^1.0.0
   story: ^1.1.0
@@ -76,6 +78,7 @@ dependencies:
   url_launcher: ^6.3.1
   badges: ^3.1.2
   persistent_bottom_nav_bar: ^6.2.1
+
 
 dev_dependencies:
   flutter_test:

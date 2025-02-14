@@ -37,7 +37,9 @@ class CodegenLoader extends AssetLoader{
     "forgot_password": "Забыли пароль?",
     "resend_code": "Отправить код повторно",
     "read_more": "Читать ещё",
-    "read_less": "Читать меньше"
+    "read_less": "Читать меньше",
+    "logout": "Выйти из профиля",
+    "delete_account": "Удалить профиль"
   },
   "form": {
     "phone_number": "Номер телефона",
@@ -86,7 +88,14 @@ class CodegenLoader extends AssetLoader{
     "profile": "Профиль",
     "tracking": "Трекинг",
     "cabinet": "Кабинет",
-    "support": "Поддержка"
+    "support": "Поддержка",
+    "requests": "Заявки",
+    "my_reviews": "Мои отзывы",
+    "language": "Язык",
+    "userInfo": "Личные данные",
+    "aboutApp": "О приложении",
+    "termsOfUse": "Условия использования",
+    "order_history": "История заказов"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": _ru};
