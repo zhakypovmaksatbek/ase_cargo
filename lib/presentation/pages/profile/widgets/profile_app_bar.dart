@@ -12,7 +12,6 @@ class ProfileAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       expandedHeight: 200,
-      pinned: true,
       floating: false,
       snap: false,
       flexibleSpace: FlexibleSpaceBar(

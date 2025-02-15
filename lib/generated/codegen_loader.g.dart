@@ -39,7 +39,9 @@ class CodegenLoader extends AssetLoader{
     "read_more": "Читать ещё",
     "read_less": "Читать меньше",
     "logout": "Выйти из профиля",
-    "delete_account": "Удалить профиль"
+    "delete_account": "Удалить профиль",
+    "exit": "Выйти",
+    "ok": "Ок"
   },
   "form": {
     "phone_number": "Номер телефона",
@@ -69,7 +71,8 @@ class CodegenLoader extends AssetLoader{
     "something_went_wrong_try_again": "Что-то пошло не так, попробуйте еще раз"
   },
   "notification": {
-    "we_sent_code_to_your_phone": "Мы отправили код на указанный вами номер"
+    "we_sent_code_to_your_phone": "Мы отправили код на указанный вами номер",
+    "exit_account": "Вы действительно хотите выйти из своего аккаунта?"
   },
   "general": {
     "seconds": "сек",

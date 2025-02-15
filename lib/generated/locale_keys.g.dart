@@ -27,6 +27,8 @@ abstract class  LocaleKeys {
   static const button_read_less = 'button.read_less';
   static const button_logout = 'button.logout';
   static const button_delete_account = 'button.delete_account';
+  static const button_exit = 'button.exit';
+  static const button_ok = 'button.ok';
   static const button = 'button';
   static const form_phone_number = 'form.phone_number';
   static const form_password = 'form.password';
@@ -54,6 +56,7 @@ abstract class  LocaleKeys {
   static const exception_something_went_wrong_try_again = 'exception.something_went_wrong_try_again';
   static const exception = 'exception';
   static const notification_we_sent_code_to_your_phone = 'notification.we_sent_code_to_your_phone';
+  static const notification_exit_account = 'notification.exit_account';
   static const notification = 'notification';
   static const general_seconds = 'general.seconds';
   static const general_create_new_password = 'general.create_new_password';
