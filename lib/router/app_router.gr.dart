@@ -75,6 +75,40 @@ class MainRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [OrderDetailPage]
+class OrderDetailRoute extends PageRouteInfo<OrderDetailRouteArgs> {
+  OrderDetailRoute({Key? key, List<PageRouteInfo>? children})
+    : super(
+        OrderDetailRoute.name,
+        args: OrderDetailRouteArgs(key: key),
+        initialChildren: children,
+      );
+
+  static const String name = 'OrderDetailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<OrderDetailRouteArgs>(
+        orElse: () => const OrderDetailRouteArgs(),
+      );
+      return OrderDetailPage(key: args.key);
+    },
+  );
+}
+
+class OrderDetailRouteArgs {
+  const OrderDetailRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'OrderDetailRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
 /// [OrderHistory]
 class OrderHistoryRoute extends PageRouteInfo<void> {
   const OrderHistoryRoute({List<PageRouteInfo>? children})
@@ -202,6 +236,22 @@ class ResetPasswordRouteArgs {
   String toString() {
     return 'ResetPasswordRouteArgs{key: $key}';
   }
+}
+
+/// generated route for
+/// [SenderFormView]
+class SenderFormRoute extends PageRouteInfo<void> {
+  const SenderFormRoute({List<PageRouteInfo>? children})
+    : super(SenderFormRoute.name, initialChildren: children);
+
+  static const String name = 'SenderFormRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SenderFormView();
+    },
+  );
 }
 
 /// generated route for

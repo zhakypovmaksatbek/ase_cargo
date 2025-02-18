@@ -26,7 +26,8 @@
         "delete_account": "Удалить профиль",
         "exit":"Выйти",
         "ok":"Ок",
-        "filters":"Фильтры"
+        "filters":"Фильтры",
+        "next_step":"Далее"
     },
     "form": {
         "phone_number": "Номер телефона",
@@ -45,7 +46,31 @@
         "have_account": "Есть аккаунт? Войдите",
         "no_account": "Нет аккаунта? Зарегистрируйтесь",
         "confirm_phone_number": "Подтвердите номер телефона",
-        "restore_access": "Восстоновление доступа"
+        "restore_access": "Восстоновление доступа",
+        "name_field":"Наименование",
+        "description":"Описание",
+        "weight":"Вес:",
+        "price_product":"Стоимость товара",
+        "dimensions":"Габариты",
+        "length":"Длина в см",
+        "width":"Ширина в см",
+        "height":"Высота в см",
+        "enter_document_info":"Введите информацию о документе:",
+        "passport_data":"Паспортные данные",
+        "inn":"ИНН",
+        "date_issue":"Дата выдачи",
+        "who_issue":"Кем выдан?",
+        "upload_passport":"Загрузите фотографию паспорта",
+        "upload_back_passport":"Загрузите фото обратной стороны паспорта",
+        "upload_photo":"Загрузите фото",
+        "contact_data":"Контактные данные",
+        "country":"Страна",
+        "city":"Город",
+        "street":"Улица",
+        "address":"Улица / Дом / Кв",
+        "index":"Почтовый индекс",
+        "save_data":"Сохранить данные",
+        "region":"Район"
     },
     "exception": {
         "cannot_be_empty": "Не может быть пустым",
@@ -89,7 +114,16 @@
         "recipient":"Получатель:",
         "paid":"Оплачено:",
         "by_sender":"Отправителем",
-        "by_recipient":"Получателем"
+        "by_recipient":"Получателем",
+        "date":"Дата:",
+        "i_sender":"Я отправитель",
+        "i_recipient":"Я получатель",
+        "new_order":"Новый заказ",
+        "select_role":"Выберите свою роль, чтобы продолжить",
+        "delivery":"Посылка",
+        "document":"Документ",
+        "enter_info":"Введите информацию о посылке:"
+        
     },
     "navigation": {
         "verify": "Подтверждение",
@@ -107,7 +141,11 @@
         "aboutApp": "О приложении",
         "termsOfUse":"Условия использования",
         "order_history":"История заказов",
-        "order_details":"Детали заявки"
+        "order_details":"Детали заказа",
+        "request_detail":"Детали заявки",
+        "sender":"Отправитель",
+        "recipient":"Получатель",
+        "fill_delivery_info":"Заполните детали доставки"
     }
 
 }

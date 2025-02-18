@@ -13,8 +13,9 @@ final class ColorConstants {
   static const Color dividerColor = Color(0xffe6e6e6);
   static const Color darkGrey = Color(0xff5A5A5E);
   static const Color red = Color(0xffDE0201);
-  static Color blue = Color(0xff7270D1);
-  static Color green = const Color(0xff4CAF50);
+  static const Color lavenderBlue = Color(0xff7270D1);
+  static const Color blue = Color(0xff007BFF);
+  static const Color green = Color(0xff4CAF50);
   static const Color lightBlack = Color(0xff2F2F2F);
   static const Color lightSlate = Color(0xFFE2E8F0);
 }

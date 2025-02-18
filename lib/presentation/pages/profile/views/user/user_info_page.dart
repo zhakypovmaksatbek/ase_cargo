@@ -38,8 +38,8 @@ class _UserInfoPageState extends State<UserInfoPage> with UserInfoMixin {
   bool _checkIfChanged() {
     final state = context.read<UserCubit>().state;
     if (state is UserSuccess) {
-      return firstNameController.text != (state.user.fullName ?? "") ||
-          lastNameController.text != (state.user.fullName ?? "") ||
+      return firstNameController.text != (state.user.firstName ?? "") ||
+          lastNameController.text != (state.user.lastName ?? "") ||
           emailController.text != (state.user.email ?? "");
     }
     return false;
@@ -167,8 +167,8 @@ class _UserInfoPageState extends State<UserInfoPage> with UserInfoMixin {
   void _userCubitState(context, state) {
     if (!mounted) return;
     if (state is UserSuccess) {
-      firstNameController.text = state.user.fullName ?? "";
-      lastNameController.text = state.user.fullName ?? "";
+      firstNameController.text = state.user.firstName ?? "";
+      lastNameController.text = state.user.lastName ?? "";
       emailController.text = state.user.email ?? "";
       phoneNumberController.text = state.user.phone ?? "";
     }

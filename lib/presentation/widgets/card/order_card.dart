@@ -17,7 +17,7 @@ class OrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => router.push(RequestDetailRoute()),
+      onTap: () => router.push(OrderDetailRoute()),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         decoration: CustomBoxDecoration(),
@@ -62,7 +62,7 @@ class OrderCard extends StatelessWidget {
                       AppText(
                         title: LocaleKeys.general_delivery_address.tr(),
                         textType: TextType.subtitle,
-                        color: ColorConstants.blue,
+                        color: ColorConstants.lavenderBlue,
                       ),
                       AppText(
                         title: "г. Бишкек, Турусбеков 109",
@@ -95,6 +95,7 @@ class OrderCard extends StatelessWidget {
             ),
             Row(
               spacing: 10,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CustomAssetImage(
                   path: AssetConstants.cash.svg,
@@ -110,6 +111,72 @@ class OrderCard extends StatelessWidget {
                     title: LocaleKeys.general_by_sender.tr(),
                     fontWeight: FontWeight.w500,
                     textType: TextType.body),
+              ],
+            ),
+            ReminderMessageWidget(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 10,
+                    children: [
+                      Icon(
+                        Icons.date_range_outlined,
+                        color: Colors.grey,
+                      ),
+                      Flexible(
+                        child: AppText(
+                          title: LocaleKeys.general_date.tr(),
+                          textType: TextType.subtitle,
+                          color: ColorConstants.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 10,
+                    children: [
+                      CustomAssetImage(
+                        path: AssetConstants.send.svg,
+                        isSvg: true,
+                      ),
+                      Flexible(
+                        child: AppText(
+                          title: "01.01.2023",
+                          textType: TextType.subtitle,
+                          color: ColorConstants.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Row(
+                    spacing: 10,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CustomAssetImage(
+                        path: AssetConstants.get.svg,
+                        isSvg: true,
+                      ),
+                      Flexible(
+                        child: AppText(
+                          title: "04.01.2023",
+                          textType: TextType.subtitle,
+                          color: ColorConstants.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             )
           ],
@@ -179,6 +246,40 @@ class OrderCard extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+}
+
+class ReminderMessageWidget extends StatelessWidget {
+  const ReminderMessageWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration:
+          CustomBoxDecoration().copyWith(color: ColorConstants.lightGrey),
+      child: Row(
+        spacing: 10,
+        children: [
+          Container(
+            padding: EdgeInsets.all(4),
+            decoration: CustomBoxDecoration.circleDecoration().copyWith(
+                color: ColorConstants.lightGrey,
+                border: Border.all(color: ColorConstants.white, width: 6)),
+            child: Icon(Icons.error_outline, color: ColorConstants.primary),
+          ),
+          Flexible(
+            child: AppText(
+              title: LocaleKeys.notification_order_will_be_shipped.tr(),
+              textType: TextType.body,
+              color: ColorConstants.primary,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

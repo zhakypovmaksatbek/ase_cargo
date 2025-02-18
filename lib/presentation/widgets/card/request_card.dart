@@ -47,7 +47,7 @@ class RequestCard extends StatelessWidget {
                       AppText(
                         title: LocaleKeys.general_delivery_address.tr(),
                         textType: TextType.subtitle,
-                        color: ColorConstants.blue,
+                        color: ColorConstants.lavenderBlue,
                       ),
                       AppText(
                         title: "г. Бишкек, Турусбеков 109",

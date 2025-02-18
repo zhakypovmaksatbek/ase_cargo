@@ -21,7 +21,10 @@ enum AssetConstants {
   waiting,
   canceled,
   cash,
-  error
+  error,
+  send,
+  get,
+  order
 }
 
 extension AssetConstantsExtension on AssetConstants {

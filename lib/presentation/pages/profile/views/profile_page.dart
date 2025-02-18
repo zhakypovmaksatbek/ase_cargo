@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:ase/data/bloc/user_cubit/user_cubit.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/main.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
@@ -14,7 +13,6 @@ import 'package:ase/router/app_router.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage(name: 'ProfileRoute')
 class ProfilePage extends StatefulWidget {
@@ -29,10 +27,6 @@ class _ProfilePageState extends State<ProfilePage> with ProfileMixin {
   void initState() {
     super.initState();
     initData(context);
-  }
-
-  void initData(BuildContext context) {
-    context.read<UserCubit>().getUser();
   }
 
   final router = getIt<AppRouter>();

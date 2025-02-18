@@ -30,6 +30,7 @@ abstract class  LocaleKeys {
   static const button_exit = 'button.exit';
   static const button_ok = 'button.ok';
   static const button_filters = 'button.filters';
+  static const button_next_step = 'button.next_step';
   static const button = 'button';
   static const form_phone_number = 'form.phone_number';
   static const form_password = 'form.password';
@@ -48,6 +49,30 @@ abstract class  LocaleKeys {
   static const form_no_account = 'form.no_account';
   static const form_confirm_phone_number = 'form.confirm_phone_number';
   static const form_restore_access = 'form.restore_access';
+  static const form_name_field = 'form.name_field';
+  static const form_description = 'form.description';
+  static const form_weight = 'form.weight';
+  static const form_price_product = 'form.price_product';
+  static const form_dimensions = 'form.dimensions';
+  static const form_length = 'form.length';
+  static const form_width = 'form.width';
+  static const form_height = 'form.height';
+  static const form_enter_document_info = 'form.enter_document_info';
+  static const form_passport_data = 'form.passport_data';
+  static const form_inn = 'form.inn';
+  static const form_date_issue = 'form.date_issue';
+  static const form_who_issue = 'form.who_issue';
+  static const form_upload_passport = 'form.upload_passport';
+  static const form_upload_back_passport = 'form.upload_back_passport';
+  static const form_upload_photo = 'form.upload_photo';
+  static const form_contact_data = 'form.contact_data';
+  static const form_country = 'form.country';
+  static const form_city = 'form.city';
+  static const form_street = 'form.street';
+  static const form_address = 'form.address';
+  static const form_index = 'form.index';
+  static const form_save_data = 'form.save_data';
+  static const form_region = 'form.region';
   static const form = 'form';
   static const exception_cannot_be_empty = 'exception.cannot_be_empty';
   static const exception_password_min_character = 'exception.password_min_character';
@@ -89,6 +114,14 @@ abstract class  LocaleKeys {
   static const general_paid = 'general.paid';
   static const general_by_sender = 'general.by_sender';
   static const general_by_recipient = 'general.by_recipient';
+  static const general_date = 'general.date';
+  static const general_i_sender = 'general.i_sender';
+  static const general_i_recipient = 'general.i_recipient';
+  static const general_new_order = 'general.new_order';
+  static const general_select_role = 'general.select_role';
+  static const general_delivery = 'general.delivery';
+  static const general_document = 'general.document';
+  static const general_enter_info = 'general.enter_info';
   static const general = 'general';
   static const navigation_verify = 'navigation.verify';
   static const navigation_reset_password = 'navigation.reset_password';
@@ -106,6 +139,10 @@ abstract class  LocaleKeys {
   static const navigation_termsOfUse = 'navigation.termsOfUse';
   static const navigation_order_history = 'navigation.order_history';
   static const navigation_order_details = 'navigation.order_details';
+  static const navigation_request_detail = 'navigation.request_detail';
+  static const navigation_sender = 'navigation.sender';
+  static const navigation_recipient = 'navigation.recipient';
+  static const navigation_fill_delivery_info = 'navigation.fill_delivery_info';
   static const navigation = 'navigation';
 
 }

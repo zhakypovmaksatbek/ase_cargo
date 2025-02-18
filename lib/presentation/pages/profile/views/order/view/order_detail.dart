@@ -1,43 +1,23 @@
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
-import 'package:ase/presentation/products/decoration/custom_decorations.dart';
 import 'package:ase/presentation/widgets/app_bar/def_sliver_app_bar.dart';
-import 'package:ase/presentation/widgets/buttons/def_elevated_button.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-@RoutePage(name: "RequestDetailRoute")
-class RequestDetail extends StatelessWidget {
-  const RequestDetail({super.key});
+@RoutePage(name: "OrderDetailRoute")
+class OrderDetailPage extends StatelessWidget {
+  OrderDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: BottomAppBar(
-        color: Colors.transparent,
-        height: 130,
-        child: Column(
-          spacing: 10,
-          children: [
-            SizedBox(
-                width: double.infinity,
-                child: DefElevatedButton(text: LocaleKeys.general_pay.tr())),
-            SizedBox(
-                width: double.infinity,
-                child: DefElevatedButton(
-                  text: LocaleKeys.button_cancel.tr(),
-                )),
-          ],
-        ),
-      ),
       body: CustomScrollView(
         slivers: [
-          DefSliverAppBar(title: LocaleKeys.navigation_request_detail.tr()),
+          DefSliverAppBar(title: LocaleKeys.navigation_order_details.tr()),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -75,6 +55,7 @@ class RequestDetail extends StatelessWidget {
                   _buildOrderInfo(
                       title: LocaleKeys.general_additional_service_price.tr(),
                       subtitle: "50 сом"),
+                  SizedBox(height: 60)
                 ],
               ),
             ),
@@ -132,43 +113,86 @@ class RequestDetail extends StatelessWidget {
     );
   }
 
-  Row _buildOrderStatus() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  final List<OrderStatusModel> orderStatuses = [
+    OrderStatusModel(
+      title: "В процессе",
+      date: "12.01.2025",
+      icon: Icons.access_time,
+      status: OrderStatus.completed,
+    ),
+    OrderStatusModel(
+      title: "В пути",
+      date: "12.01.2025",
+      icon: Icons.local_shipping,
+      status: OrderStatus.completed,
+    ),
+    OrderStatusModel(
+      title: "У курьера",
+      date: "12.01.2025",
+      icon: Icons.person,
+      status: OrderStatus.active,
+    ),
+    OrderStatusModel(
+      title: "Доставлен",
+      date: "12.01.2025",
+      icon: Icons.check_circle,
+      status: OrderStatus.upcoming,
+    ),
+  ];
+  Widget _buildOrderStatus() {
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 8,
+      spacing: 10,
       children: [
         AppText(
           title: LocaleKeys.general_status_order.tr(),
           textType: TextType.body,
           fontWeight: FontWeight.w500,
         ),
-        Flexible(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            decoration: CustomBoxDecoration()
-                .copyWith(color: ColorConstants.lightSlate),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Column(
+          spacing: 16,
+          children: orderStatuses.asMap().entries.map((entry) {
+            int index = entry.key;
+            var step = entry.value;
+            bool isLast = index == orderStatuses.length - 1;
+
+            return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              spacing: 8,
+              spacing: 10,
               children: [
-                Flexible(
-                  child: AppText(
-                    title: "Ожидает оплаты",
-                    textType: TextType.body,
-                    fontWeight: FontWeight.w500,
-                    color: ColorConstants.orange,
-                  ),
+                Column(
+                  children: [
+                    Icon(
+                      step.status.icon,
+                      color: step.status.color,
+                    ),
+                    if (!isLast)
+                      Container(
+                        width: 2,
+                        height: 20,
+                        color: step.status.color,
+                      ),
+                  ],
                 ),
-                CustomAssetImage(
-                  path: AssetConstants.cash.svg,
-                  isSvg: true,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppText(
+                      title: step.title ?? "",
+                      textType: TextType.body,
+                      fontWeight: FontWeight.bold,
+                      color: step.status.color,
+                    ),
+                    AppText(
+                      title: step.date ?? "",
+                      textType: TextType.body,
+                      color: Colors.grey,
+                    ),
+                  ],
                 ),
               ],
-            ),
-          ),
+            );
+          }).toList(),
         ),
       ],
     );
@@ -204,4 +228,37 @@ class RequestDetail extends StatelessWidget {
       ],
     );
   }
+}
+
+class OrderStatusModel {
+  String? title;
+  String? date;
+  OrderStatus status;
+  IconData? icon;
+
+  OrderStatusModel({this.title, this.date, this.icon, required this.status});
+
+  factory OrderStatusModel.fromJson(Map<String, dynamic> json) {
+    return OrderStatusModel(
+        title: json['title'],
+        date: json['date'],
+        icon: json['icon'],
+        status: json['status'] != null &&
+                OrderStatus.values
+                    .any((e) => e.toString().split('.').last == json['status'])
+            ? OrderStatus.values.byName(json['status'])
+            : OrderStatus.upcoming);
+  }
+}
+
+enum OrderStatus {
+  active(Icons.radio_button_checked_sharp, ColorConstants.blue),
+  completed(Icons.check_circle, ColorConstants.green),
+  upcoming(Icons.access_time, ColorConstants.grey),
+  canceled(Icons.cancel, ColorConstants.red);
+
+  final Color color;
+  final IconData icon;
+
+  const OrderStatus(this.icon, this.color);
 }

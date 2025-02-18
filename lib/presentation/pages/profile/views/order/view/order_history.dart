@@ -60,12 +60,15 @@ class _OrderHistoryState extends State<OrderHistory>
                         indicatorSize: TabBarIndicatorSize.tab,
                         // padding: EdgeInsets.symmetric(horizontal: 16),
                         controller: controller,
-                        tabs: [Tab(text: "Tab 1"), Tab(text: "Tab 2")]),
+                        tabs: [
+                          Tab(text: LocaleKeys.general_i_sender.tr()),
+                          Tab(text: LocaleKeys.general_i_recipient.tr()),
+                        ]),
                   ),
                   Expanded(
                     child: TabBarView(controller: controller, children: [
                       SenderTabView(),
-                      Center(child: Text("Tab 2")),
+                      RecipientTabView(),
                     ]),
                   ),
                 ],
@@ -88,7 +91,25 @@ class SenderTabView extends StatelessWidget {
     return ListView.separated(
         separatorBuilder: (context, index) => SizedBox(height: 10),
         itemCount: 10,
-        padding: EdgeInsets.only(top: 20),
+        padding: EdgeInsets.symmetric(vertical: 20),
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return OrderCard();
+        });
+  }
+}
+
+class RecipientTabView extends StatelessWidget {
+  const RecipientTabView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+        separatorBuilder: (context, index) => SizedBox(height: 10),
+        itemCount: 10,
+        padding: EdgeInsets.symmetric(vertical: 20),
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return OrderCard();
