@@ -49,5 +49,13 @@
 	<array>
 		<string>ru</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Доступ к микрофону необходим для эффективного использования функций камеры.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Доступ к вашим фотографиям требуется для сохранения сделанных снимков во время отчета о проблеме или в чате.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Доступ к вашей фотогалерее необходим для отправки существующих фотографий при отчете о проблеме или в чате.</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>

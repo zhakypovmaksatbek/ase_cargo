@@ -11,6 +11,13 @@ class CustomBoxDecoration extends BoxDecoration {
     return const BoxDecoration(
         shape: BoxShape.circle, color: ColorConstants.white);
   }
+
+  static ButtonStyle backButtonStyle() {
+    return ButtonStyle(
+        backgroundColor: WidgetStatePropertyAll(ColorConstants.dividerColor),
+        shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(32))));
+  }
 }
 
 class BoxDecorationValues {

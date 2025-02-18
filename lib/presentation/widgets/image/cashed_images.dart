@@ -37,10 +37,7 @@ class CashedImages extends StatelessWidget {
       child: imageUrl.isNotEmpty
           ? CachedNetworkImage(
               fit: fit ?? BoxFit.cover,
-              errorListener: (value) {
-                print("----------Image-------------");
-                print(value.toString());
-              },
+              errorListener: (value) {},
               imageUrl: imageUrl,
               height: height,
               alignment: Alignment.center,

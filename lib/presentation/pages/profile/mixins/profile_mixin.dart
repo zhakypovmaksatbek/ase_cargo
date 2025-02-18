@@ -1,6 +1,6 @@
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
-import 'package:ase/presentation/pages/profile/profile_page.dart';
+import 'package:ase/presentation/pages/profile/views/profile_page.dart';
 import 'package:ase/presentation/widgets/dialogs/app_dialogs.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

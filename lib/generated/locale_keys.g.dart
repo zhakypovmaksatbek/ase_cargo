@@ -29,6 +29,7 @@ abstract class  LocaleKeys {
   static const button_delete_account = 'button.delete_account';
   static const button_exit = 'button.exit';
   static const button_ok = 'button.ok';
+  static const button_filters = 'button.filters';
   static const button = 'button';
   static const form_phone_number = 'form.phone_number';
   static const form_password = 'form.password';
@@ -54,9 +55,14 @@ abstract class  LocaleKeys {
   static const exception_invalid_phone_number = 'exception.invalid_phone_number';
   static const exception_exception = 'exception.exception';
   static const exception_something_went_wrong_try_again = 'exception.something_went_wrong_try_again';
+  static const exception_no_internet = 'exception.no_internet';
+  static const exception_unknown_error = 'exception.unknown_error';
+  static const exception_unexpected_error = 'exception.unexpected_error';
   static const exception = 'exception';
   static const notification_we_sent_code_to_your_phone = 'notification.we_sent_code_to_your_phone';
   static const notification_exit_account = 'notification.exit_account';
+  static const notification_no_orders = 'notification.no_orders';
+  static const notification_order_will_be_shipped = 'notification.order_will_be_shipped';
   static const notification = 'notification';
   static const general_seconds = 'general.seconds';
   static const general_create_new_password = 'general.create_new_password';
@@ -65,6 +71,24 @@ abstract class  LocaleKeys {
   static const general_read_reviews = 'general.read_reviews';
   static const general_questions_and_answers = 'general.questions_and_answers';
   static const general_reviews = 'general.reviews';
+  static const general_delivery_address = 'general.delivery_address';
+  static const general_status_order = 'general.status_order';
+  static const general_delivery_type = 'general.delivery_type';
+  static const general_weight = 'general.weight';
+  static const general_service_price = 'general.service_price';
+  static const general_additional_service_price = 'general.additional_service_price';
+  static const general_pay = 'general.pay';
+  static const general_waiting_payment = 'general.waiting_payment';
+  static const general_processing = 'general.processing';
+  static const general_canceled = 'general.canceled';
+  static const general_select = 'general.select';
+  static const general_delivery_info = 'general.delivery_info';
+  static const general_additional_services = 'general.additional_services';
+  static const general_sender = 'general.sender';
+  static const general_recipient = 'general.recipient';
+  static const general_paid = 'general.paid';
+  static const general_by_sender = 'general.by_sender';
+  static const general_by_recipient = 'general.by_recipient';
   static const general = 'general';
   static const navigation_verify = 'navigation.verify';
   static const navigation_reset_password = 'navigation.reset_password';
@@ -81,6 +105,7 @@ abstract class  LocaleKeys {
   static const navigation_aboutApp = 'navigation.aboutApp';
   static const navigation_termsOfUse = 'navigation.termsOfUse';
   static const navigation_order_history = 'navigation.order_history';
+  static const navigation_order_details = 'navigation.order_details';
   static const navigation = 'navigation';
 
 }

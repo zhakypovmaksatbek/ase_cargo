@@ -6,8 +6,10 @@ class DefElevatedButton extends StatelessWidget {
     super.key,
     required this.text,
     this.onPressed,
+    this.verticalPadding,
   });
   final String text;
+  final double? verticalPadding;
   final VoidCallback? onPressed;
 
   @override
@@ -16,7 +18,7 @@ class DefElevatedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: ColorConstants.primary,
         overlayColor: ColorConstants.white,
-        padding: EdgeInsets.symmetric(vertical: 14),
+        padding: EdgeInsets.symmetric(vertical: verticalPadding ?? 12),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(14),
         ),

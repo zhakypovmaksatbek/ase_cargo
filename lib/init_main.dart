@@ -1,9 +1,11 @@
 import 'package:ase/data/bloc/banner_bloc/banner_cubit.dart';
+import 'package:ase/data/bloc/image/image_picker_cubit.dart';
 import 'package:ase/data/bloc/login/login_cubit.dart';
 import 'package:ase/data/bloc/register/register_cubit.dart';
 import 'package:ase/data/bloc/resent_code/resent_code_cubit.dart';
 import 'package:ase/data/bloc/story/story_cubit.dart';
 import 'package:ase/data/bloc/story_view/story_view_cubit.dart';
+import 'package:ase/data/bloc/user_cubit/user_cubit.dart';
 import 'package:ase/data/bloc/verify/verify_cubit.dart';
 import 'package:ase/main.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +29,8 @@ class InitMain {
       BlocProvider(create: (context) => StoryCubit()),
       BlocProvider(create: (context) => StoryViewCubit()),
       BlocProvider(create: (context) => BannerCubit()),
+      BlocProvider(create: (context) => ImagePickerCubit()),
+      BlocProvider(create: (context) => UserCubit()),
     ];
   }
 }

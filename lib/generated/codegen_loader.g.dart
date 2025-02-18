@@ -41,7 +41,8 @@ class CodegenLoader extends AssetLoader{
     "logout": "Выйти из профиля",
     "delete_account": "Удалить профиль",
     "exit": "Выйти",
-    "ok": "Ок"
+    "ok": "Ок",
+    "filters": "Фильтры"
   },
   "form": {
     "phone_number": "Номер телефона",
@@ -68,11 +69,16 @@ class CodegenLoader extends AssetLoader{
     "password_not_match": "Пароли не совпадают",
     "invalid_phone_number": "Неверный номер телефона",
     "exception": "Ошибка",
-    "something_went_wrong_try_again": "Что-то пошло не так, попробуйте еще раз"
+    "something_went_wrong_try_again": "Что-то пошло не так, попробуйте еще раз",
+    "no_internet": "На вашем устройстве нет интернета",
+    "unknown_error": "Неизвестная ошибка",
+    "unexpected_error": "Непредвиденная ошибка"
   },
   "notification": {
     "we_sent_code_to_your_phone": "Мы отправили код на указанный вами номер",
-    "exit_account": "Вы действительно хотите выйти из своего аккаунта?"
+    "exit_account": "Вы действительно хотите выйти из своего аккаунта?",
+    "no_orders": "У вас нет заявок...",
+    "order_will_be_shipped": "Ваш заказ будет отправлен в ближайшее время!"
   },
   "general": {
     "seconds": "сек",
@@ -81,7 +87,25 @@ class CodegenLoader extends AssetLoader{
     "our_services": "Наши услуги",
     "read_reviews": "Читайте отзывы о нас",
     "questions_and_answers": "Вопросы и ответы",
-    "reviews": "Отзывы"
+    "reviews": "Отзывы",
+    "delivery_address": "Адрес доставки",
+    "status_order": "Статус заказа:",
+    "delivery_type": "Тип доставки:",
+    "weight": "Вес:",
+    "service_price": "Цена за услугу:",
+    "additional_service_price": "Цена за доп. услугу:",
+    "pay": "Оплатить",
+    "waiting_payment": "Ожидает оплаты",
+    "processing": "Обрабатывается",
+    "canceled": "Отменён",
+    "select": "Выбрать",
+    "delivery_info": "Информация о посылке:",
+    "additional_services": "Доп. услуги:",
+    "sender": "Отправитель:",
+    "recipient": "Получатель:",
+    "paid": "Оплачено:",
+    "by_sender": "Отправителем",
+    "by_recipient": "Получателем"
   },
   "navigation": {
     "verify": "Подтверждение",
@@ -98,7 +122,8 @@ class CodegenLoader extends AssetLoader{
     "userInfo": "Личные данные",
     "aboutApp": "О приложении",
     "termsOfUse": "Условия использования",
-    "order_history": "История заказов"
+    "order_history": "История заказов",
+    "order_details": "Детали заявки"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": _ru};

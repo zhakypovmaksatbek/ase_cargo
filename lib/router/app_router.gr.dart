@@ -75,6 +75,22 @@ class MainRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [OrderHistory]
+class OrderHistoryRoute extends PageRouteInfo<void> {
+  const OrderHistoryRoute({List<PageRouteInfo>? children})
+    : super(OrderHistoryRoute.name, initialChildren: children);
+
+  static const String name = 'OrderHistoryRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const OrderHistory();
+    },
+  );
+}
+
+/// generated route for
 /// [ProfilePage]
 class ProfileRoute extends PageRouteInfo<void> {
   const ProfileRoute({List<PageRouteInfo>? children})
@@ -118,6 +134,38 @@ class RegisterRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const RegisterPage();
+    },
+  );
+}
+
+/// generated route for
+/// [RequestDetail]
+class RequestDetailRoute extends PageRouteInfo<void> {
+  const RequestDetailRoute({List<PageRouteInfo>? children})
+    : super(RequestDetailRoute.name, initialChildren: children);
+
+  static const String name = 'RequestDetailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const RequestDetail();
+    },
+  );
+}
+
+/// generated route for
+/// [RequestsView]
+class RequestsRoute extends PageRouteInfo<void> {
+  const RequestsRoute({List<PageRouteInfo>? children})
+    : super(RequestsRoute.name, initialChildren: children);
+
+  static const String name = 'RequestsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const RequestsView();
     },
   );
 }
@@ -200,6 +248,22 @@ class TrackingRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const TrackingPage();
+    },
+  );
+}
+
+/// generated route for
+/// [UserInfoPage]
+class UserInfoRoute extends PageRouteInfo<void> {
+  const UserInfoRoute({List<PageRouteInfo>? children})
+    : super(UserInfoRoute.name, initialChildren: children);
+
+  static const String name = 'UserInfoRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const UserInfoPage();
     },
   );
 }

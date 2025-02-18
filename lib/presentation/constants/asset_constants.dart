@@ -16,7 +16,12 @@ enum AssetConstants {
   history,
   myReview,
   language,
-  userInfo
+  userInfo,
+  location,
+  waiting,
+  canceled,
+  cash,
+  error
 }
 
 extension AssetConstantsExtension on AssetConstants {

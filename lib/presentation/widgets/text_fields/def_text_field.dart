@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class DefTextField extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final InputDecoration? decoration;
@@ -11,10 +11,11 @@ class DefTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final String? errorText;
   final void Function(String)? onChanged;
+  final bool? enabled;
 
   const DefTextField({
     super.key,
-    required this.controller,
+    this.controller,
     required this.keyboardType,
     required this.textInputAction,
     this.decoration,
@@ -23,13 +24,15 @@ class DefTextField extends StatelessWidget {
     this.validator,
     this.errorText,
     this.onChanged,
+    this.enabled,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      onChanged: onChanged  ,
+      enabled: enabled,
+      onChanged: onChanged,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       validator: validator,
@@ -37,7 +40,7 @@ class DefTextField extends StatelessWidget {
       inputFormatters: inputFormatters,
       decoration: decoration ??
           InputDecoration(
-            errorText: errorText  ,
+            errorText: errorText,
             hintText: hintText,
           ),
     );
