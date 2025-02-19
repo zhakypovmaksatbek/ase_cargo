@@ -69,10 +69,22 @@ abstract class  LocaleKeys {
   static const form_country = 'form.country';
   static const form_city = 'form.city';
   static const form_street = 'form.street';
-  static const form_address = 'form.address';
+  static const form_address_apartment = 'form.address_apartment';
   static const form_index = 'form.index';
   static const form_save_data = 'form.save_data';
   static const form_region = 'form.region';
+  static const form_legal = 'form.legal';
+  static const form_physical = 'form.physical';
+  static const form_full_name = 'form.full_name';
+  static const form_name_of_company = 'form.name_of_company';
+  static const form_inn_company = 'form.inn_company';
+  static const form_who_pay = 'form.who_pay';
+  static const form_sender_pay = 'form.sender_pay';
+  static const form_recipient_pay = 'form.recipient_pay';
+  static const form_write_comment = 'form.write_comment';
+  static const form_comments = 'form.comments';
+  static const form_check_correct = 'form.check_correct';
+  static const form_address = 'form.address';
   static const form = 'form';
   static const exception_cannot_be_empty = 'exception.cannot_be_empty';
   static const exception_password_min_character = 'exception.password_min_character';
@@ -143,6 +155,9 @@ abstract class  LocaleKeys {
   static const navigation_sender = 'navigation.sender';
   static const navigation_recipient = 'navigation.recipient';
   static const navigation_fill_delivery_info = 'navigation.fill_delivery_info';
+  static const navigation_fill_sender_info = 'navigation.fill_sender_info';
+  static const navigation_fill_recipient_info = 'navigation.fill_recipient_info';
+  static const navigation_additional = 'navigation.additional';
   static const navigation = 'navigation';
 
 }

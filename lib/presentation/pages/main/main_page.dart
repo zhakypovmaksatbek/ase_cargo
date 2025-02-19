@@ -1,11 +1,14 @@
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
+import 'package:ase/presentation/products/decoration/custom_decorations.dart';
+import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:ase/router/app_router.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 @RoutePage(name: 'MainRoute')
 class MainPage extends StatefulWidget {
@@ -27,6 +30,52 @@ class _MainPageState extends State<MainPage> {
   void onTap(int index, TabsRouter tabsRouter) {
     if (tabsRouter.activeIndex == index) {
       tabsRouter.stackRouterOfIndex(index)?.maybePop();
+    } else if (index == 1) {
+      showBarModalBottomSheet(
+        context: context,
+        shape: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(14)),
+        barrierColor: ColorConstants.black.withValues(alpha: .4),
+        useRootNavigator: true,
+        builder: (context) {
+          return Padding(
+            padding: EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+              top: 20,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.go,
+                  decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 6, horizontal: 14),
+                      hintText: LocaleKeys.button_search.tr(),
+                      suffixIcon: Container(
+                        width: 80,
+                        decoration: CustomBoxDecoration()
+                            .copyWith(color: ColorConstants.primary),
+                        child: Center(
+                          child: AppText(
+                            title: LocaleKeys.button_search.tr(),
+                            textType: TextType.body,
+                            textAlign: TextAlign.center,
+                            color: ColorConstants.white,
+                          ),
+                        ),
+                      )),
+                ),
+                SizedBox(height: 90)
+              ],
+            ),
+          );
+        },
+      );
     } else {
       tabsRouter.setActiveIndex(index);
     }

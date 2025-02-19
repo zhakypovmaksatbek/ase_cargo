@@ -75,6 +75,22 @@ class MainRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [NewsDetailPage]
+class NewsDetailRoute extends PageRouteInfo<void> {
+  const NewsDetailRoute({List<PageRouteInfo>? children})
+    : super(NewsDetailRoute.name, initialChildren: children);
+
+  static const String name = 'NewsDetailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const NewsDetailPage();
+    },
+  );
+}
+
+/// generated route for
 /// [OrderDetailPage]
 class OrderDetailRoute extends PageRouteInfo<OrderDetailRouteArgs> {
   OrderDetailRoute({Key? key, List<PageRouteInfo>? children})
@@ -250,6 +266,22 @@ class SenderFormRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const SenderFormView();
+    },
+  );
+}
+
+/// generated route for
+/// [ServiceDetailPage]
+class ServiceDetailRoute extends PageRouteInfo<void> {
+  const ServiceDetailRoute({List<PageRouteInfo>? children})
+    : super(ServiceDetailRoute.name, initialChildren: children);
+
+  static const String name = 'ServiceDetailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ServiceDetailPage();
     },
   );
 }

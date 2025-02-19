@@ -67,10 +67,23 @@
         "country":"Страна",
         "city":"Город",
         "street":"Улица",
-        "address":"Улица / Дом / Кв",
+        "address_apartment":"Улица / Дом / Кв",
         "index":"Почтовый индекс",
         "save_data":"Сохранить данные",
-        "region":"Район"
+        "region":"Район",
+        "legal":"Физ. лицо",
+        "physical":"Юр. лицо",
+        "full_name":"ФИО *",
+        "name_of_company":"Название компании *",
+        "inn_company":"ИНН компании *",
+        "who_pay":"Выберите кем будет оплачено?",
+        "sender_pay":"Отправителем (вами)",
+        "recipient_pay":"Получателем",
+        "write_comment":"Напишите комментарии",
+        "comments":"Комментарии",
+        "check_correct":"Проверьте все ли правильно?",
+        "address":"Адрес"
+
     },
     "exception": {
         "cannot_be_empty": "Не может быть пустым",
@@ -145,7 +158,10 @@
         "request_detail":"Детали заявки",
         "sender":"Отправитель",
         "recipient":"Получатель",
-        "fill_delivery_info":"Заполните детали доставки"
+        "fill_delivery_info":"Заполните детали доставки",
+        "fill_sender_info":"Заполните данные отправителя",
+        "fill_recipient_info":"Заполните данные получателя",
+        "additional":"Дополнительное"
     }
 
 }

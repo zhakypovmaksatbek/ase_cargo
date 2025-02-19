@@ -12,26 +12,28 @@ class DefTextField extends StatelessWidget {
   final String? errorText;
   final void Function(String)? onChanged;
   final bool? enabled;
+  final int? maxLines;
 
-  const DefTextField({
-    super.key,
-    this.controller,
-    required this.keyboardType,
-    required this.textInputAction,
-    this.decoration,
-    this.inputFormatters,
-    required this.hintText,
-    this.validator,
-    this.errorText,
-    this.onChanged,
-    this.enabled,
-  });
+  const DefTextField(
+      {super.key,
+      this.controller,
+      required this.keyboardType,
+      required this.textInputAction,
+      this.decoration,
+      this.inputFormatters,
+      required this.hintText,
+      this.validator,
+      this.errorText,
+      this.onChanged,
+      this.enabled,
+      this.maxLines});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       enabled: enabled,
+      maxLines: maxLines,
       onChanged: onChanged,
       keyboardType: keyboardType,
       textInputAction: textInputAction,

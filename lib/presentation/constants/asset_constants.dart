@@ -24,7 +24,8 @@ enum AssetConstants {
   error,
   send,
   get,
-  order
+  order,
+  gallery
 }
 
 extension AssetConstantsExtension on AssetConstants {

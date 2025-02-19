@@ -4,6 +4,8 @@ import 'package:ase/presentation/pages/auth/register/register_page.dart';
 import 'package:ase/presentation/pages/auth/reset_password/reset_password.dart';
 import 'package:ase/presentation/pages/auth/verify/verify_page.dart';
 import 'package:ase/presentation/pages/home/home_page.dart';
+import 'package:ase/presentation/pages/home/views/news_detail.dart';
+import 'package:ase/presentation/pages/home/views/service_detail.dart';
 import 'package:ase/presentation/pages/main/main_page.dart';
 import 'package:ase/presentation/pages/order/create_order_page.dart';
 import 'package:ase/presentation/pages/order/view/sender_form_view.dart';
@@ -49,6 +51,8 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: OrderHistoryRoute.page, path: "/order_history"),
         AutoRoute(page: OrderDetailRoute.page, path: "/order_detail"),
         AutoRoute(page: SenderFormRoute.page, path: "/sender_form"),
+        AutoRoute(page: NewsDetailRoute.page, path: "/news_detail"),
+        AutoRoute(page: ServiceDetailRoute.page, path: "/service_detail"),
       ];
 }
 

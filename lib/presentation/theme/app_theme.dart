@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static ThemeData get theme => ThemeData(
         fontFamily: "EuclidCircular",
+        visualDensity: VisualDensity.adaptivePlatformDensity,
         useMaterial3: true,
         primaryColor: ColorConstants.primary,
         scaffoldBackgroundColor: ColorConstants.backgroundLight,
         hintColor: ColorConstants.grey,
+        canvasColor: ColorConstants.backgroundLight,
         appBarTheme: AppBarTheme(
           backgroundColor: ColorConstants.backgroundLight,
           surfaceTintColor: ColorConstants.backgroundLight,
@@ -20,7 +22,9 @@ class AppTheme {
           ),
         ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
-            error: ColorConstants.red, surface: ColorConstants.lightGrey),
+            error: ColorConstants.red,
+            surface: ColorConstants.lightGrey,
+            primary: ColorConstants.primary),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: ColorConstants.lightGrey,
