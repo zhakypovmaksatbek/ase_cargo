@@ -10,7 +10,6 @@ import 'package:get_it/get_it.dart';
 Future<void> main() async {
   setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
-
   await EasyLocalization.ensureInitialized();
   runApp(ProductLocalizationService(child: await InitMain.init()));
 }

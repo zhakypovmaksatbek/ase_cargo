@@ -44,12 +44,13 @@ class PhoneNumberTextField extends StatelessWidget {
       showCountryFlag: false,
       languageCode: "ky",
       initialCountryCode: "KG",
+      textInputAction: TextInputAction.next,
       onChanged: (phone) {
         onChanged?.call(phone.completeNumber);
-        print(phone.completeNumber);
+        debugPrint(phone.completeNumber);
       },
       onCountryChanged: (country) {
-        print('Country changed to: ${country.name}');
+        debugPrint('Country changed to: ${country.name}');
       },
     );
   }

@@ -134,6 +134,7 @@ abstract class  LocaleKeys {
   static const general_delivery = 'general.delivery';
   static const general_document = 'general.document';
   static const general_enter_info = 'general.enter_info';
+  static const general_office_address = 'general.office_address';
   static const general = 'general';
   static const navigation_verify = 'navigation.verify';
   static const navigation_reset_password = 'navigation.reset_password';
@@ -158,6 +159,7 @@ abstract class  LocaleKeys {
   static const navigation_fill_sender_info = 'navigation.fill_sender_info';
   static const navigation_fill_recipient_info = 'navigation.fill_recipient_info';
   static const navigation_additional = 'navigation.additional';
+  static const navigation_online_chat = 'navigation.online_chat';
   static const navigation = 'navigation';
 
 }

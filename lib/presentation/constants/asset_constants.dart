@@ -25,7 +25,9 @@ enum AssetConstants {
   send,
   get,
   order,
-  gallery
+  gallery,
+  call,
+  whatsapp
 }
 
 extension AssetConstantsExtension on AssetConstants {

@@ -48,7 +48,7 @@ class CashedImages extends StatelessWidget {
                 child: Center(
                   child: LoadingAnimationWidget.flickr(
                       size: 40,
-                      leftDotColor: ColorConstants.orange,
+                      leftDotColor: ColorConstants.green,
                       rightDotColor: ColorConstants.primary),
                 ),
               ),

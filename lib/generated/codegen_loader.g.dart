@@ -150,7 +150,8 @@ class CodegenLoader extends AssetLoader{
     "select_role": "Выберите свою роль, чтобы продолжить",
     "delivery": "Посылка",
     "document": "Документ",
-    "enter_info": "Введите информацию о посылке:"
+    "enter_info": "Введите информацию о посылке:",
+    "office_address": "Адрес офиса"
   },
   "navigation": {
     "verify": "Подтверждение",
@@ -175,7 +176,8 @@ class CodegenLoader extends AssetLoader{
     "fill_delivery_info": "Заполните детали доставки",
     "fill_sender_info": "Заполните данные отправителя",
     "fill_recipient_info": "Заполните данные получателя",
-    "additional": "Дополнительное"
+    "additional": "Дополнительное",
+    "online_chat": "Онлайн чат"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": _ru};

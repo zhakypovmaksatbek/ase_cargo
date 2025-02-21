@@ -1,13 +1,15 @@
 import 'package:ase/generated/locale_keys.g.dart';
+import 'package:ase/main.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
 import 'package:ase/presentation/widgets/rating/rating_widget.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
+import 'package:ase/router/app_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ReviewsWidget extends StatelessWidget {
   const ReviewsWidget({super.key});
-
+  static final router = getIt.get<AppRouter>();
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -22,7 +24,9 @@ class ReviewsWidget extends StatelessWidget {
               AppText(
                   title: LocaleKeys.general_read_reviews.tr(),
                   textType: TextType.title),
-              const Icon(Icons.arrow_forward_ios_rounded)
+              GestureDetector(
+                  onTap: () => router.pushNamed("/views"),
+                  child: const Icon(Icons.arrow_forward_ios_rounded))
             ],
           ),
           SingleChildScrollView(

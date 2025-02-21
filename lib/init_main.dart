@@ -5,6 +5,7 @@ import 'package:ase/data/bloc/register/register_cubit.dart';
 import 'package:ase/data/bloc/resent_code/resent_code_cubit.dart';
 import 'package:ase/data/bloc/story/story_cubit.dart';
 import 'package:ase/data/bloc/story_view/story_view_cubit.dart';
+import 'package:ase/data/bloc/update/update_user_cubit.dart';
 import 'package:ase/data/bloc/user_cubit/user_cubit.dart';
 import 'package:ase/data/bloc/verify/verify_cubit.dart';
 import 'package:ase/main.dart';
@@ -31,6 +32,7 @@ class InitMain {
       BlocProvider(create: (context) => BannerCubit()),
       BlocProvider(create: (context) => ImagePickerCubit()),
       BlocProvider(create: (context) => UserCubit()),
+      BlocProvider(create: (context) => UpdateUserCubit()),
     ];
   }
 }

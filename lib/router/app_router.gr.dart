@@ -91,6 +91,38 @@ class NewsDetailRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [NewsPage]
+class NewsRoute extends PageRouteInfo<void> {
+  const NewsRoute({List<PageRouteInfo>? children})
+    : super(NewsRoute.name, initialChildren: children);
+
+  static const String name = 'NewsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const NewsPage();
+    },
+  );
+}
+
+/// generated route for
+/// [OnlineChatPage]
+class OnlineChatRoute extends PageRouteInfo<void> {
+  const OnlineChatRoute({List<PageRouteInfo>? children})
+    : super(OnlineChatRoute.name, initialChildren: children);
+
+  static const String name = 'OnlineChatRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const OnlineChatPage();
+    },
+  );
+}
+
+/// generated route for
 /// [OrderDetailPage]
 class OrderDetailRoute extends PageRouteInfo<OrderDetailRouteArgs> {
   OrderDetailRoute({Key? key, List<PageRouteInfo>? children})
@@ -388,4 +420,20 @@ class VerifyRouteArgs {
   String toString() {
     return 'VerifyRouteArgs{key: $key, model: $model, title: $title}';
   }
+}
+
+/// generated route for
+/// [ViewsPage]
+class ViewsRoute extends PageRouteInfo<void> {
+  const ViewsRoute({List<PageRouteInfo>? children})
+    : super(ViewsRoute.name, initialChildren: children);
+
+  static const String name = 'ViewsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ViewsPage();
+    },
+  );
 }

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 
 class PasswordTextField extends StatefulWidget {
-  const PasswordTextField({
-    super.key,
-    required this.hintText,
-    required this.controller,
-    this.textInputAction,
-    this.validator,
-    this.errorText,
-    this.onChanged,
-  });
+  const PasswordTextField(
+      {super.key,
+      required this.hintText,
+      required this.controller,
+      this.textInputAction,
+      this.validator,
+      this.errorText,
+      this.onChanged,
+      this.onEditingComplete});
   final String hintText;
   final TextEditingController controller;
   final TextInputAction? textInputAction;
   final String? Function(String?)? validator;
   final String? errorText;
   final void Function(String)? onChanged;
+  final void Function()? onEditingComplete;
   @override
   State<PasswordTextField> createState() => _PasswordTextFieldState();
 }
@@ -38,6 +39,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       validator: widget.validator,
       onChanged: widget.onChanged,
+      onEditingComplete: widget.onEditingComplete,
       decoration: InputDecoration(
         hintText: widget.hintText,
         errorText: widget.errorText,

@@ -26,7 +26,9 @@ class NewsWidget extends StatelessWidget {
               AppText(
                   title: LocaleKeys.general_news.tr(),
                   textType: TextType.title),
-              const Icon(Icons.arrow_forward_ios_rounded)
+              GestureDetector(
+                  onTap: () => getIt<AppRouter>().push(NewsRoute()),
+                  child: const Icon(Icons.arrow_forward_ios_rounded))
             ],
           ),
           SingleChildScrollView(

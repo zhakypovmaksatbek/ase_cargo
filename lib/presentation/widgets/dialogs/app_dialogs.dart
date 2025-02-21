@@ -36,6 +36,7 @@ class AppDialogs {
                         context.router.maybePop(true);
                       },
                       style: ElevatedButton.styleFrom(
+                          overlayColor: ColorConstants.white,
                           backgroundColor: ColorConstants.primary),
                       child: AppText(
                           title: confirmTitle ?? LocaleKeys.button_exit.tr(),

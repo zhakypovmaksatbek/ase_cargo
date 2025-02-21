@@ -5,7 +5,9 @@ import 'package:ase/presentation/pages/auth/reset_password/reset_password.dart';
 import 'package:ase/presentation/pages/auth/verify/verify_page.dart';
 import 'package:ase/presentation/pages/home/home_page.dart';
 import 'package:ase/presentation/pages/home/views/news_detail.dart';
+import 'package:ase/presentation/pages/home/views/news_page.dart';
 import 'package:ase/presentation/pages/home/views/service_detail.dart';
+import 'package:ase/presentation/pages/home/views/views_page.dart';
 import 'package:ase/presentation/pages/main/main_page.dart';
 import 'package:ase/presentation/pages/order/create_order_page.dart';
 import 'package:ase/presentation/pages/order/view/sender_form_view.dart';
@@ -16,6 +18,7 @@ import 'package:ase/presentation/pages/profile/views/requests/request_detail.dar
 import 'package:ase/presentation/pages/profile/views/requests/requests_view.dart';
 import 'package:ase/presentation/pages/profile/views/user/user_info_page.dart';
 import 'package:ase/presentation/pages/splash/splash_page.dart';
+import 'package:ase/presentation/pages/support/online_chat_page.dart';
 import 'package:ase/presentation/pages/support/support_page.dart';
 import 'package:ase/presentation/pages/tracking/tracking_page.dart';
 import 'package:auto_route/auto_route.dart';
@@ -53,6 +56,9 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: SenderFormRoute.page, path: "/sender_form"),
         AutoRoute(page: NewsDetailRoute.page, path: "/news_detail"),
         AutoRoute(page: ServiceDetailRoute.page, path: "/service_detail"),
+        AutoRoute(page: ViewsRoute.page, path: "/views"),
+        AutoRoute(page: OnlineChatRoute.page, path: "/online_chat"),
+        AutoRoute(page: NewsRoute.page, path: "/news_route"),
       ];
 }
 

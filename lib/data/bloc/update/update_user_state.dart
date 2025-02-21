@@ -8,3 +8,12 @@ sealed class UpdateUserState extends Equatable {
 }
 
 final class UpdateUserInitial extends UpdateUserState {}
+
+final class UpdateUserLoading extends UpdateUserState {}
+
+final class UpdateUserError extends UpdateUserState {
+  final String message;
+  const UpdateUserError(this.message);
+}
+
+final class UpdateUserSuccess extends UpdateUserState {}

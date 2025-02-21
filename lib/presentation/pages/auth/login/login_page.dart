@@ -74,6 +74,10 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
                       hintText: LocaleKeys.form_password.tr(),
                       controller: passwordController,
                       validator: validate.validatePassword,
+                      onEditingComplete: () {
+                        login(context);
+                        focusNode.unfocus();
+                      },
                     ),
                     Align(
                       alignment: Alignment.centerRight,

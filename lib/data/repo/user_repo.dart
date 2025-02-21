@@ -58,7 +58,8 @@ class UserRepo implements IUserRepo {
   }
 
   @override
-  Future<void> updateProfile(UserModel user, {XFile? image}) async {
+  Future<void> updateProfile(UserModel user,
+      {XFile? image, required UserModel originalUser}) async {
     final String url = "v1/accounts/me-info/";
     if (image != null) {
       FormData requestData = FormData.fromMap({
@@ -70,7 +71,7 @@ class UserRepo implements IUserRepo {
       });
       await dio.patch(url, requestData);
     }
-    await dio.patch(url, user.toJson());
+    await dio.patch(url, user.toUpdatedJson(originalUser));
   }
 }
 
@@ -80,5 +81,6 @@ abstract class IUserRepo {
   Future<VerifyModel> verify(VerifyModel model);
   Future<RegisterResponseModel> resentCode(String phone);
   Future<UserModel> getUser();
-  Future<void> updateProfile(UserModel user);
+  Future<void> updateProfile(UserModel user,
+      {XFile? image, required UserModel originalUser});
 }
