@@ -11,6 +11,22 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [ChangePasswordPage]
+class ChangePasswordRoute extends PageRouteInfo<void> {
+  const ChangePasswordRoute({List<PageRouteInfo>? children})
+    : super(ChangePasswordRoute.name, initialChildren: children);
+
+  static const String name = 'ChangePasswordRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ChangePasswordPage();
+    },
+  );
+}
+
+/// generated route for
 /// [CreateOrderPage]
 class CreateOrderRoute extends PageRouteInfo<void> {
   const CreateOrderRoute({List<PageRouteInfo>? children})
@@ -76,18 +92,46 @@ class MainRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [NewsDetailPage]
-class NewsDetailRoute extends PageRouteInfo<void> {
-  const NewsDetailRoute({List<PageRouteInfo>? children})
-    : super(NewsDetailRoute.name, initialChildren: children);
+class NewsDetailRoute extends PageRouteInfo<NewsDetailRouteArgs> {
+  NewsDetailRoute({
+    Key? key,
+    required String slug,
+    required String image,
+    List<PageRouteInfo>? children,
+  }) : super(
+         NewsDetailRoute.name,
+         args: NewsDetailRouteArgs(key: key, slug: slug, image: image),
+         initialChildren: children,
+       );
 
   static const String name = 'NewsDetailRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const NewsDetailPage();
+      final args = data.argsAs<NewsDetailRouteArgs>();
+      return NewsDetailPage(key: args.key, slug: args.slug, image: args.image);
     },
   );
+}
+
+class NewsDetailRouteArgs {
+  const NewsDetailRouteArgs({
+    this.key,
+    required this.slug,
+    required this.image,
+  });
+
+  final Key? key;
+
+  final String slug;
+
+  final String image;
+
+  @override
+  String toString() {
+    return 'NewsDetailRouteArgs{key: $key, slug: $slug, image: $image}';
+  }
 }
 
 /// generated route for
@@ -168,6 +212,22 @@ class OrderHistoryRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const OrderHistory();
+    },
+  );
+}
+
+/// generated route for
+/// [PaymentPage]
+class PaymentRoute extends PageRouteInfo<void> {
+  const PaymentRoute({List<PageRouteInfo>? children})
+    : super(PaymentRoute.name, initialChildren: children);
+
+  static const String name = 'PaymentRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const PaymentPage();
     },
   );
 }
@@ -287,6 +347,22 @@ class ResetPasswordRouteArgs {
 }
 
 /// generated route for
+/// [RestoreAccessPage]
+class RestoreAccessRoute extends PageRouteInfo<void> {
+  const RestoreAccessRoute({List<PageRouteInfo>? children})
+    : super(RestoreAccessRoute.name, initialChildren: children);
+
+  static const String name = 'RestoreAccessRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const RestoreAccessPage();
+    },
+  );
+}
+
+/// generated route for
 /// [SenderFormView]
 class SenderFormRoute extends PageRouteInfo<void> {
   const SenderFormRoute({List<PageRouteInfo>? children})
@@ -304,18 +380,50 @@ class SenderFormRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ServiceDetailPage]
-class ServiceDetailRoute extends PageRouteInfo<void> {
-  const ServiceDetailRoute({List<PageRouteInfo>? children})
-    : super(ServiceDetailRoute.name, initialChildren: children);
+class ServiceDetailRoute extends PageRouteInfo<ServiceDetailRouteArgs> {
+  ServiceDetailRoute({
+    Key? key,
+    required String slug,
+    required String image,
+    List<PageRouteInfo>? children,
+  }) : super(
+         ServiceDetailRoute.name,
+         args: ServiceDetailRouteArgs(key: key, slug: slug, image: image),
+         initialChildren: children,
+       );
 
   static const String name = 'ServiceDetailRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ServiceDetailPage();
+      final args = data.argsAs<ServiceDetailRouteArgs>();
+      return ServiceDetailPage(
+        key: args.key,
+        slug: args.slug,
+        image: args.image,
+      );
     },
   );
+}
+
+class ServiceDetailRouteArgs {
+  const ServiceDetailRouteArgs({
+    this.key,
+    required this.slug,
+    required this.image,
+  });
+
+  final Key? key;
+
+  final String slug;
+
+  final String image;
+
+  @override
+  String toString() {
+    return 'ServiceDetailRouteArgs{key: $key, slug: $slug, image: $image}';
+  }
 }
 
 /// generated route for

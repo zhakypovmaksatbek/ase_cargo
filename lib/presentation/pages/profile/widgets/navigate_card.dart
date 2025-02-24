@@ -2,6 +2,7 @@ import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/main.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
+import 'package:ase/presentation/locale/product_localization.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
@@ -24,6 +25,7 @@ class NavigateCard extends StatelessWidget {
       child: Column(
         children: [
           _navigateWidget(
+            context,
             title: LocaleKeys.navigation_profile.tr(),
             icon: AssetConstants.userInfo.svg,
             onTap: () => router.push(UserInfoRoute()),
@@ -32,19 +34,22 @@ class NavigateCard extends StatelessWidget {
             color: ColorConstants.dividerColor,
           ),
           _navigateWidget(
+            context,
             title: LocaleKeys.navigation_language.tr(),
             icon: AssetConstants.language.svg,
+            activateTrailingWidget: true,
           ),
           Divider(
             color: ColorConstants.dividerColor,
           ),
-          _navigateWidget(
+          _navigateWidget(context,
               title: LocaleKeys.navigation_my_reviews.tr(),
               icon: AssetConstants.myReview.svg),
           Divider(
             color: ColorConstants.dividerColor,
           ),
           _navigateWidget(
+            context,
             title: LocaleKeys.navigation_notifications.tr(),
             icon: AssetConstants.notification.svg,
           ),
@@ -53,12 +58,15 @@ class NavigateCard extends StatelessWidget {
     );
   }
 
-  InkWell _navigateWidget(
-      {required String title, required String icon, void Function()? onTap}) {
+  InkWell _navigateWidget(BuildContext context,
+      {required String title,
+      required String icon,
+      void Function()? onTap,
+      bool activateTrailingWidget = false}) {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
         child: Row(
           children: [
             CustomAssetImage(
@@ -72,6 +80,24 @@ class NavigateCard extends StatelessWidget {
               color: ColorConstants.lightBlack,
               fontWeight: FontWeight.w500,
             ),
+            Spacer(),
+            if (activateTrailingWidget)
+              PopupMenuButton<String>(
+                icon: const Icon(Icons.keyboard_arrow_down),
+                padding: EdgeInsets.zero,
+                menuPadding: EdgeInsets.zero,
+                onSelected: (value) {},
+                itemBuilder: (context) => Locales.values.map((e) {
+                  return PopupMenuItem<String>(
+                    value: e.name,
+                    onTap: () {
+                      ProductLocalizationService.updateLanguage(
+                          context: context, value: e);
+                    },
+                    child: Text(e.name.tr()),
+                  );
+                }).toList(),
+              ),
           ],
         ),
       ),

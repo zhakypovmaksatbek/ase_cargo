@@ -1,41 +1,53 @@
+import 'package:ase/data/repo/product_repo.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
 import 'package:ase/presentation/widgets/image/cashed_images.dart';
-import 'package:ase/presentation/widgets/text/app_text.dart';
+import 'package:ase/presentation/widgets/loading/loading_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 @RoutePage(name: "NewsDetailRoute")
 class NewsDetailPage extends StatelessWidget {
-  const NewsDetailPage({super.key});
-
+  const NewsDetailPage({super.key, required this.slug, required this.image});
+  final String slug;
+  final String image;
+  static final repo = ProductRepo();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 380,
+            expandedHeight: 300,
             leading: BackButton(
               style: CustomBoxDecoration.backButtonStyle(),
             ),
             flexibleSpace: FlexibleSpaceBar(
-              background:
-                  CashedImages(imageUrl: "https://picsum.photos/200/300"),
+              background: CashedImages(imageUrl: image),
             ),
           ),
           SliverToBoxAdapter(
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16),
-              child: Column(
-                spacing: 10,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AppText(title: title, textType: TextType.title20),
-                  AppText(title: description, textType: TextType.body),
-                  SizedBox(height: 90)
-                ],
-              ),
+              child: FutureBuilder(
+                  future: repo.getDetails(slug, type: "articles"),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      String pageData = snapshot.data.toString();
+                      return HtmlWidget(
+                        pageData,
+                        textStyle: const TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'EuclidCircular',
+                        ),
+                      );
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return const Center(child: LoadingWidget());
+                    }
+                    return SizedBox();
+                  }),
             ),
           )
         ],

@@ -1,8 +1,11 @@
 import 'package:ase/data/bloc/banner_bloc/banner_cubit.dart';
+import 'package:ase/data/bloc/news/news_cubit.dart';
+import 'package:ase/data/bloc/service/service_cubit.dart';
 import 'package:ase/data/bloc/story/story_cubit.dart';
+import 'package:ase/data/bloc/user_cubit/user_cubit.dart';
 import 'package:ase/presentation/pages/home/widgets/banners_widget.dart';
 import 'package:ase/presentation/pages/home/widgets/home_app_bar.dart';
-import 'package:ase/presentation/pages/home/widgets/news_windget.dart';
+import 'package:ase/presentation/pages/home/widgets/news_widget.dart';
 import 'package:ase/presentation/pages/home/widgets/our_services.dart';
 import 'package:ase/presentation/pages/home/widgets/questions_widget.dart';
 import 'package:ase/presentation/pages/home/widgets/reviews_widget.dart';
@@ -30,6 +33,9 @@ class _HomePageState extends State<HomePage> {
   void _getHomeData() {
     context.read<StoryCubit>().getStories();
     context.read<BannerCubit>().getHomeData();
+    context.read<NewsCubit>().getNews(1);
+    context.read<ServiceCubit>().getService(1);
+    context.read<UserCubit>().getUser();
   }
 
   @override

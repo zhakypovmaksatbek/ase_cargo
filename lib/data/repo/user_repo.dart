@@ -73,6 +73,17 @@ class UserRepo implements IUserRepo {
     }
     await dio.patch(url, user.toUpdatedJson(originalUser));
   }
+
+  @override
+  Future<void> updatePassword(String oldPassword, String newPassword) async {
+    await dio.patch("v1/accounts/change-password/",
+        {"old_password": oldPassword, "new_password": newPassword});
+  }
+
+  @override
+  Future<void> recoverySendCode(String phoneNumber) async {
+    await dio.post("v1/auth/verification/otp/send", {"phone": phoneNumber});
+  }
 }
 
 abstract class IUserRepo {
@@ -83,4 +94,7 @@ abstract class IUserRepo {
   Future<UserModel> getUser();
   Future<void> updateProfile(UserModel user,
       {XFile? image, required UserModel originalUser});
+  Future<void> updatePassword(String oldPassword, String newPassword);
+
+  Future<void> recoverySendCode(String phoneNumber);
 }

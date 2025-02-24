@@ -43,7 +43,9 @@ class CodegenLoader extends AssetLoader{
     "exit": "Выйти",
     "ok": "Ок",
     "filters": "Фильтры",
-    "next_step": "Далее"
+    "next_step": "Далее",
+    "upload_check": "Загрузить чек",
+    "get_code": "Получить код"
   },
   "form": {
     "phone_number": "Номер телефона",
@@ -98,7 +100,8 @@ class CodegenLoader extends AssetLoader{
     "write_comment": "Напишите комментарии",
     "comments": "Комментарии",
     "check_correct": "Проверьте все ли правильно?",
-    "address": "Адрес"
+    "address": "Адрес",
+    "enter_number_phone": "Укажите номер, мы отправим код"
   },
   "exception": {
     "cannot_be_empty": "Не может быть пустым",
@@ -151,7 +154,16 @@ class CodegenLoader extends AssetLoader{
     "delivery": "Посылка",
     "document": "Документ",
     "enter_info": "Введите информацию о посылке:",
-    "office_address": "Адрес офиса"
+    "office_address": "Адрес офиса",
+    "cash": "Наличными",
+    "card": "Карта",
+    "transfer": "Перевод",
+    "payment_method": "Способ оплаты",
+    "take_change": "Сколько сдачи взять?",
+    "write_sum": "Напишите сумму.",
+    "ru": "Русский",
+    "ky": "Кыргызский",
+    "en": "Английский"
   },
   "navigation": {
     "verify": "Подтверждение",
@@ -177,7 +189,9 @@ class CodegenLoader extends AssetLoader{
     "fill_sender_info": "Заполните данные отправителя",
     "fill_recipient_info": "Заполните данные получателя",
     "additional": "Дополнительное",
-    "online_chat": "Онлайн чат"
+    "online_chat": "Онлайн чат",
+    "payment": "Оплата",
+    "change_password": "Изменение пароля"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": _ru};

@@ -83,7 +83,9 @@ class RequestCard extends StatelessWidget {
                 child: DefElevatedButton(
                   verticalPadding: 12,
                   text: LocaleKeys.general_pay.tr(),
-                  onPressed: () {},
+                  onPressed: () {
+                    router.push(PaymentRoute());
+                  },
                 ))
           ],
         ),

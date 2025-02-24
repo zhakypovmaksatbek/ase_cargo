@@ -22,4 +22,5 @@ class AppConstants {
       'https://play.google.com/store/apps/details?id=com.tatadev.steak_dream';
   final String appStoreUrl =
       'https://apps.apple.com/kg/app/steak-dream/id6738393977';
+  static const String localePath = 'assets/translations';
 }

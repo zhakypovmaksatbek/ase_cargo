@@ -12,7 +12,7 @@ final class BannerInitial extends BannerState {}
 final class BannerLoading extends BannerState {}
 
 final class BannerLoaded extends BannerState {
-  final HomeModel data;
+  final List<BannerModel> data;
 
   const BannerLoaded({required this.data});
 }

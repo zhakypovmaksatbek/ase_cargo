@@ -31,6 +31,8 @@ abstract class  LocaleKeys {
   static const button_ok = 'button.ok';
   static const button_filters = 'button.filters';
   static const button_next_step = 'button.next_step';
+  static const button_upload_check = 'button.upload_check';
+  static const button_get_code = 'button.get_code';
   static const button = 'button';
   static const form_phone_number = 'form.phone_number';
   static const form_password = 'form.password';
@@ -85,6 +87,7 @@ abstract class  LocaleKeys {
   static const form_comments = 'form.comments';
   static const form_check_correct = 'form.check_correct';
   static const form_address = 'form.address';
+  static const form_enter_number_phone = 'form.enter_number_phone';
   static const form = 'form';
   static const exception_cannot_be_empty = 'exception.cannot_be_empty';
   static const exception_password_min_character = 'exception.password_min_character';
@@ -135,6 +138,15 @@ abstract class  LocaleKeys {
   static const general_document = 'general.document';
   static const general_enter_info = 'general.enter_info';
   static const general_office_address = 'general.office_address';
+  static const general_cash = 'general.cash';
+  static const general_card = 'general.card';
+  static const general_transfer = 'general.transfer';
+  static const general_payment_method = 'general.payment_method';
+  static const general_take_change = 'general.take_change';
+  static const general_write_sum = 'general.write_sum';
+  static const general_ru = 'general.ru';
+  static const general_ky = 'general.ky';
+  static const general_en = 'general.en';
   static const general = 'general';
   static const navigation_verify = 'navigation.verify';
   static const navigation_reset_password = 'navigation.reset_password';
@@ -160,6 +172,8 @@ abstract class  LocaleKeys {
   static const navigation_fill_recipient_info = 'navigation.fill_recipient_info';
   static const navigation_additional = 'navigation.additional';
   static const navigation_online_chat = 'navigation.online_chat';
+  static const navigation_payment = 'navigation.payment';
+  static const navigation_change_password = 'navigation.change_password';
   static const navigation = 'navigation';
 
 }

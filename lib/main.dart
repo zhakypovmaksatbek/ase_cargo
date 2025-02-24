@@ -1,6 +1,6 @@
-import 'package:ase/core/localization_service.dart';
 import 'package:ase/init_main.dart';
 import 'package:ase/presentation/constants/app_constants.dart';
+import 'package:ase/presentation/locale/product_localization.dart';
 import 'package:ase/presentation/theme/app_theme.dart';
 import 'package:ase/router/app_router.dart';
 import 'package:easy_localization/easy_localization.dart';

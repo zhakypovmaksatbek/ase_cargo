@@ -1,3 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ase/data/bloc/service/service_cubit.dart';
+import 'package:ase/data/models/service_model.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/main.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
@@ -6,53 +9,97 @@ import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:ase/router/app_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class OurServicesWidget extends StatelessWidget {
+class OurServicesWidget extends StatefulWidget {
   const OurServicesWidget({
     super.key,
   });
 
   @override
+  State<OurServicesWidget> createState() => _OurServicesWidgetState();
+}
+
+class _OurServicesWidgetState extends State<OurServicesWidget> {
+  List<ServiceModel> services = [];
+  @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-        child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
-      child: Column(
-        spacing: 16,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppText(
-              title: LocaleKeys.general_our_services.tr(),
-              textType: TextType.title),
-          ...List.generate(
-            5,
-            (index) => ServiceCard(),
-          )
-        ],
-      ),
-    ));
+    return BlocConsumer<ServiceCubit, ServiceState>(
+      listener: (context, state) {
+        if (state is ServiceSuccess) {
+          services = state.services.results ?? [];
+        }
+      },
+      builder: (context, state) {
+        if (services.isEmpty) {
+          return SliverToBoxAdapter();
+        }
+        return SliverToBoxAdapter(
+            child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+          child: Column(
+            spacing: 16,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppText(
+                  title: LocaleKeys.general_our_services.tr(),
+                  textType: TextType.title),
+              ...List.generate(
+                services.length,
+                (index) => ServiceCard(
+                  service: services[index],
+                ),
+              )
+            ],
+          ),
+        ));
+      },
+    );
   }
 }
 
 class ServiceCard extends StatelessWidget {
   const ServiceCard({
     super.key,
+    required this.service,
   });
+  final ServiceModel service;
   static final router = getIt<AppRouter>();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => router.push(ServiceDetailRoute()),
+      onTap: () => router.push(ServiceDetailRoute(
+          image: service.image ?? "", slug: service.slug ?? "")),
       child: SizedBox(
         height: 202,
         child: Stack(
           children: [
             CashedImages(
-              imageUrl: "https://picsum.photos/200/300",
+              imageUrl: service.image ?? "",
               fit: BoxFit.cover,
               width: double.infinity,
               borderRadius: BorderRadius.circular(14),
               height: 202,
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Opacity(
+                opacity: 0.7,
+                child: Container(
+                  width: double.infinity,
+                  height: 202,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                        ColorConstants.black.withValues(alpha: .01),
+                        ColorConstants.black.withValues(alpha: .3),
+                        ColorConstants.black.withValues(alpha: .7),
+                        ColorConstants.black.withValues(alpha: .8),
+                      ])),
+                ),
+              ),
             ),
             Positioned(
               bottom: 0,
@@ -70,8 +117,7 @@ class ServiceCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           AppText(
-                            title:
-                                "Экспресс доставка Экспресс доставкаЭкспресс доставка",
+                            title: service.title ?? "",
                             textType: TextType.header,
                             fontWeight: FontWeight.w600,
                             maxLines: 3,
@@ -79,8 +125,7 @@ class ServiceCard extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                           AppText(
-                            title:
-                                "Доставка за краткие сроки Экспресс доставка",
+                            title: service.subtitle ?? "",
                             textType: TextType.body,
                             color: ColorConstants.white,
                             maxLines: 2,

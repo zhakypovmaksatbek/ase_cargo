@@ -46,7 +46,9 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
         suffixIcon: IconButton(
           onPressed: _toggleVisibility,
           icon: Icon(
-            _isVisible ? Icons.visibility : Icons.visibility_off,
+            _isVisible
+                ? Icons.visibility_outlined
+                : Icons.visibility_off_outlined,
           ),
         ),
       ),

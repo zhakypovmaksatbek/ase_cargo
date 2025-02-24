@@ -7,7 +7,6 @@ import 'package:ase/presentation/widgets/image/cashed_images.dart';
 import 'package:ase/router/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class BannersWidget extends StatefulWidget {
   const BannersWidget({super.key});
@@ -17,7 +16,7 @@ class BannersWidget extends StatefulWidget {
 }
 
 class _BannersWidgetState extends State<BannersWidget> {
-  List<Banners>? banners = [];
+  List<BannerModel>? banners = [];
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class _BannersWidgetState extends State<BannersWidget> {
     return BlocConsumer<BannerCubit, BannerState>(
       listener: (context, state) async {
         if (state is BannerLoaded) {
-          banners = state.data.banners;
+          banners = state.data;
         }
       },
       builder: (context, state) {
@@ -41,21 +40,14 @@ class _BannersWidgetState extends State<BannersWidget> {
               child: PageView.builder(
                   itemCount: banners?.length ?? 0,
                   scrollDirection: Axis.horizontal,
-                  pageSnapping: true,
                   itemBuilder: (context, index) {
                     final banner = banners?[index];
-                    return InkWell(
-                      onTap: () async {
-                        await _navigate(banner);
-                      },
-                      borderRadius: BorderRadius.circular(10),
-                      child: CashedImages(
-                          imageUrl: banner?.imageMobile ?? "",
-                          width: size.width,
-                          borderRadius: BorderRadius.circular(14),
-                          fit: BoxFit.cover,
-                          height: 132),
-                    );
+                    return CashedImages(
+                        imageUrl: banner?.image ?? "",
+                        width: size.width,
+                        borderRadius: BorderRadius.circular(14),
+                        fit: BoxFit.cover,
+                        height: 132);
                   }),
             )),
           );
@@ -67,30 +59,4 @@ class _BannersWidgetState extends State<BannersWidget> {
   }
 
   final router = getIt<AppRouter>();
-
-  Future<void> _navigate(Banners? banner) async {
-    switch (banner?.type) {
-      case "link":
-        if (banner?.link?.link != null && banner?.link?.link != "") {
-          await launchUrl(Uri.parse(banner!.link!.link!));
-        }
-        break;
-
-      case "product":
-        if (banner?.link?.link != null) {
-          // router
-          //     .push(DynamicProductDetailRoute(productId: banner!.link!.link!));
-        }
-      case "category":
-        if (banner?.link?.link != null) {
-          // router.push(ProductsRoute(
-          //     image: banner?.imageMobile ?? "",
-          //     category: CategoryModel(
-          //       id: banner?.link?.link,
-          //       title: "",
-          //     )));
-        }
-      default:
-    }
-  }
 }

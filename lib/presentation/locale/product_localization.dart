@@ -1,11 +1,13 @@
 import 'package:ase/generated/codegen_loader.g.dart';
+import 'package:ase/generated/locale_keys.g.dart';
+import 'package:ase/presentation/constants/app_constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 final class ProductLocalizationService extends EasyLocalization {
   ProductLocalizationService({super.key, required super.child})
       : super(
-          path: localePath,
+          path: AppConstants.localePath,
           fallbackLocale: Locales.ru.locale,
           startLocale: Locales.ru.locale,
           useOnlyLangCode: true,
@@ -13,10 +15,9 @@ final class ProductLocalizationService extends EasyLocalization {
           assetLoader: const CodegenLoader(),
         );
 
-  static const String localePath = 'assets/translations';
   static final List<Locale> _supportedLocales = [
     //Locales.en.locale,
-    Locales.ky.locale,
+    // Locales.ky.locale,
     Locales.ru.locale
   ];
 
@@ -26,12 +27,11 @@ final class ProductLocalizationService extends EasyLocalization {
       context.setLocale(value.locale);
 }
 
-// Project locale enum for operation and configuration
 enum Locales {
-  //en(Locale('en')),
-  ky(Locale('ky')),
-  ru(Locale('ru'));
+  // ky(Locale('ky')),
+  ru(Locale('ru'), LocaleKeys.general_ru);
 
   final Locale locale;
-  const Locales(this.locale);
+  final String name;
+  const Locales(this.locale, this.name);
 }

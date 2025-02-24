@@ -30,11 +30,7 @@ class UserImageWidget extends StatelessWidget {
           child: _editButton(
             formCubit,
             () async {
-              if (Platform.isIOS) {
-                await formCubit.permissionIOSGallery();
-              } else {
-                await formCubit.checkImageFromGallery();
-              }
+              await formCubit.checkPlatformPermission();
             },
           ),
         ),

@@ -75,6 +75,7 @@ class RequestDetail extends StatelessWidget {
                   _buildOrderInfo(
                       title: LocaleKeys.general_additional_service_price.tr(),
                       subtitle: "50 сом"),
+                  SizedBox(height: 90)
                 ],
               ),
             ),

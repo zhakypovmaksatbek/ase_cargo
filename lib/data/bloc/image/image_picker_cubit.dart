@@ -129,9 +129,9 @@ class ImagePickerCubit extends Cubit<FeedbackImagePickerState> {
 
   Future<void> checkPlatformPermission() async {
     if (Platform.isIOS) {
-      await permissionIOSGalleryForReview();
+      await permissionIOSGallery();
     } else {
-      await permissionGalleryForReview();
+      await permissionGallery();
     }
   }
 }

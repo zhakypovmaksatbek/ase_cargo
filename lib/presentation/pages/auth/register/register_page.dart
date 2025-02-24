@@ -44,6 +44,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final registerCubit = context.read<RegisterCubit>();
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: registerState,
       builder: (context, state) {
@@ -89,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         onChanged: (value) {
-                          context.read<RegisterCubit>().clearError("firstName");
+                          registerCubit.clearError("firstName");
                         },
                       ),
 
@@ -101,7 +102,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                         textInputAction: TextInputAction.next,
                         errorText: error?.lastName?.firstOrNull,
                         onChanged: (value) {
-                          context.read<RegisterCubit>().clearError("lastName");
+                          registerCubit.clearError("lastName");
                         },
                       ),
 
@@ -113,7 +114,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                         textInputAction: TextInputAction.next,
                         errorText: error?.email?.firstOrNull,
                         onChanged: (value) {
-                          context.read<RegisterCubit>().clearError("email");
+                          registerCubit.clearError("email");
                         },
                       ),
 
@@ -124,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                           onChanged: (value) {
                             phone = value;
 
-                            context.read<RegisterCubit>().clearError("phone");
+                            registerCubit.clearError("phone");
                           }),
 
                       /// MARK: Password
@@ -135,7 +136,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                         validator: _validate.validatePassword,
                         errorText: error?.password?.firstOrNull,
                         onChanged: (value) {
-                          context.read<RegisterCubit>().clearError("password");
+                          registerCubit.clearError("password");
                         },
                       ),
                       PasswordTextField(
@@ -144,7 +145,7 @@ class _RegisterPageState extends State<RegisterPage> with RegisterMixin {
                         validator: (value) => _validate.validateConfirmPassword(
                             value, passwordController.text),
                         onChanged: (value) {
-                          context.read<RegisterCubit>().clearError("password");
+                          registerCubit.clearError("password");
                         },
                       ),
                       BlocBuilder<RegisterCubit, RegisterState>(

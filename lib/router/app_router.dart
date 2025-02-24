@@ -2,6 +2,7 @@ import 'package:ase/data/models/verify_model.dart';
 import 'package:ase/presentation/pages/auth/login/login_page.dart';
 import 'package:ase/presentation/pages/auth/register/register_page.dart';
 import 'package:ase/presentation/pages/auth/reset_password/reset_password.dart';
+import 'package:ase/presentation/pages/auth/reset_password/restore_access_page.dart';
 import 'package:ase/presentation/pages/auth/verify/verify_page.dart';
 import 'package:ase/presentation/pages/home/home_page.dart';
 import 'package:ase/presentation/pages/home/views/news_detail.dart';
@@ -14,8 +15,10 @@ import 'package:ase/presentation/pages/order/view/sender_form_view.dart';
 import 'package:ase/presentation/pages/profile/views/order/view/order_detail.dart';
 import 'package:ase/presentation/pages/profile/views/order/view/order_history.dart';
 import 'package:ase/presentation/pages/profile/views/profile_page.dart';
+import 'package:ase/presentation/pages/profile/views/requests/payment_page.dart';
 import 'package:ase/presentation/pages/profile/views/requests/request_detail.dart';
 import 'package:ase/presentation/pages/profile/views/requests/requests_view.dart';
+import 'package:ase/presentation/pages/profile/views/user/change_password_page.dart';
 import 'package:ase/presentation/pages/profile/views/user/user_info_page.dart';
 import 'package:ase/presentation/pages/splash/splash_page.dart';
 import 'package:ase/presentation/pages/support/online_chat_page.dart';
@@ -59,6 +62,9 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: ViewsRoute.page, path: "/views"),
         AutoRoute(page: OnlineChatRoute.page, path: "/online_chat"),
         AutoRoute(page: NewsRoute.page, path: "/news_route"),
+        AutoRoute(page: PaymentRoute.page, path: "/payment_route"),
+        AutoRoute(page: ChangePasswordRoute.page, path: "/change_password"),
+        AutoRoute(page: RestoreAccessRoute.page, path: "/reset_access"),
       ];
 }
 

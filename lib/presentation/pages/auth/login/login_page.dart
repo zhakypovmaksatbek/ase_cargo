@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
                     Align(
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
-                        onTap: () => router.push(ResetPasswordRoute()),
+                        onTap: () => router.push(RestoreAccessRoute()),
                         child: AppText(
                           title: LocaleKeys.button_forgot_password.tr(),
                           textType: TextType.subtitle,

@@ -40,7 +40,7 @@ class ProfileAppBar extends StatelessWidget {
                   Column(
                     children: [
                       AppText(
-                        title: user.fullName ?? "",
+                        title: "${user.firstName ?? ""} ${user.lastName ?? ""}",
                         textType: TextType.header,
                         fontWeight: FontWeight.w500,
                       ),

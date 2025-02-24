@@ -35,12 +35,25 @@ class UserCubit extends Cubit<UserState> {
           emit(UserUnauthorized());
           _router.replaceAll([LoginRoute()]);
           return;
+        } else if (e.response != null && e.response?.data != null) {
+          String errorMessage;
+          if (e.response?.data is Map && e.response?.data['error'] is String) {
+            errorMessage = e.response?.data['error'];
+          } else {
+            errorMessage =
+                LocaleKeys.exception_something_went_wrong_try_again.tr();
+          }
+
+          emit(UserError(errorMessage));
+          return;
         }
+
         final errorMessage = e.response?.data['error'] ??
             LocaleKeys.exception_something_went_wrong_try_again.tr();
         emit(UserError(errorMessage));
         return;
       }
+
       emit(UserError(LocaleKeys.exception_unknown_error.tr()));
     } catch (e) {
       emit(UserError(LocaleKeys.exception_unexpected_error.tr()));

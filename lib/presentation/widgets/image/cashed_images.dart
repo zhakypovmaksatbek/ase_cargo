@@ -70,7 +70,7 @@ class CashedImages extends StatelessWidget {
                       ),
                     )
                   : Image.asset(
-                      localImage ?? AssetConstants.noImage.png,
+                      localImage ?? AssetConstants.logo.png,
                       width: width,
                       alignment: Alignment.center,
                       height: height,

@@ -1,56 +1,62 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ase/data/repo/product_repo.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
 import 'package:ase/presentation/widgets/image/cashed_images.dart';
-import 'package:ase/presentation/widgets/text/app_text.dart';
+import 'package:ase/presentation/widgets/loading/loading_widget.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 @RoutePage(name: "ServiceDetailRoute")
 class ServiceDetailPage extends StatelessWidget {
-  const ServiceDetailPage({super.key});
-
+  const ServiceDetailPage({
+    super.key,
+    required this.slug,
+    required this.image,
+  });
+  final String slug;
+  final String image;
+  static final repo = ProductRepo();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 380,
+            expandedHeight: 300,
             leading: BackButton(
               style: CustomBoxDecoration.backButtonStyle(),
             ),
             flexibleSpace: FlexibleSpaceBar(
-              background:
-                  CashedImages(imageUrl: "https://picsum.photos/200/300"),
+              background: CashedImages(imageUrl: image),
             ),
           ),
           SliverToBoxAdapter(
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16),
-              child: Column(
-                spacing: 10,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AppText(title: title, textType: TextType.title20),
-                  AppText(title: description, textType: TextType.body),
-                  SizedBox(height: 90)
-                ],
-              ),
+              child: FutureBuilder(
+                  future: repo.getDetails(slug, type: "services"),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      String pageData = snapshot.data.toString();
+                      return HtmlWidget(
+                        pageData,
+                        textStyle: const TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'EuclidCircular',
+                        ),
+                      );
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return const Center(child: LoadingWidget());
+                    }
+                    return SizedBox();
+                  }),
             ),
           )
         ],
       ),
     );
   }
-
-  static const String title =
-      "Доставка экспресс-отправлений, посылок и грузов по городам Кыргызстана, включая области и поселки";
-  static const String description = """• Выезд курьера для приема отправлений.
-• Прием отправлений в офисе, на складе отправителя и/или по поручению отправителя со склада поставщика.
-• Предоставление накладной для оформления и отслеживания отправлений.
-• Стандартная упаковка: фирменные картонные конверты и пластиковые пакеты.
-• Автоматическое страхование в рамках Закона о почте, ограничивающее ответственность компании установленными пределами.
-• Персональный консультант для поддержки и консультаций по всем вопросам.
-• Консультации по таможенному оформлению для международных отправлений.
-• Подтверждение доставки: отчет по электронной почте или устно предоставляется бесплатно. Официальное письмо-уведомление доступно за дополнительную плату.""";
 }

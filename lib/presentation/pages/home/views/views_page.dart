@@ -45,9 +45,7 @@ class _ViewsPageState extends State<ViewsPage> {
             itemCount: 20,
             itemBuilder: (context, index) => DetailReviewCard(size: size),
           ),
-          SliverPadding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewPadding.bottom))
+          SliverPadding(padding: EdgeInsets.only(bottom: 60))
         ],
       ),
     ));

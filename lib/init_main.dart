@@ -1,11 +1,14 @@
 import 'package:ase/data/bloc/banner_bloc/banner_cubit.dart';
 import 'package:ase/data/bloc/image/image_picker_cubit.dart';
 import 'package:ase/data/bloc/login/login_cubit.dart';
+import 'package:ase/data/bloc/news/news_cubit.dart';
 import 'package:ase/data/bloc/register/register_cubit.dart';
 import 'package:ase/data/bloc/resent_code/resent_code_cubit.dart';
+import 'package:ase/data/bloc/service/service_cubit.dart';
 import 'package:ase/data/bloc/story/story_cubit.dart';
 import 'package:ase/data/bloc/story_view/story_view_cubit.dart';
 import 'package:ase/data/bloc/update/update_user_cubit.dart';
+import 'package:ase/data/bloc/update_password/update_password_cubit.dart';
 import 'package:ase/data/bloc/user_cubit/user_cubit.dart';
 import 'package:ase/data/bloc/verify/verify_cubit.dart';
 import 'package:ase/main.dart';
@@ -33,6 +36,9 @@ class InitMain {
       BlocProvider(create: (context) => ImagePickerCubit()),
       BlocProvider(create: (context) => UserCubit()),
       BlocProvider(create: (context) => UpdateUserCubit()),
+      BlocProvider(create: (context) => NewsCubit()),
+      BlocProvider(create: (context) => ServiceCubit()),
+      BlocProvider(create: (context) => UpdatePasswordCubit()),
     ];
   }
 }
