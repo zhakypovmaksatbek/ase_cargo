@@ -1,6 +1,10 @@
 import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
+import 'package:ase/presentation/constants/color_constants.dart';
+import 'package:ase/presentation/widgets/dialogs/app_dialogs.dart';
+import 'package:ase/presentation/widgets/text/app_text.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -9,6 +13,75 @@ class ImagePickerCubit extends Cubit<FeedbackImagePickerState> {
   final ImagePicker _picker = ImagePicker();
 
   ImagePickerCubit() : super(FeedbackImagePickerState());
+
+  Future<void> pickFrontImage(BuildContext context) async {
+    // Galeri izni kontrolü
+    final bool isGranted = await galleryPermission();
+    if (isGranted) {
+      final pickedFile = await _picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 50,
+      );
+      emit(state.copyWith(frontFile: pickedFile));
+    } else {
+      if (context.mounted) {
+        bool? goSettings = await AppDialogs.defaultDialog(
+            context,
+            AppText(title: "title", textType: TextType.body),
+            ColorConstants.primary);
+        if (goSettings ?? false) {
+          await AppSettings.openAppSettings(type: AppSettingsType.settings);
+        }
+      }
+    }
+  }
+
+  // Kimlik fotoğrafı (arka yüz) seçme
+  Future<XFile?> pickBackImage(BuildContext context) async {
+    // Galeri izni kontrolü
+    final bool isGranted = await galleryPermission();
+    if (isGranted) {
+      final pickedFile = await _picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 50,
+      );
+      emit(state.copyWith(backFile: pickedFile));
+      return pickedFile;
+    } else {
+      if (context.mounted) {
+        bool? goSettings = await AppDialogs.defaultDialog(
+            context,
+            AppText(title: "title", textType: TextType.body),
+            ColorConstants.primary);
+        if (goSettings ?? false) {
+          await AppSettings.openAppSettings(type: AppSettingsType.settings);
+        }
+      }
+      return null;
+    }
+  }
+
+  void removePickImage(ImageType type) {
+    switch (type) {
+      case ImageType.frontFile:
+        state.frontFile = null;
+        emit(state.copyWith(frontFile: state.frontFile));
+        break;
+      case ImageType.backFile:
+        state.backFile = null;
+        emit(state.copyWith(backFile: state.backFile));
+        break;
+      case ImageType.recipientFrontFile:
+        state.recipientFrontFile = null;
+        emit(state.copyWith(recipientFrontFile: state.recipientFrontFile));
+        break;
+      case ImageType.recipientBackFile:
+        state.recipientBackFile = null;
+        emit(state.copyWith(recipientBackFile: state.recipientBackFile));
+        break;
+    }
+  }
+
   Future<void> checkImageFromGallery() async {
     final pickedFile =
         await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
@@ -35,8 +108,17 @@ class ImagePickerCubit extends Cubit<FeedbackImagePickerState> {
   void cleanData() {
     state.pickedFile = null;
     state.pickedFiles = null;
+    state.frontFile = null;
+    state.backFile = null;
+    state.recipientBackFile = null;
+    state.recipientFrontFile = null;
     emit(state.copyWith(
-        pickedFile: state.pickedFile, pickedFiles: state.pickedFiles));
+        pickedFile: state.pickedFile,
+        pickedFiles: state.pickedFiles,
+        frontFile: state.frontFile,
+        backFile: state.backFile,
+        recipientBackFile: state.recipientBackFile,
+        recipientFrontFile: state.recipientFrontFile));
   }
 
   Future<void> checkImageFromCamera(context) async {
@@ -111,7 +193,21 @@ class ImagePickerCubit extends Cubit<FeedbackImagePickerState> {
     }
   }
 
-  Future<void> permissionGalleryForReview() async {
+  Future<bool> galleryPermission() async {
+    final status = await Permission.photos.status;
+    if (status.isGranted) {
+      return true;
+    } else {
+      final result = await Permission.photos.request();
+      if (result.isGranted) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  Future<void> permissionGalleryForMultiImage() async {
     final status = await Permission.mediaLibrary.status;
     if (status.isGranted) {
       await checkMultiImageFromGallery();
@@ -134,19 +230,86 @@ class ImagePickerCubit extends Cubit<FeedbackImagePickerState> {
       await permissionGallery();
     }
   }
+
+  void updateImage(ImageType type, XFile file) {
+    switch (type) {
+      case ImageType.frontFile:
+        emit(state.copyWith(frontFile: file));
+        break;
+      case ImageType.backFile:
+        emit(state.copyWith(backFile: file));
+        break;
+      case ImageType.recipientFrontFile:
+        emit(state.copyWith(recipientFrontFile: file));
+        break;
+      case ImageType.recipientBackFile:
+        emit(state.copyWith(recipientBackFile: file));
+        break;
+    }
+  }
+
+  Future<XFile?> pickImage(BuildContext context, ImageType type) async {
+    final bool isGranted = await galleryPermission();
+    if (isGranted) {
+      final pickedFile = await _picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 50,
+      );
+      if (pickedFile != null) {
+        updateImage(type, pickedFile);
+      }
+      return pickedFile;
+    } else {
+      if (context.mounted) {
+        bool? goSettings = await AppDialogs.defaultDialog(
+            context,
+            AppText(title: "title", textType: TextType.body),
+            ColorConstants.primary);
+        if (goSettings ?? false) {
+          await AppSettings.openAppSettings(type: AppSettingsType.settings);
+        }
+      }
+      return null;
+    }
+  }
 }
 
 class FeedbackImagePickerState {
   XFile? pickedFile;
+  XFile? frontFile;
+  XFile? backFile;
+  XFile? recipientFrontFile;
+  XFile? recipientBackFile;
   List<XFile>? pickedFiles;
 
-  FeedbackImagePickerState({this.pickedFile, this.pickedFiles});
+  FeedbackImagePickerState(
+      {this.pickedFile,
+      this.pickedFiles,
+      this.frontFile,
+      this.backFile,
+      this.recipientBackFile,
+      this.recipientFrontFile});
 
   FeedbackImagePickerState copyWith(
-      {XFile? pickedFile, List<XFile>? pickedFiles}) {
+      {XFile? pickedFile,
+      List<XFile>? pickedFiles,
+      XFile? frontFile,
+      XFile? backFile,
+      XFile? recipientBackFile,
+      XFile? recipientFrontFile}) {
     return FeedbackImagePickerState(
-      pickedFile: pickedFile ?? this.pickedFile,
-      pickedFiles: pickedFiles ?? this.pickedFiles,
-    );
+        pickedFile: pickedFile ?? this.pickedFile,
+        pickedFiles: pickedFiles ?? this.pickedFiles,
+        frontFile: frontFile ?? this.frontFile,
+        backFile: backFile ?? this.backFile,
+        recipientBackFile: recipientBackFile ?? this.recipientBackFile,
+        recipientFrontFile: recipientFrontFile ?? this.recipientFrontFile);
   }
+}
+
+enum ImageType {
+  frontFile,
+  backFile,
+  recipientFrontFile,
+  recipientBackFile,
 }

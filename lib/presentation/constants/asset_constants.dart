@@ -1,5 +1,6 @@
 enum AssetConstants {
   logo,
+  edit,
   splash,
   icon,
   profileImage,

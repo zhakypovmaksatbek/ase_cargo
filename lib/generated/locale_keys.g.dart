@@ -88,6 +88,10 @@ abstract class  LocaleKeys {
   static const form_check_correct = 'form.check_correct';
   static const form_address = 'form.address';
   static const form_enter_number_phone = 'form.enter_number_phone';
+  static const form_pickup = 'form.pickup';
+  static const form_delivery = 'form.delivery';
+  static const form_select_delivery_type = 'form.select_delivery_type';
+  static const form_package = 'form.package';
   static const form = 'form';
   static const exception_cannot_be_empty = 'exception.cannot_be_empty';
   static const exception_password_min_character = 'exception.password_min_character';
@@ -103,6 +107,11 @@ abstract class  LocaleKeys {
   static const notification_exit_account = 'notification.exit_account';
   static const notification_no_orders = 'notification.no_orders';
   static const notification_order_will_be_shipped = 'notification.order_will_be_shipped';
+  static const notification_not_found_package_info = 'notification.not_found_package_info';
+  static const notification_order_is_being_reviewed = 'notification.order_is_being_reviewed';
+  static const notification_please_wait = 'notification.please_wait';
+  static const notification_want_to_exit_page = 'notification.want_to_exit_page';
+  static const notification_exit_description = 'notification.exit_description';
   static const notification = 'notification';
   static const general_seconds = 'general.seconds';
   static const general_create_new_password = 'general.create_new_password';

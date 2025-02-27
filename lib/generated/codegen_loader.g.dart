@@ -67,7 +67,7 @@ class CodegenLoader extends AssetLoader{
     "restore_access": "Восстоновление доступа",
     "name_field": "Наименование",
     "description": "Описание",
-    "weight": "Вес:",
+    "weight": "Вес в кг:",
     "price_product": "Стоимость товара",
     "dimensions": "Габариты",
     "length": "Длина в см",
@@ -89,8 +89,8 @@ class CodegenLoader extends AssetLoader{
     "index": "Почтовый индекс",
     "save_data": "Сохранить данные",
     "region": "Район",
-    "legal": "Физ. лицо",
-    "physical": "Юр. лицо",
+    "legal": "Юр. лицо",
+    "physical": "Физ. лицо",
     "full_name": "ФИО *",
     "name_of_company": "Название компании *",
     "inn_company": "ИНН компании *",
@@ -101,7 +101,11 @@ class CodegenLoader extends AssetLoader{
     "comments": "Комментарии",
     "check_correct": "Проверьте все ли правильно?",
     "address": "Адрес",
-    "enter_number_phone": "Укажите номер, мы отправим код"
+    "enter_number_phone": "Укажите номер, мы отправим код",
+    "pickup": "Самовывоз",
+    "delivery": "Доставка",
+    "select_delivery_type": "Выберите способ доставки:",
+    "package": "Посылка"
   },
   "exception": {
     "cannot_be_empty": "Не может быть пустым",
@@ -118,7 +122,12 @@ class CodegenLoader extends AssetLoader{
     "we_sent_code_to_your_phone": "Мы отправили код на указанный вами номер",
     "exit_account": "Вы действительно хотите выйти из своего аккаунта?",
     "no_orders": "У вас нет заявок...",
-    "order_will_be_shipped": "Ваш заказ будет отправлен в ближайшее время!"
+    "order_will_be_shipped": "Ваш заказ будет отправлен в ближайшее время!",
+    "not_found_package_info": "Информация о посылке не найдена",
+    "order_is_being_reviewed": "Ваша заявка рассматривается",
+    "please_wait": "Ожидайте!",
+    "want_to_exit_page": "Хотите выйти из страницы?",
+    "exit_description": "Если вы покинете страницу, все введенные данные будут удалены и не сохранены."
   },
   "general": {
     "seconds": "сек",
@@ -151,7 +160,7 @@ class CodegenLoader extends AssetLoader{
     "i_recipient": "Я получатель",
     "new_order": "Новый заказ",
     "select_role": "Выберите свою роль, чтобы продолжить",
-    "delivery": "Посылка",
+    "delivery": "Посылка №{number}",
     "document": "Документ",
     "enter_info": "Введите информацию о посылке:",
     "office_address": "Адрес офиса",

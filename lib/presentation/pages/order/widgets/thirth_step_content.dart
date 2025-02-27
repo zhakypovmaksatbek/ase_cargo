@@ -6,6 +6,7 @@ import 'package:ase/data/models/sender_model.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
+import 'package:ase/presentation/pages/order/widgets/second_step_content.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
@@ -15,16 +16,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SecondStepContent extends StatefulWidget {
-  const SecondStepContent(
-      {super.key, required this.sender, required this.senderError});
-  final ValueNotifier<SenderModel> sender;
-  final SenderErrorModel? senderError;
+class ThirdStepContent extends StatefulWidget {
+  const ThirdStepContent(
+      {super.key, required this.recipient, required this.recipientError});
+  final ValueNotifier<SenderModel> recipient;
+  final SenderErrorModel? recipientError;
   @override
-  State<SecondStepContent> createState() => _SecondStepContentState();
+  State<ThirdStepContent> createState() => _ThirdStepContentState();
 }
 
-class _SecondStepContentState extends State<SecondStepContent> {
+class _ThirdStepContentState extends State<ThirdStepContent> {
   final ValueNotifier<PersonType> selectedType =
       ValueNotifier<PersonType>(PersonType.physical);
   final TextEditingController fullName = TextEditingController();
@@ -42,8 +43,8 @@ class _SecondStepContentState extends State<SecondStepContent> {
   final TextEditingController innCompany = TextEditingController();
   @override
   void initState() {
-    widget.sender.value =
-        widget.sender.value.copyWith(entityType: PersonType.physical.key);
+    widget.recipient.value =
+        widget.recipient.value.copyWith(entityType: PersonType.physical.key);
 
     super.initState();
   }
@@ -120,19 +121,20 @@ class _SecondStepContentState extends State<SecondStepContent> {
               ),
               PhoneNumberTextField(
                 focusNode: focus,
-                errorText: widget.senderError?.phone?.join(", "),
+                errorText: widget.recipientError?.phone?.join(", "),
                 onChanged: (p0) {
-                  widget.sender.value = widget.sender.value.copyWith(phone: p0);
+                  widget.recipient.value =
+                      widget.recipient.value.copyWith(phone: p0);
                 },
               ),
               DefTextField(
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
                   controller: email,
-                  errorText: widget.senderError?.email?.join(", "),
+                  errorText: widget.recipientError?.email?.join(", "),
                   onChanged: (p0) {
-                    widget.sender.value =
-                        widget.sender.value.copyWith(email: email.text);
+                    widget.recipient.value =
+                        widget.recipient.value.copyWith(email: email.text);
                   },
                   hintText: LocaleKeys.form_email.tr()),
               AppText(
@@ -144,39 +146,39 @@ class _SecondStepContentState extends State<SecondStepContent> {
                   keyboardType: TextInputType.streetAddress,
                   textInputAction: TextInputAction.next,
                   controller: country,
-                  errorText: widget.senderError?.region?.join(", "),
+                  errorText: widget.recipientError?.country?.join(", "),
                   onChanged: (p0) {
-                    widget.sender.value =
-                        widget.sender.value.copyWith(country: country.text);
+                    widget.recipient.value =
+                        widget.recipient.value.copyWith(country: country.text);
                   },
                   hintText: LocaleKeys.form_country.tr()),
               DefTextField(
                   keyboardType: TextInputType.streetAddress,
                   textInputAction: TextInputAction.next,
                   controller: city,
-                  errorText: widget.senderError?.city?.join(", "),
+                  errorText: widget.recipientError?.city?.join(", "),
                   onChanged: (p0) {
-                    widget.sender.value =
-                        widget.sender.value.copyWith(city: city.text);
+                    widget.recipient.value =
+                        widget.recipient.value.copyWith(city: city.text);
                   },
                   hintText: LocaleKeys.form_city.tr()),
               DefTextField(
                   keyboardType: TextInputType.streetAddress,
                   textInputAction: TextInputAction.next,
-                  errorText: widget.senderError?.region?.join(", "),
+                  errorText: widget.recipientError?.region?.join(", "),
                   controller: region,
                   onChanged: (p0) {
-                    widget.sender.value =
-                        widget.sender.value.copyWith(region: region.text);
+                    widget.recipient.value =
+                        widget.recipient.value.copyWith(region: region.text);
                   },
                   hintText: LocaleKeys.form_region.tr()),
               DefTextField(
                   keyboardType: TextInputType.streetAddress,
                   textInputAction: TextInputAction.next,
                   controller: addressLine,
-                  errorText: widget.senderError?.addressLine?.join(", "),
+                  errorText: widget.recipientError?.addressLine?.join(", "),
                   onChanged: (p0) {
-                    widget.sender.value = widget.sender.value
+                    widget.recipient.value = widget.recipient.value
                         .copyWith(addressLine: addressLine.text);
                   },
                   hintText: LocaleKeys.form_address_apartment.tr()),
@@ -184,16 +186,18 @@ class _SecondStepContentState extends State<SecondStepContent> {
                   keyboardType: TextInputType.streetAddress,
                   textInputAction: TextInputAction.next,
                   controller: zipcode,
-                  errorText: widget.senderError?.zipcode?.join(", "),
+                  errorText: widget.recipientError?.zipcode?.join(", "),
                   onChanged: (p0) {
-                    widget.sender.value =
-                        widget.sender.value.copyWith(zipcode: zipcode.text);
+                    widget.recipient.value =
+                        widget.recipient.value.copyWith(zipcode: zipcode.text);
                   },
                   hintText: LocaleKeys.form_index.tr()),
               CustomCheckBox(
                 onChanged: (value) {
-                  widget.sender.value =
-                      widget.sender.value.copyWith(saveForm: value);
+                  widget.recipient.value =
+                      widget.recipient.value.copyWith(saveForm: value);
+                  widget.recipient.value =
+                      widget.recipient.value.copyWith(savedByUser: value);
                 },
               )
             ],
@@ -214,9 +218,10 @@ class _SecondStepContentState extends State<SecondStepContent> {
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.next,
             controller: fullName,
-            errorText: widget.senderError?.name?.join(", "),
+            errorText: widget.recipientError?.name?.join(", "),
             onChanged: (name) {
-              widget.sender.value = widget.sender.value.copyWith(name: name);
+              widget.recipient.value =
+                  widget.recipient.value.copyWith(name: name);
             },
             hintText: LocaleKeys.form_full_name.tr()),
         AppText(
@@ -229,9 +234,10 @@ class _SecondStepContentState extends State<SecondStepContent> {
                 TextInputType.numberWithOptions(decimal: true, signed: true),
             textInputAction: TextInputAction.next,
             controller: inn,
-            errorText: widget.senderError?.tin?.join(", "),
+            errorText: widget.recipientError?.tin?.join(", "),
             onChanged: (inn) {
-              widget.sender.value = widget.sender.value.copyWith(tin: inn);
+              widget.recipient.value =
+                  widget.recipient.value.copyWith(tin: inn);
             },
             hintText: LocaleKeys.form_inn.tr()),
         Row(
@@ -250,8 +256,8 @@ class _SecondStepContentState extends State<SecondStepContent> {
                         .format(value ?? DateTime.now());
 
                     dateIssue.text = formattedDate;
-                    widget.sender.value =
-                        widget.sender.value.copyWith(issueDate: formattedDate);
+                    widget.recipient.value = widget.recipient.value
+                        .copyWith(issueDate: formattedDate);
                   });
                 },
                 child: DefTextField(
@@ -259,10 +265,10 @@ class _SecondStepContentState extends State<SecondStepContent> {
                         decimal: true, signed: true),
                     textInputAction: TextInputAction.next,
                     controller: dateIssue,
-                    errorText: widget.senderError?.issueDate?.join(", "),
+                    errorText: widget.recipientError?.issueDate?.join(", "),
                     onChanged: (p0) {
-                      widget.sender.value =
-                          widget.sender.value.copyWith(issueDate: p0);
+                      widget.recipient.value =
+                          widget.recipient.value.copyWith(issueDate: p0);
                     },
                     enabled: false,
                     hintText: LocaleKeys.form_date_issue.tr()),
@@ -272,10 +278,11 @@ class _SecondStepContentState extends State<SecondStepContent> {
               child: DefTextField(
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
-                  errorText: widget.senderError?.issuingAuthority?.join(", "),
+                  errorText:
+                      widget.recipientError?.issuingAuthority?.join(", "),
                   onChanged: (date) {
-                    widget.sender.value =
-                        widget.sender.value.copyWith(issuingAuthority: date);
+                    widget.recipient.value =
+                        widget.recipient.value.copyWith(issuingAuthority: date);
                   },
                   controller: whoIssue,
                   hintText: LocaleKeys.form_who_issue.tr()),
@@ -289,20 +296,22 @@ class _SecondStepContentState extends State<SecondStepContent> {
         ),
         UploadImageButton(
           onTap: () async {
-            await imageCubit.pickImage(context, ImageType.frontFile).then(
+            await imageCubit
+                .pickImage(context, ImageType.recipientFrontFile)
+                .then(
               (value) {
-                widget.sender.value =
-                    widget.sender.value.copyWith(frontPartImg: value);
+                widget.recipient.value =
+                    widget.recipient.value.copyWith(frontPartImg: value);
               },
             );
           },
-          type: ImageType.frontFile,
-          path: imageCubit.state.frontFile?.path,
+          type: ImageType.recipientFrontFile,
+          path: imageCubit.state.recipientFrontFile?.path,
           cubit: imageCubit,
         ),
-        if (widget.senderError?.frontPartImg != null)
+        if (widget.recipientError?.frontPartImg != null)
           AppText(
-            title: widget.senderError?.frontPartImg?.join(", ") ?? "",
+            title: widget.recipientError?.frontPartImg?.join(", ") ?? "",
             textType: TextType.description,
             color: ColorConstants.red,
           ),
@@ -313,20 +322,22 @@ class _SecondStepContentState extends State<SecondStepContent> {
         ),
         UploadImageButton(
           onTap: () async {
-            await imageCubit.pickImage(context, ImageType.backFile).then(
+            await imageCubit
+                .pickImage(context, ImageType.recipientBackFile)
+                .then(
               (value) {
-                widget.sender.value =
-                    widget.sender.value.copyWith(backPartImg: value);
+                widget.recipient.value =
+                    widget.recipient.value.copyWith(backPartImg: value);
               },
             );
           },
           cubit: imageCubit,
-          type: ImageType.backFile,
-          path: imageCubit.state.backFile?.path,
+          type: ImageType.recipientBackFile,
+          path: imageCubit.state.recipientBackFile?.path,
         ),
-        if (widget.senderError?.backPartImg != null)
+        if (widget.recipientError?.backPartImg != null)
           AppText(
-            title: widget.senderError?.backPartImg?.join(", ") ?? "",
+            title: widget.recipientError?.backPartImg?.join(", ") ?? "",
             textType: TextType.description,
             color: ColorConstants.red,
           )
@@ -343,9 +354,10 @@ class _SecondStepContentState extends State<SecondStepContent> {
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.next,
             controller: companyName,
-            errorText: widget.senderError?.name?.join(", "),
+            errorText: widget.recipientError?.name?.join(", "),
             onChanged: (name) {
-              widget.sender.value = widget.sender.value.copyWith(name: name);
+              widget.recipient.value =
+                  widget.recipient.value.copyWith(name: name);
             },
             hintText: LocaleKeys.form_name_of_company.tr()),
         AppText(
@@ -356,9 +368,10 @@ class _SecondStepContentState extends State<SecondStepContent> {
         DefTextField(
             controller: innCompany,
             onChanged: (inn) {
-              widget.sender.value = widget.sender.value.copyWith(tin: inn);
+              widget.recipient.value =
+                  widget.recipient.value.copyWith(tin: inn);
             },
-            errorText: widget.senderError?.tin?.join(", "),
+            errorText: widget.recipientError?.tin?.join(", "),
             keyboardType:
                 TextInputType.numberWithOptions(decimal: true, signed: true),
             textInputAction: TextInputAction.next,
@@ -373,8 +386,8 @@ class _SecondStepContentState extends State<SecondStepContent> {
       child: GestureDetector(
         onTap: () {
           selectedType.value = type;
-          widget.sender.value =
-              widget.sender.value.copyWith(entityType: type.key);
+          widget.recipient.value =
+              widget.recipient.value.copyWith(entityType: type.key);
         },
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 6),
@@ -390,37 +403,6 @@ class _SecondStepContentState extends State<SecondStepContent> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class CustomCheckBox extends StatefulWidget {
-  const CustomCheckBox({
-    super.key,
-    required this.onChanged,
-  });
-  final ValueChanged<bool> onChanged;
-  @override
-  State<CustomCheckBox> createState() => _CustomCheckBoxState();
-}
-
-class _CustomCheckBoxState extends State<CustomCheckBox> {
-  bool isSave = false;
-
-  void onChanged(bool? value) {
-    isSave = value ?? false;
-    widget.onChanged(value ?? false);
-    setState(() {});
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return CheckboxListTile(
-      value: isSave,
-      onChanged: onChanged,
-      contentPadding: EdgeInsets.zero,
-      controlAffinity: ListTileControlAffinity.leading,
-      title: Text(LocaleKeys.form_save_data.tr()),
     );
   }
 }
@@ -486,14 +468,4 @@ class UploadImageButton extends StatelessWidget {
       ),
     );
   }
-}
-
-enum PersonType {
-  physical(title: LocaleKeys.form_physical, key: "individual"),
-  legal(title: LocaleKeys.form_legal, key: "legal_entity");
-
-  final String title;
-  final String key;
-
-  const PersonType({required this.title, required this.key});
 }

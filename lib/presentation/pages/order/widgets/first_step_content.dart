@@ -1,17 +1,36 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ase/data/models/package_info_model.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
 import 'package:ase/presentation/pages/order/view/sender_form_view.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
+import 'package:ase/presentation/utils/validation.dart';
+import 'package:ase/presentation/widgets/card/package_card.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:ase/presentation/widgets/text_fields/def_text_field.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class FirstStepContent extends StatelessWidget {
-  FirstStepContent({super.key});
+class FirstStepContent extends StatefulWidget {
+  const FirstStepContent({
+    super.key,
+    required this.onPayerChanged,
+    required this.weigh,
+    required this.packagesList,
+    this.packageErrorInfoModel,
+  });
+  final ValueChanged<DeliveryType> onPayerChanged;
+  final ValueChanged<double> weigh;
 
+  final ValueNotifier<List<Packages>> packagesList;
+  final PackageErrorInfoModel? packageErrorInfoModel;
+  @override
+  State<FirstStepContent> createState() => _FirstStepContentState();
+}
+
+class _FirstStepContentState extends State<FirstStepContent> {
   final ValueNotifier<DeliveryType> selectedType =
-      ValueNotifier<DeliveryType>(DeliveryType.delivery);
+      ValueNotifier<DeliveryType>(DeliveryType.parcel);
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +49,13 @@ class FirstStepContent extends StatelessWidget {
                   children: [
                     _buildOption(
                       context,
-                      type: DeliveryType.delivery,
-                      isSelected: value == DeliveryType.delivery,
+                      type: DeliveryType.parcel,
+                      isSelected: value == DeliveryType.parcel,
                     ),
                     _buildOption(
                       context,
-                      type: DeliveryType.document,
-                      isSelected: value == DeliveryType.document,
+                      type: DeliveryType.docs,
+                      isSelected: value == DeliveryType.docs,
                     ),
                   ],
                 ),
@@ -45,12 +64,11 @@ class FirstStepContent extends StatelessWidget {
                 duration: Durations.extralong1,
                 curve: Curves.easeInOut,
                 margin: EdgeInsets.only(bottom: 20),
-                height: value == DeliveryType.delivery ? 700 : 140,
                 width: double.infinity,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                 decoration: CustomBoxDecoration(),
-                child: value == DeliveryType.delivery
+                child: value == DeliveryType.parcel
                     ? _buildDeliveryForm()
                     : _buildDocumentForm(),
               )
@@ -70,85 +88,66 @@ class FirstStepContent extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
         DefTextField(
+            inputFormatters: InputValidate.instance.inputDoubleFormatters,
             keyboardType:
                 TextInputType.numberWithOptions(decimal: true, signed: true),
             textInputAction: TextInputAction.next,
+            onChanged: (p0) {
+              widget.weigh(double.tryParse(p0) ?? 0);
+            },
             hintText: LocaleKeys.form_weight.tr()),
       ],
     );
   }
 
-  SingleChildScrollView _buildDeliveryForm() {
-    return SingleChildScrollView(
-      child: Column(
-        spacing: 10,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppText(
-            title: "Посылка № 1",
-            textType: TextType.body,
-            fontWeight: FontWeight.w600,
-          ),
-          AppText(
-            title: LocaleKeys.general_delivery_info.tr(),
-            textType: TextType.body,
-            fontWeight: FontWeight.w500,
-          ),
-          DefTextField(
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.next,
-              hintText: LocaleKeys.form_name_field.tr()),
-          DefTextField(
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.next,
-              hintText: LocaleKeys.form_description.tr()),
-          DefTextField(
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.next,
-              hintText: LocaleKeys.form_weight.tr()),
-          DefTextField(
-              keyboardType:
-                  TextInputType.numberWithOptions(decimal: true, signed: true),
-              textInputAction: TextInputAction.next,
-              hintText: LocaleKeys.form_price_product.tr()),
-          SizedBox(),
-          AppText(
-            title: LocaleKeys.form_dimensions.tr(),
-            textType: TextType.body,
-            fontWeight: FontWeight.w500,
-          ),
-          DefTextField(
-              keyboardType:
-                  TextInputType.numberWithOptions(decimal: true, signed: true),
-              textInputAction: TextInputAction.next,
-              hintText: LocaleKeys.form_length.tr()),
-          DefTextField(
-              keyboardType:
-                  TextInputType.numberWithOptions(decimal: true, signed: true),
-              textInputAction: TextInputAction.next,
-              hintText: LocaleKeys.form_width.tr()),
-          DefTextField(
-              keyboardType:
-                  TextInputType.numberWithOptions(decimal: true, signed: true),
-              textInputAction: TextInputAction.next,
-              hintText: LocaleKeys.form_height.tr()),
-          SizedBox(),
-          Center(
-              child: FloatingActionButton(
-            onPressed: () {},
-            backgroundColor: ColorConstants.primary,
-            child: Icon(Icons.add),
-          )),
-        ],
-      ),
-    );
+  Widget _buildDeliveryForm() {
+    return ValueListenableBuilder(
+        valueListenable: widget.packagesList,
+        builder: (context, value, _) {
+          return Column(
+            children: [
+              ListView.builder(
+                itemCount: value.length,
+                padding: EdgeInsets.zero,
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) {
+                  final package = value[index];
+
+                  return PackageCard(
+                    widget: widget,
+                    package: package,
+                    index: index,
+                    value: widget.packagesList.value,
+                    packageErrorInfoModel: widget
+                        .packageErrorInfoModel?.packages?[index.toString()],
+                  );
+                },
+              ),
+              Center(
+                  child: IconButton.filled(
+                style: ButtonStyle(
+                  shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14))),
+                ),
+                onPressed: () {
+                  widget.packagesList.value = List.from(value)..add(Packages());
+                },
+                icon: Icon(Icons.add),
+              )),
+            ],
+          );
+        });
   }
 
   Widget _buildOption(BuildContext context,
       {required DeliveryType type, required bool isSelected}) {
     return Expanded(
       child: InkWell(
-        onTap: () => selectedType.value = type,
+        onTap: () {
+          widget.onPayerChanged(type);
+          selectedType.value = type;
+        },
         borderRadius: BorderRadius.circular(14),
         splashColor: ColorConstants.white.withValues(alpha: .3),
         highlightColor: ColorConstants.white.withValues(alpha: .3),

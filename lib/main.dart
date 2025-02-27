@@ -1,3 +1,4 @@
+import 'package:ase/core/dio_settings.dart';
 import 'package:ase/init_main.dart';
 import 'package:ase/presentation/constants/app_constants.dart';
 import 'package:ase/presentation/locale/product_localization.dart';
@@ -34,4 +35,9 @@ class MyApp extends StatelessWidget {
 final getIt = GetIt.instance;
 void setupLocator() {
   getIt.registerSingleton<AppRouter>(AppRouter());
+  getIt.registerLazySingleton<FormDioSettings>(() {
+    final dio = FormDioSettings();
+    dio.init();
+    return dio;
+  });
 }

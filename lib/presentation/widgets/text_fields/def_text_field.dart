@@ -13,6 +13,7 @@ class DefTextField extends StatelessWidget {
   final void Function(String)? onChanged;
   final bool? enabled;
   final int? maxLines;
+  final void Function()? onTap;
 
   const DefTextField(
       {super.key,
@@ -26,7 +27,8 @@ class DefTextField extends StatelessWidget {
       this.errorText,
       this.onChanged,
       this.enabled,
-      this.maxLines});
+      this.maxLines,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,7 @@ class DefTextField extends StatelessWidget {
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       validator: validator,
+      onTap: onTap,
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       inputFormatters: inputFormatters,
       decoration: decoration ??

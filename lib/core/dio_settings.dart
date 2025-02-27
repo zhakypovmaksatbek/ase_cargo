@@ -1,10 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import "dart:async";
 
-import "package:ase/presentation/constants/app_constants.dart";
-import "package:dio/dio.dart";
-import "package:flutter/foundation.dart";
 import "package:ase/core/app_manager.dart";
+import "package:ase/presentation/constants/app_constants.dart";
+import "package:cookie_jar/cookie_jar.dart";
+import "package:dio/dio.dart";
+import "package:dio_cookie_manager/dio_cookie_manager.dart";
+import "package:flutter/foundation.dart";
+import "package:path_provider/path_provider.dart";
 
 class DioSettings {
   DioSettings() {
@@ -151,5 +154,60 @@ class DioLoggingInterceptor extends Interceptor {
       print('---------------------');
     }
     super.onError(err, handler);
+  }
+}
+
+class FormDioSettings {
+  late final CookieJar cookieJar;
+  late final Dio dio;
+
+  FormDioSettings._internal() {
+    dio = Dio(
+      BaseOptions(
+        baseUrl: AppConstants.instance.baseUrl,
+        contentType: "application/json",
+        headers: {
+          "Accept": "application/json",
+          "Accept-Language": "ru",
+        },
+        connectTimeout: const Duration(seconds: 20),
+        receiveTimeout: const Duration(seconds: 20),
+      ),
+    );
+
+    dio.interceptors.add(DioLoggingInterceptor());
+  }
+
+  static final FormDioSettings _instance = FormDioSettings._internal();
+  factory FormDioSettings() => _instance;
+
+  Future<void> init() async {
+    final appDocDir = await getApplicationDocumentsDirectory();
+    cookieJar =
+        PersistCookieJar(storage: FileStorage('${appDocDir.path}/cookies'));
+
+    dio.interceptors.add(CookieManager(cookieJar));
+  }
+
+  Future<void> clearCookies() async {
+    await cookieJar.deleteAll();
+  }
+
+  Future<Response> post(String url, Object? data) async {
+    return await dio.post(url, data: data, options: await _buildOptions());
+  }
+
+  Future<Response> get(String url, {Object? data}) async {
+    return await dio.get(url, data: data, options: await _buildOptions());
+  }
+
+  Future<Options> _buildOptions() async {
+    final String? token = await AppManager.instance.getToken();
+    return token != null && token.isNotEmpty
+        ? Options(headers: {
+            'Authorization': 'Bearer $token',
+            'Accept-Language': "ru",
+          })
+        : Options(headers: {'Accept-Language': "ru"});
   }
 }

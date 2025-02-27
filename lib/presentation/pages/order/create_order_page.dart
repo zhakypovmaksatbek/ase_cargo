@@ -1,7 +1,9 @@
+import 'package:ase/data/bloc/form/form_cubit.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/main.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
+import 'package:ase/presentation/pages/order/view/sender_form_view.dart';
 import 'package:ase/presentation/widgets/buttons/def_elevated_button.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
@@ -9,6 +11,7 @@ import 'package:ase/router/app_router.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage(name: 'CreateOrderRoute')
 class CreateOrderPage extends StatelessWidget {
@@ -46,29 +49,40 @@ class CreateOrderPage extends StatelessWidget {
                     color: ColorConstants.darkGrey,
                   ),
                   SizedBox(height: 21.5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    spacing: 10,
-                    children: [
-                      Expanded(
-                        child: DefElevatedButton(
-                          text: LocaleKeys.navigation_sender.tr(),
-                          // horizontalPadding: 20,
-                          radius: 20,
-                          onPressed: () {
-                            router.push(const SenderFormRoute());
-                          },
+                  BlocListener<FormCubit, FormCubitState>(
+                    listener: (context, state) {
+                      if (state is FormSuccess) {
+                        if (state.steps == FormSteps.first) {
+                          router.push(const SenderFormRoute());
+                        }
+                      }
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      spacing: 10,
+                      children: [
+                        Expanded(
+                          child: DefElevatedButton(
+                            text: LocaleKeys.navigation_sender.tr(),
+                            // horizontalPadding: 20,
+                            radius: 20,
+                            onPressed: () {
+                              context.read<FormCubit>().createForm('sender');
+                            },
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: DefElevatedButton(
-                          text: LocaleKeys.navigation_recipient.tr(),
-                          // horizontalPadding: 20,
-                          radius: 20,
-                          onPressed: () {},
+                        Expanded(
+                          child: DefElevatedButton(
+                            text: LocaleKeys.navigation_recipient.tr(),
+                            // horizontalPadding: 20,
+                            radius: 20,
+                            onPressed: () {
+                              context.read<FormCubit>().createForm('recipient');
+                            },
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   )
                 ],
               )),
