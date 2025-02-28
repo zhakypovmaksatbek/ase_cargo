@@ -2,11 +2,14 @@
 import 'dart:io';
 
 import 'package:ase/data/bloc/image/image_picker_cubit.dart';
+import 'package:ase/data/models/country_model.dart';
 import 'package:ase/data/models/sender_model.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
+import 'package:ase/presentation/pages/order/options/order_options.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
+import 'package:ase/presentation/widgets/drop_down/custom_drop_down.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:ase/presentation/widgets/text_fields/def_text_field.dart';
@@ -17,9 +20,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SecondStepContent extends StatefulWidget {
   const SecondStepContent(
-      {super.key, required this.sender, required this.senderError});
+      {super.key,
+      required this.sender,
+      required this.senderError,
+      required this.countries});
   final ValueNotifier<SenderModel> sender;
   final SenderErrorModel? senderError;
+  final List<CountryModel> countries;
   @override
   State<SecondStepContent> createState() => _SecondStepContentState();
 }
@@ -30,7 +37,6 @@ class _SecondStepContentState extends State<SecondStepContent> {
   final TextEditingController fullName = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController phone = TextEditingController();
-  final TextEditingController country = TextEditingController();
   final TextEditingController inn = TextEditingController();
   final TextEditingController dateIssue = TextEditingController();
   final TextEditingController whoIssue = TextEditingController();
@@ -53,7 +59,6 @@ class _SecondStepContentState extends State<SecondStepContent> {
     fullName.dispose();
     email.dispose();
     phone.dispose();
-    country.dispose();
     inn.dispose();
     dateIssue.dispose();
     whoIssue.dispose();
@@ -140,16 +145,17 @@ class _SecondStepContentState extends State<SecondStepContent> {
                 textType: TextType.body,
                 fontWeight: FontWeight.w500,
               ),
-              DefTextField(
-                  keyboardType: TextInputType.streetAddress,
-                  textInputAction: TextInputAction.next,
-                  controller: country,
-                  errorText: widget.senderError?.region?.join(", "),
-                  onChanged: (p0) {
-                    widget.sender.value =
-                        widget.sender.value.copyWith(country: country.text);
-                  },
-                  hintText: LocaleKeys.form_country.tr()),
+              CustomDropDown<CountryModel>(
+                validatorTitle: LocaleKeys.form_country.tr(),
+                hint: LocaleKeys.form_choice_country.tr(),
+                items: widget.countries,
+                errorMessage: widget.senderError?.country?.join(", "),
+                itemBuilder: (country) => country.name ?? "-",
+                onChanged: (selectedCountry) {
+                  widget.sender.value = widget.sender.value
+                      .copyWith(country: selectedCountry?.code ?? "");
+                },
+              ),
               DefTextField(
                   keyboardType: TextInputType.streetAddress,
                   textInputAction: TextInputAction.next,
@@ -486,14 +492,4 @@ class UploadImageButton extends StatelessWidget {
       ),
     );
   }
-}
-
-enum PersonType {
-  physical(title: LocaleKeys.form_physical, key: "individual"),
-  legal(title: LocaleKeys.form_legal, key: "legal_entity");
-
-  final String title;
-  final String key;
-
-  const PersonType({required this.title, required this.key});
 }

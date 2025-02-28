@@ -2,12 +2,15 @@
 import 'dart:io';
 
 import 'package:ase/data/bloc/image/image_picker_cubit.dart';
+import 'package:ase/data/models/country_model.dart';
 import 'package:ase/data/models/sender_model.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
+import 'package:ase/presentation/pages/order/options/order_options.dart';
 import 'package:ase/presentation/pages/order/widgets/second_step_content.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
+import 'package:ase/presentation/widgets/drop_down/custom_drop_down.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:ase/presentation/widgets/text_fields/def_text_field.dart';
@@ -18,9 +21,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ThirdStepContent extends StatefulWidget {
   const ThirdStepContent(
-      {super.key, required this.recipient, required this.recipientError});
+      {super.key,
+      required this.recipient,
+      required this.recipientError,
+      required this.countries});
   final ValueNotifier<SenderModel> recipient;
   final SenderErrorModel? recipientError;
+  final List<CountryModel> countries;
+
   @override
   State<ThirdStepContent> createState() => _ThirdStepContentState();
 }
@@ -31,7 +39,6 @@ class _ThirdStepContentState extends State<ThirdStepContent> {
   final TextEditingController fullName = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController phone = TextEditingController();
-  final TextEditingController country = TextEditingController();
   final TextEditingController inn = TextEditingController();
   final TextEditingController dateIssue = TextEditingController();
   final TextEditingController whoIssue = TextEditingController();
@@ -54,7 +61,6 @@ class _ThirdStepContentState extends State<ThirdStepContent> {
     fullName.dispose();
     email.dispose();
     phone.dispose();
-    country.dispose();
     inn.dispose();
     dateIssue.dispose();
     whoIssue.dispose();
@@ -142,16 +148,17 @@ class _ThirdStepContentState extends State<ThirdStepContent> {
                 textType: TextType.body,
                 fontWeight: FontWeight.w500,
               ),
-              DefTextField(
-                  keyboardType: TextInputType.streetAddress,
-                  textInputAction: TextInputAction.next,
-                  controller: country,
-                  errorText: widget.recipientError?.country?.join(", "),
-                  onChanged: (p0) {
-                    widget.recipient.value =
-                        widget.recipient.value.copyWith(country: country.text);
-                  },
-                  hintText: LocaleKeys.form_country.tr()),
+              CustomDropDown<CountryModel>(
+                validatorTitle: LocaleKeys.form_country.tr(),
+                hint: LocaleKeys.form_choice_country.tr(),
+                items: widget.countries,
+                errorMessage: widget.recipientError?.country?.join(", "),
+                itemBuilder: (country) => country.name ?? "-",
+                onChanged: (selectedCountry) {
+                  widget.recipient.value = widget.recipient.value
+                      .copyWith(country: selectedCountry?.code ?? "");
+                },
+              ),
               DefTextField(
                   keyboardType: TextInputType.streetAddress,
                   textInputAction: TextInputAction.next,

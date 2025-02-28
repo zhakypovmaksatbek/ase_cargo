@@ -168,36 +168,18 @@ class OnlineChatRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [OrderDetailPage]
-class OrderDetailRoute extends PageRouteInfo<OrderDetailRouteArgs> {
-  OrderDetailRoute({Key? key, List<PageRouteInfo>? children})
-    : super(
-        OrderDetailRoute.name,
-        args: OrderDetailRouteArgs(key: key),
-        initialChildren: children,
-      );
+class OrderDetailRoute extends PageRouteInfo<void> {
+  const OrderDetailRoute({List<PageRouteInfo>? children})
+    : super(OrderDetailRoute.name, initialChildren: children);
 
   static const String name = 'OrderDetailRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<OrderDetailRouteArgs>(
-        orElse: () => const OrderDetailRouteArgs(),
-      );
-      return OrderDetailPage(key: args.key);
+      return const OrderDetailPage();
     },
   );
-}
-
-class OrderDetailRouteArgs {
-  const OrderDetailRouteArgs({this.key});
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'OrderDetailRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for
@@ -282,18 +264,36 @@ class RegisterRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [RequestDetail]
-class RequestDetailRoute extends PageRouteInfo<void> {
-  const RequestDetailRoute({List<PageRouteInfo>? children})
-    : super(RequestDetailRoute.name, initialChildren: children);
+class RequestDetailRoute extends PageRouteInfo<RequestDetailRouteArgs> {
+  RequestDetailRoute({Key? key, required int id, List<PageRouteInfo>? children})
+    : super(
+        RequestDetailRoute.name,
+        args: RequestDetailRouteArgs(key: key, id: id),
+        initialChildren: children,
+      );
 
   static const String name = 'RequestDetailRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const RequestDetail();
+      final args = data.argsAs<RequestDetailRouteArgs>();
+      return RequestDetail(key: args.key, id: args.id);
     },
   );
+}
+
+class RequestDetailRouteArgs {
+  const RequestDetailRouteArgs({this.key, required this.id});
+
+  final Key? key;
+
+  final int id;
+
+  @override
+  String toString() {
+    return 'RequestDetailRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for
@@ -364,18 +364,39 @@ class RestoreAccessRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [SenderFormView]
-class SenderFormRoute extends PageRouteInfo<void> {
-  const SenderFormRoute({List<PageRouteInfo>? children})
-    : super(SenderFormRoute.name, initialChildren: children);
+class SenderFormRoute extends PageRouteInfo<SenderFormRouteArgs> {
+  SenderFormRoute({
+    Key? key,
+    required ShipmentOption userRole,
+    List<PageRouteInfo>? children,
+  }) : super(
+         SenderFormRoute.name,
+         args: SenderFormRouteArgs(key: key, userRole: userRole),
+         initialChildren: children,
+       );
 
   static const String name = 'SenderFormRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const SenderFormView();
+      final args = data.argsAs<SenderFormRouteArgs>();
+      return SenderFormView(key: args.key, userRole: args.userRole);
     },
   );
+}
+
+class SenderFormRouteArgs {
+  const SenderFormRouteArgs({this.key, required this.userRole});
+
+  final Key? key;
+
+  final ShipmentOption userRole;
+
+  @override
+  String toString() {
+    return 'SenderFormRouteArgs{key: $key, userRole: $userRole}';
+  }
 }
 
 /// generated route for

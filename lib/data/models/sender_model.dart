@@ -13,7 +13,7 @@ class SenderModel {
   String? name;
   String? phone;
   String? email;
-  String? country;
+  String? countryCode;
   String? city;
   String? region;
   String? zipcode;
@@ -31,7 +31,7 @@ class SenderModel {
       this.name,
       this.phone,
       this.email,
-      this.country,
+      this.countryCode,
       this.city,
       this.region,
       this.zipcode,
@@ -49,7 +49,7 @@ class SenderModel {
     name = json['name'];
     phone = json['phone'];
     email = json['email'];
-    country = json['country'];
+    countryCode = json['country'];
     city = json['city'];
     region = json['region'];
     zipcode = json['zipcode'];
@@ -67,12 +67,12 @@ class SenderModel {
       'name': sender.name,
       'phone': sender.phone,
       'email': sender.email,
-      'country': sender.country,
       'city': sender.city,
       'region': sender.region,
       'zipcode': sender.zipcode,
       'address_line': sender.addressLine,
       'saved_by_user': sender.savedByUser,
+      'country_code': sender.countryCode,
       'front_part_img': sender.frontPartImg != null
           ? await MultipartFile.fromFile(sender.frontPartImg!.path,
               filename: sender.frontPartImg!.name)
@@ -92,12 +92,13 @@ class SenderModel {
     data['name'] = name;
     data['phone'] = phone;
     data['email'] = email;
-    data['country'] = country;
+    data['country'] = countryCode;
     data['city'] = city;
     data['region'] = region;
     data['zipcode'] = zipcode;
     data['address_line'] = addressLine;
     data['saved_by_user'] = savedByUser;
+    data['country_code'] = countryCode;
     return data;
   }
 
@@ -130,7 +131,7 @@ class SenderModel {
       name: name ?? this.name,
       phone: phone ?? this.phone,
       email: email ?? this.email,
-      country: country ?? this.country,
+      countryCode: country ?? countryCode,
       city: city ?? this.city,
       region: region ?? this.region,
       zipcode: zipcode ?? this.zipcode,
@@ -181,7 +182,7 @@ class SenderErrorModel {
     name = json['name']?.cast<String>();
     phone = json['phone']?.cast<String>();
     email = json['email']?.cast<String>();
-    country = json['country']?.cast<String>();
+    country = json['country_code']?.cast<String>();
     city = json['city']?.cast<String>();
     region = json['region']?.cast<String>();
     zipcode = json['zipcode']?.cast<String>();
@@ -199,7 +200,7 @@ class SenderErrorModel {
     data['name'] = name;
     data['phone'] = phone;
     data['email'] = email;
-    data['country'] = country;
+    data['country_code'] = country;
     data['city'] = city;
     data['region'] = region;
     data['zipcode'] = zipcode;

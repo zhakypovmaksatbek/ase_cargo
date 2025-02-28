@@ -92,6 +92,8 @@ abstract class  LocaleKeys {
   static const form_delivery = 'form.delivery';
   static const form_select_delivery_type = 'form.select_delivery_type';
   static const form_package = 'form.package';
+  static const form_choice_country = 'form.choice_country';
+  static const form_me = 'form.me';
   static const form = 'form';
   static const exception_cannot_be_empty = 'exception.cannot_be_empty';
   static const exception_password_min_character = 'exception.password_min_character';
@@ -112,6 +114,8 @@ abstract class  LocaleKeys {
   static const notification_please_wait = 'notification.please_wait';
   static const notification_want_to_exit_page = 'notification.want_to_exit_page';
   static const notification_exit_description = 'notification.exit_description';
+  static const notification_not_found_requests = 'notification.not_found_requests';
+  static const notification_not_found_address = 'notification.not_found_address';
   static const notification = 'notification';
   static const general_seconds = 'general.seconds';
   static const general_create_new_password = 'general.create_new_password';
@@ -156,6 +160,7 @@ abstract class  LocaleKeys {
   static const general_ru = 'general.ru';
   static const general_ky = 'general.ky';
   static const general_en = 'general.en';
+  static const general_packages_type = 'general.packages_type';
   static const general = 'general';
   static const navigation_verify = 'navigation.verify';
   static const navigation_reset_password = 'navigation.reset_password';
@@ -184,5 +189,17 @@ abstract class  LocaleKeys {
   static const navigation_payment = 'navigation.payment';
   static const navigation_change_password = 'navigation.change_password';
   static const navigation = 'navigation';
+  static const status_awaiting_process = 'status.awaiting_process';
+  static const status_wait_payment = 'status.wait_payment';
+  static const status_accepted = 'status.accepted';
+  static const status_canceled = 'status.canceled';
+  static const status_denied = 'status.denied';
+  static const status_draft = 'status.draft';
+  static const status_in_process = 'status.in_process';
+  static const status_in_transit = 'status.in_transit';
+  static const status_awaiting_pickup = 'status.awaiting_pickup';
+  static const status_rejected = 'status.rejected';
+  static const status_done = 'status.done';
+  static const status = 'status';
 
 }

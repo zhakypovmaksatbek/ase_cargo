@@ -3,7 +3,7 @@ import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/main.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
-import 'package:ase/presentation/pages/order/view/sender_form_view.dart';
+import 'package:ase/presentation/pages/order/options/order_options.dart';
 import 'package:ase/presentation/widgets/buttons/def_elevated_button.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
@@ -53,7 +53,9 @@ class CreateOrderPage extends StatelessWidget {
                     listener: (context, state) {
                       if (state is FormSuccess) {
                         if (state.steps == FormSteps.first) {
-                          router.push(const SenderFormRoute());
+                          router.push(SenderFormRoute(
+                            userRole: state.userRole ?? ShipmentOption.sender,
+                          ));
                         }
                       }
                     },
@@ -67,7 +69,9 @@ class CreateOrderPage extends StatelessWidget {
                             // horizontalPadding: 20,
                             radius: 20,
                             onPressed: () {
-                              context.read<FormCubit>().createForm('sender');
+                              context
+                                  .read<FormCubit>()
+                                  .createForm(ShipmentOption.sender);
                             },
                           ),
                         ),
@@ -77,7 +81,9 @@ class CreateOrderPage extends StatelessWidget {
                             // horizontalPadding: 20,
                             radius: 20,
                             onPressed: () {
-                              context.read<FormCubit>().createForm('recipient');
+                              context
+                                  .read<FormCubit>()
+                                  .createForm(ShipmentOption.recipient);
                             },
                           ),
                         ),

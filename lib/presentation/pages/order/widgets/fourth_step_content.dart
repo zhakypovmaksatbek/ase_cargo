@@ -2,6 +2,7 @@
 import 'package:ase/data/models/shipment_model.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
+import 'package:ase/presentation/pages/order/options/order_options.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 
 class FourthStepContent extends StatelessWidget {
   final ValueChanged<Payer> onPayerChanged;
+  final ShipmentOption currentShipment;
   final ValueChanged<ShipmentModel> onDeliveryChanged;
   final ValueNotifier<Payer> selectedPayer = ValueNotifier<Payer>(Payer.sender);
   final List<ShipmentModel>? shipmentOptions;
@@ -19,7 +21,8 @@ class FourthStepContent extends StatelessWidget {
       required this.onPayerChanged,
       required this.onDeliveryChanged,
       this.shipmentOptions,
-      required this.selectedDeliveryType});
+      required this.selectedDeliveryType,
+      required this.currentShipment});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +57,11 @@ class FourthStepContent extends StatelessWidget {
                                     : null),
                             child: RadioListTile<Payer>(
                               selectedTileColor: ColorConstants.blue,
-                              title: Text(payer.title.tr()),
+                              title: Text(payer.title.tr(namedArgs: {
+                                "who": payer.name == currentShipment.name
+                                    ? LocaleKeys.form_me.tr()
+                                    : ""
+                              })),
                               value: payer,
                               groupValue: value,
                               onChanged: (newValue) {
@@ -125,12 +132,4 @@ class FourthStepContent extends StatelessWidget {
       ],
     );
   }
-}
-
-enum Payer {
-  sender(LocaleKeys.form_sender_pay),
-  recipient(LocaleKeys.form_recipient_pay);
-
-  const Payer(this.title);
-  final String title;
 }

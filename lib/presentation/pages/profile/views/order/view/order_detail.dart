@@ -9,9 +9,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage(name: "OrderDetailRoute")
-class OrderDetailPage extends StatelessWidget {
-  OrderDetailPage({super.key});
+class OrderDetailPage extends StatefulWidget {
+  const OrderDetailPage({super.key});
 
+  @override
+  State<OrderDetailPage> createState() => _OrderDetailPageState();
+}
+
+class _OrderDetailPageState extends State<OrderDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,6 +144,7 @@ class OrderDetailPage extends StatelessWidget {
       status: OrderStatus.upcoming,
     ),
   ];
+
   Widget _buildOrderStatus() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

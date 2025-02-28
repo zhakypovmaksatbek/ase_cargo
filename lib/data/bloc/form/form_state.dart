@@ -13,9 +13,10 @@ final class FormLoading extends FormCubitState {}
 
 final class FormSuccess extends FormCubitState {
   final FormSteps? steps;
+  final ShipmentOption? userRole;
   final FormMissingStepModel? formMissingStepModel;
 
-  const FormSuccess({this.steps, this.formMissingStepModel});
+  const FormSuccess({this.steps, this.formMissingStepModel, this.userRole});
 }
 
 final class FormError extends FormCubitState {

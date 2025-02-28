@@ -95,8 +95,8 @@ class CodegenLoader extends AssetLoader{
     "name_of_company": "Название компании *",
     "inn_company": "ИНН компании *",
     "who_pay": "Выберите кем будет оплачено?",
-    "sender_pay": "Отправителем (вами)",
-    "recipient_pay": "Получателем",
+    "sender_pay": "Отправителем {who}",
+    "recipient_pay": "Получателем {who}",
     "write_comment": "Напишите комментарии",
     "comments": "Комментарии",
     "check_correct": "Проверьте все ли правильно?",
@@ -105,7 +105,9 @@ class CodegenLoader extends AssetLoader{
     "pickup": "Самовывоз",
     "delivery": "Доставка",
     "select_delivery_type": "Выберите способ доставки:",
-    "package": "Посылка"
+    "package": "Посылка",
+    "choice_country": "Выберите страну",
+    "me": "(вами)"
   },
   "exception": {
     "cannot_be_empty": "Не может быть пустым",
@@ -127,7 +129,9 @@ class CodegenLoader extends AssetLoader{
     "order_is_being_reviewed": "Ваша заявка рассматривается",
     "please_wait": "Ожидайте!",
     "want_to_exit_page": "Хотите выйти из страницы?",
-    "exit_description": "Если вы покинете страницу, все введенные данные будут удалены и не сохранены."
+    "exit_description": "Если вы покинете страницу, все введенные данные будут удалены и не сохранены.",
+    "not_found_requests": "У вас нет заявок...",
+    "not_found_address": "Адресная информация отсутствует"
   },
   "general": {
     "seconds": "сек",
@@ -172,7 +176,8 @@ class CodegenLoader extends AssetLoader{
     "write_sum": "Напишите сумму.",
     "ru": "Русский",
     "ky": "Кыргызский",
-    "en": "Английский"
+    "en": "Английский",
+    "packages_type": "Тип посылки:"
   },
   "navigation": {
     "verify": "Подтверждение",
@@ -201,6 +206,19 @@ class CodegenLoader extends AssetLoader{
     "online_chat": "Онлайн чат",
     "payment": "Оплата",
     "change_password": "Изменение пароля"
+  },
+  "status": {
+    "awaiting_process": "Ожидает обработки",
+    "wait_payment": "Ожидает оплаты",
+    "accepted": "Принят",
+    "canceled": "Отменён",
+    "denied": "Отклонён",
+    "draft": "Черновик",
+    "in_process": "В обработке",
+    "in_transit": "В пути",
+    "awaiting_pickup": "Ожидает забора",
+    "rejected": "Отклонён",
+    "done": "Выполнен"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": _ru};

@@ -1,10 +1,12 @@
 import 'package:ase/data/bloc/form/form_cubit.dart';
 import 'package:ase/data/models/additions_model.dart';
+import 'package:ase/data/models/country_model.dart';
 import 'package:ase/data/models/package_info_model.dart';
 import 'package:ase/data/models/sender_model.dart';
 import 'package:ase/data/models/shipment_model.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/main.dart';
+import 'package:ase/presentation/pages/order/options/order_options.dart';
 import 'package:ase/presentation/pages/order/view/sender_form_view.dart';
 import 'package:ase/router/app_router.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -17,6 +19,7 @@ mixin SenderFormMixin on State<SenderFormView> {
   DeliveryType deliveryType = DeliveryType.parcel;
   double weight = 0;
   final ValueNotifier<int> currentStep = ValueNotifier<int>(0);
+  List<CountryModel> countries = [];
   ValueNotifier<List<Packages>> packagesList =
       ValueNotifier<List<Packages>>([]);
   ValueNotifier<PackageErrorInfoModel?> packageErrorInfoModel =
@@ -37,6 +40,12 @@ mixin SenderFormMixin on State<SenderFormView> {
       ValueNotifier<List<ShipmentModel>>([]);
   final ValueNotifier<ShipmentModel?> selectedDeliveryType =
       ValueNotifier<ShipmentModel?>(null);
+  void cleanErrorMessages() {
+    senderError.value = null;
+    recipientError.value = null;
+    additionError.value = null;
+    packageErrorInfoModel.value = null;
+  }
 
   void onContinue(BuildContext context) {
     switch (currentStep.value) {

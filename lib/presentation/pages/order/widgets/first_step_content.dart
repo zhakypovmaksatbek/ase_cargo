@@ -2,7 +2,7 @@
 import 'package:ase/data/models/package_info_model.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
-import 'package:ase/presentation/pages/order/view/sender_form_view.dart';
+import 'package:ase/presentation/pages/order/options/order_options.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
 import 'package:ase/presentation/utils/validation.dart';
 import 'package:ase/presentation/widgets/card/package_card.dart';
@@ -89,6 +89,8 @@ class _FirstStepContentState extends State<FirstStepContent> {
         ),
         DefTextField(
             inputFormatters: InputValidate.instance.inputDoubleFormatters,
+            errorText: widget.packageErrorInfoModel?.packages?["0"]?.weight
+                ?.join(", "),
             keyboardType:
                 TextInputType.numberWithOptions(decimal: true, signed: true),
             textInputAction: TextInputAction.next,

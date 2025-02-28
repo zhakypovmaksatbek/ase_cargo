@@ -1,6 +1,7 @@
 enum AssetConstants {
   logo,
   edit,
+  empty,
   splash,
   icon,
   profileImage,
@@ -22,6 +23,8 @@ enum AssetConstants {
   waiting,
   canceled,
   cash,
+  process,
+  cancel,
   error,
   send,
   get,
