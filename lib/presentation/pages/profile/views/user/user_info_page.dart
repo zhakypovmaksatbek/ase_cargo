@@ -114,11 +114,11 @@ class _UserInfoPageState extends State<UserInfoPage> with UserInfoMixin {
                               email: emailController.text.trim(),
                             );
 
-                            if (userState.user.hasChanges(updatedUser)) {
-                              context.read<UpdateUserCubit>().updateProfile(
+                            context.read<UpdateUserCubit>().updateProfile(
                                   updatedUser,
-                                  originalUser: userState.user);
-                            }
+                                  originalUser: userState.user,
+                                  image: formCubit.state.pickedFile,
+                                );
                           }
                         }
                       : null,
@@ -143,7 +143,7 @@ class _UserInfoPageState extends State<UserInfoPage> with UserInfoMixin {
                           spacing: 20,
                           children: [
                             UserImageWidget(
-                                imageUrl: "https://picsum.photos/200/300",
+                                imageUrl: state.user.avatar ?? "",
                                 formCubit: formCubit),
                             DefTextField(
                               hintText: "${LocaleKeys.form_first_name.tr()}*",
@@ -229,13 +229,14 @@ class _UserInfoPageState extends State<UserInfoPage> with UserInfoMixin {
     );
   }
 
-  void _userCubitState(context, state) {
+  void _userCubitState(BuildContext context, state) {
     if (!mounted) return;
     if (state is UserSuccess) {
       firstNameController.text = state.user.firstName ?? "";
       lastNameController.text = state.user.lastName ?? "";
       emailController.text = state.user.email ?? "";
       phoneNumberController.text = state.user.phone ?? "";
+      context.read<ImagePickerCubit>().cleanData();
     }
   }
 }

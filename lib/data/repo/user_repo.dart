@@ -80,16 +80,13 @@ class UserRepo implements IUserRepo {
       {XFile? image, required UserModel originalUser}) async {
     final String url = "v1/accounts/me-info/";
     if (image != null) {
-      FormData requestData = FormData.fromMap({
-        'avatar': [
-          await MultipartFile.fromFile(image.path, filename: image.name)
-        ],
-        'full_name': user.fullName,
-        'email': user.email
-      });
-      await dio.patch(url, requestData);
+      FormData formData =
+          await user.toFormData(image: image, originalUser: originalUser);
+      await dio.patch(url, formData);
+    } else {
+      await dio.patch(
+          url, user.toUpdatedJson(original: originalUser, user: user));
     }
-    await dio.patch(url, user.toUpdatedJson(originalUser));
   }
 
   @override

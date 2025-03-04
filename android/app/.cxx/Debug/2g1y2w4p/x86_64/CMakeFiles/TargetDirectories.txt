@@ -1,0 +1,2 @@
+/Users/turdumamatov/Desktop/ase_courier/android/app/.cxx/Debug/2g1y2w4p/x86_64/CMakeFiles/edit_cache.dir
+/Users/turdumamatov/Desktop/ase_courier/android/app/.cxx/Debug/2g1y2w4p/x86_64/CMakeFiles/rebuild_cache.dir

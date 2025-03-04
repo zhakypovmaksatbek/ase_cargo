@@ -227,7 +227,7 @@ class ImagePickerCubit extends Cubit<FeedbackImagePickerState> {
     if (Platform.isIOS) {
       await permissionIOSGallery();
     } else {
-      await permissionGallery();
+      await checkImageFromGallery();
     }
   }
 

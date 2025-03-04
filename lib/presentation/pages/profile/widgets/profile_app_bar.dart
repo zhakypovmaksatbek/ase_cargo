@@ -36,7 +36,9 @@ class ProfileAppBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 spacing: 10,
                 children: [
-                  UserProfileImage(),
+                  UserProfileImage(
+                    avatar: user.avatar ?? "",
+                  ),
                   Column(
                     children: [
                       AppText(

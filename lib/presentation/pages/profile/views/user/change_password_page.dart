@@ -4,6 +4,7 @@ import 'package:ase/main.dart';
 import 'package:ase/presentation/utils/validation.dart';
 import 'package:ase/presentation/widgets/app_bar/def_sliver_app_bar.dart';
 import 'package:ase/presentation/widgets/buttons/def_elevated_button.dart';
+import 'package:ase/presentation/widgets/loading/loading_widget.dart';
 import 'package:ase/presentation/widgets/text_fields/password_text_filed.dart';
 import 'package:ase/router/app_router.dart';
 import 'package:auto_route/auto_route.dart';
@@ -102,17 +103,25 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                             builder: (context, value, _) {
                               return SizedBox(
                                   width: double.infinity,
-                                  child: DefElevatedButton(
-                                    text: LocaleKeys.button_save.tr(),
-                                    onPressed: value
-                                        ? () {
-                                            context
-                                                .read<UpdatePasswordCubit>()
-                                                .updatePassword(
-                                                    _oldPasswordCtrl.text,
-                                                    _newPasswordCtrl.text);
-                                          }
-                                        : null,
+                                  child: BlocBuilder<UpdatePasswordCubit,
+                                      UpdatePasswordState>(
+                                    builder: (context, state) {
+                                      if (state is UpdatePasswordLoading) {
+                                        return Center(child: LoadingWidget());
+                                      }
+                                      return DefElevatedButton(
+                                        text: LocaleKeys.button_save.tr(),
+                                        onPressed: value
+                                            ? () {
+                                                context
+                                                    .read<UpdatePasswordCubit>()
+                                                    .updatePassword(
+                                                        _oldPasswordCtrl.text,
+                                                        _newPasswordCtrl.text);
+                                              }
+                                            : null,
+                                      );
+                                    },
                                   ));
                             })
                       ],
