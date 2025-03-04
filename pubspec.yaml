@@ -73,7 +73,7 @@ dependencies:
   shared_preferences: ^2.5.1
 
   #Bloc
-  flutter_bloc: ^9.0.0
+  flutter_bloc: ^9.1.0
 
   # Equatable
   equatable: ^2.0.7
@@ -89,6 +89,7 @@ dependencies:
   path_provider: ^2.1.5
   uuid: ^4.5.1
   dropdown_button2: ^2.3.9
+  jwt_decoder: ^2.0.1
 
 
 dev_dependencies:

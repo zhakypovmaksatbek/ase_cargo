@@ -4,6 +4,7 @@ import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/main.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
+import 'package:ase/presentation/pages/profile/widgets/status_widget.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
 import 'package:ase/presentation/utils/order_utils.dart';
 import 'package:ase/presentation/widgets/buttons/def_elevated_button.dart';
@@ -33,7 +34,8 @@ class RequestCard extends StatelessWidget {
           spacing: 10,
           children: [
             AppText(
-              title: "Заявка ${requestModel.id}",
+              title: LocaleKeys.general_request_id
+                  .tr(namedArgs: {'id': (requestModel.id ?? "").toString()}),
               textType: TextType.body,
               fontWeight: FontWeight.w500,
             ),
@@ -66,7 +68,13 @@ class RequestCard extends StatelessWidget {
                 ),
               ],
             ),
-            PreOrderStatusWidget(status: requestModel.status),
+            StatusWidget(
+              status: requestModel.status,
+              title: LocaleKeys.general_status_order.tr(),
+              statusTextFunction: OrderUtils.preOrderStatus,
+              statusColorFunction: OrderUtils.preOrderStatusColor,
+              statusIconFunction: OrderUtils.preOrderStatusIcon,
+            ),
             _buildOrderDeliveryInfo(
               title: LocaleKeys.general_delivery_type.tr(),
               subtitle: requestModel.deliveryTypeName ?? "",
@@ -84,15 +92,16 @@ class RequestCard extends StatelessWidget {
               title: LocaleKeys.general_additional_service_price.tr(),
               subtitle: "${requestModel.totalServicesPrice ?? 0.00} \$",
             ),
-            SizedBox(
-                width: double.infinity,
-                child: DefElevatedButton(
-                  verticalPadding: 12,
-                  text: LocaleKeys.general_pay.tr(),
-                  onPressed: () {
-                    router.push(PaymentRoute());
-                  },
-                ))
+            if (requestModel.userCanPay ?? false)
+              SizedBox(
+                  width: double.infinity,
+                  child: DefElevatedButton(
+                    verticalPadding: 12,
+                    text: LocaleKeys.general_pay.tr(),
+                    onPressed: () {
+                      router.push(PaymentRoute());
+                    },
+                  ))
           ],
         ),
       ),

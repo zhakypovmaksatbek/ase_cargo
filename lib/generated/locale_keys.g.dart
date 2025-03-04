@@ -161,6 +161,9 @@ abstract class  LocaleKeys {
   static const general_ky = 'general.ky';
   static const general_en = 'general.en';
   static const general_packages_type = 'general.packages_type';
+  static const general_request_id = 'general.request_id';
+  static const general_total_amount = 'general.total_amount';
+  static const general_delivery_price = 'general.delivery_price';
   static const general = 'general';
   static const navigation_verify = 'navigation.verify';
   static const navigation_reset_password = 'navigation.reset_password';
@@ -200,6 +203,7 @@ abstract class  LocaleKeys {
   static const status_awaiting_pickup = 'status.awaiting_pickup';
   static const status_rejected = 'status.rejected';
   static const status_done = 'status.done';
+  static const status_en_route = 'status.en_route';
   static const status = 'status';
 
 }

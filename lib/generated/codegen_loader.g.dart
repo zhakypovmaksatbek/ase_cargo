@@ -177,7 +177,10 @@ class CodegenLoader extends AssetLoader{
     "ru": "Русский",
     "ky": "Кыргызский",
     "en": "Английский",
-    "packages_type": "Тип посылки:"
+    "packages_type": "Тип посылки:",
+    "request_id": "Заявка {id}",
+    "total_amount": "Общая сумма:",
+    "delivery_price": "Цена доставки:"
   },
   "navigation": {
     "verify": "Подтверждение",
@@ -218,7 +221,8 @@ class CodegenLoader extends AssetLoader{
     "in_transit": "В пути",
     "awaiting_pickup": "Ожидает забора",
     "rejected": "Отклонён",
-    "done": "Выполнен"
+    "done": "Выполнен",
+    "en_route": "Проездом"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": _ru};

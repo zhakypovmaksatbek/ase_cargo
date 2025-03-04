@@ -82,6 +82,17 @@ class AppManager {
     return userId;
   }
 
+  Future<void> setUserRole({required String role}) async {
+    final prefs = await preferences();
+    await prefs.setString(AppConstants.instance.userRole, role);
+  }
+
+  Future<String?> getUserRole() async {
+    final prefs = await preferences();
+    final role = prefs.getString(AppConstants.instance.userRole);
+    return role;
+  }
+
   Future<void> setChatId({required int chatId}) async {
     final prefs = await preferences();
     await prefs.setInt(AppConstants.instance.chatId, chatId);

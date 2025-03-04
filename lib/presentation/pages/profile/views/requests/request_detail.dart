@@ -64,24 +64,7 @@ class _RequestDetailState extends State<RequestDetail> {
             return Scaffold(
               floatingActionButtonLocation:
                   FloatingActionButtonLocation.centerDocked,
-              floatingActionButton: BottomAppBar(
-                color: Colors.transparent,
-                height: 130,
-                child: Column(
-                  spacing: 10,
-                  children: [
-                    SizedBox(
-                        width: double.infinity,
-                        child: DefElevatedButton(
-                            text: LocaleKeys.general_pay.tr())),
-                    SizedBox(
-                        width: double.infinity,
-                        child: DefElevatedButton(
-                          text: LocaleKeys.button_cancel.tr(),
-                        )),
-                  ],
-                ),
-              ),
+              floatingActionButton: _buildFloatingActionButton(detail),
               body: CustomScrollView(
                 slivers: [
                   DefSliverAppBar(
@@ -174,6 +157,40 @@ class _RequestDetailState extends State<RequestDetail> {
             subtitle:
                 "${detail.recipient?.name ?? ""} (${detail.recipient?.city ?? ""})"),
       ],
+    );
+  }
+
+  Widget? _buildFloatingActionButton(RequestDetailModel detail) {
+    final canPay = detail.userCanPay ?? false;
+    final isAwaitingProcess = detail.status == "awaiting_process";
+    final isWaitPayment = detail.status == "wait_payment";
+
+    if (!canPay && !isAwaitingProcess && !isWaitPayment) {
+      return null;
+    }
+
+    return BottomAppBar(
+      color: Colors.transparent,
+      height: 130,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          if (canPay)
+            SizedBox(
+              width: double.infinity,
+              child: DefElevatedButton(
+                text: LocaleKeys.general_pay.tr(),
+              ),
+            ),
+          if (isAwaitingProcess || isWaitPayment)
+            SizedBox(
+              width: double.infinity,
+              child: DefElevatedButton(
+                text: LocaleKeys.button_cancel.tr(),
+              ),
+            ),
+        ],
+      ),
     );
   }
 

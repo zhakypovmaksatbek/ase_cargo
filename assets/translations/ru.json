@@ -163,8 +163,10 @@
         "ru":"Русский",
         "ky":"Кыргызский",
         "en":"Английский",
-        "packages_type":"Тип посылки:"
-        
+        "packages_type":"Тип посылки:",
+        "request_id":"Заявка {id}",
+        "total_amount":"Общая сумма:",
+        "delivery_price":"Цена доставки:"
     },
     "navigation": {
         "verify": "Подтверждение",
@@ -205,7 +207,8 @@
         "in_transit":"В пути",
         "awaiting_pickup":"Ожидает забора",
         "rejected":"Отклонён",
-        "done":"Выполнен"
+        "done":"Выполнен",
+        "en_route":"Проездом"
 
     }
 

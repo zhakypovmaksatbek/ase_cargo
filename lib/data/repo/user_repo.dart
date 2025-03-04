@@ -4,9 +4,12 @@ import 'package:ase/data/models/login_model.dart';
 import 'package:ase/data/models/register_model.dart';
 import 'package:ase/data/models/token_model.dart';
 import 'package:ase/data/models/user_model.dart';
+import 'package:ase/data/models/user_role_model.dart';
 import 'package:ase/data/models/verify_model.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class UserRepo implements IUserRepo {
   final dio = DioSettings();
@@ -19,6 +22,21 @@ class UserRepo implements IUserRepo {
     final token = TokenModel.fromJson(response.data);
     await AppManager.instance.setToken(accessToken: token.access ?? "");
     await AppManager.instance.setIsLogin(true);
+
+    final userRole = _getUserRoleFromToken(token.access ?? "-");
+    await AppManager.instance.setUserRole(role: userRole?.roles?.first ?? "");
+  }
+
+  UserRoleModel? _getUserRoleFromToken(String token) {
+    try {
+      final Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
+      return UserRoleModel.fromJson(decodedToken);
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error decoding token: $e");
+      }
+      return null;
+    }
   }
 
   @override

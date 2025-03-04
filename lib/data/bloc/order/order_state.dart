@@ -13,7 +13,8 @@ final class OrderLoading extends OrderState {}
 
 final class OrderLoaded extends OrderState {
   final OrderPaginationModel model;
-  const OrderLoaded(this.model);
+  final bool? isRefresh;
+  const OrderLoaded(this.model, {this.isRefresh});
 }
 
 final class OrderError extends OrderState {

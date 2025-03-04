@@ -5,7 +5,6 @@ import 'package:ase/presentation/constants/color_constants.dart';
 import 'package:ase/router/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:story/story_image.dart';
 import 'package:story/story_page_view.dart';
 
 class StoryScreenView extends StatelessWidget {
@@ -30,27 +29,28 @@ class StoryScreenView extends StatelessWidget {
           indicatorPadding: const EdgeInsets.only(top: 56),
           itemBuilder: (context, pageIndex, storyIndex) {
             final story = storyList[pageIndex];
-            final stories = story.stories?[storyIndex];
+            // final stories = story.stories?[storyIndex];
             return Stack(
               children: [
                 Positioned.fill(
                   child: Container(color: Colors.black),
                 ),
-                Positioned.fill(
-                    child: StoryImage(
-                  /// key is required
-                  key: ValueKey(stories?.image),
-                  imageProvider: NetworkImage(
-                    stories?.image ?? "",
-                  ),
-                  fit: BoxFit.fitWidth,
-                )),
+                // Positioned.fill(
+                //     child: StoryImage(
+                //   /// key is required
+                //   key: ValueKey(stories?.image),
+                //   imageProvider: NetworkImage(
+                //     stories?.image ?? "",
+                //   ),
+                //   fit: BoxFit.fitWidth,
+                // )),
               ],
             );
           },
           pageLength: storyList.length,
           storyLength: (int pageIndex) {
-            return storyList[pageIndex].stories?.length ?? 0;
+            // return storyList[pageIndex].stories?.length ?? 0;
+            return 1;
           },
           onPageLimitReached: () {
             router.maybePop();

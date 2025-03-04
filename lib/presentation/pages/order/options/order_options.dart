@@ -1,6 +1,19 @@
 import 'package:ase/generated/locale_keys.g.dart';
 
-enum ShipmentOption { sender, recipient }
+enum ShipmentOption {
+  sender(title: LocaleKeys.general_by_sender),
+  recipient(title: LocaleKeys.general_by_recipient);
+
+  const ShipmentOption({required this.title});
+  final String title;
+
+  static ShipmentOption fromString(String value) {
+    return ShipmentOption.values.firstWhere(
+      (e) => e.name == value,
+      orElse: () => ShipmentOption.sender,
+    );
+  }
+}
 
 enum DeliveryType {
   parcel(LocaleKeys.form_package),

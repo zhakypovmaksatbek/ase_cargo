@@ -123,25 +123,25 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
       title: "В процессе",
       date: "12.01.2025",
       icon: Icons.access_time,
-      status: OrderStatus.completed,
+      status: OrderStepStatus.completed,
     ),
     OrderStatusModel(
       title: "В пути",
       date: "12.01.2025",
       icon: Icons.local_shipping,
-      status: OrderStatus.completed,
+      status: OrderStepStatus.completed,
     ),
     OrderStatusModel(
       title: "У курьера",
       date: "12.01.2025",
       icon: Icons.person,
-      status: OrderStatus.active,
+      status: OrderStepStatus.active,
     ),
     OrderStatusModel(
       title: "Доставлен",
       date: "12.01.2025",
       icon: Icons.check_circle,
-      status: OrderStatus.upcoming,
+      status: OrderStepStatus.upcoming,
     ),
   ];
 
@@ -239,7 +239,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
 class OrderStatusModel {
   String? title;
   String? date;
-  OrderStatus status;
+  OrderStepStatus status;
   IconData? icon;
 
   OrderStatusModel({this.title, this.date, this.icon, required this.status});
@@ -250,14 +250,14 @@ class OrderStatusModel {
         date: json['date'],
         icon: json['icon'],
         status: json['status'] != null &&
-                OrderStatus.values
+                OrderStepStatus.values
                     .any((e) => e.toString().split('.').last == json['status'])
-            ? OrderStatus.values.byName(json['status'])
-            : OrderStatus.upcoming);
+            ? OrderStepStatus.values.byName(json['status'])
+            : OrderStepStatus.upcoming);
   }
 }
 
-enum OrderStatus {
+enum OrderStepStatus {
   active(Icons.radio_button_checked_sharp, ColorConstants.blue),
   completed(Icons.check_circle, ColorConstants.green),
   upcoming(Icons.access_time, ColorConstants.grey),
@@ -266,5 +266,5 @@ enum OrderStatus {
   final Color color;
   final IconData icon;
 
-  const OrderStatus(this.icon, this.color);
+  const OrderStepStatus(this.icon, this.color);
 }

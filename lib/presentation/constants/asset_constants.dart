@@ -33,7 +33,8 @@ enum AssetConstants {
   call,
   whatsapp,
   upload,
-  lock
+  lock,
+  done
 }
 
 extension AssetConstantsExtension on AssetConstants {

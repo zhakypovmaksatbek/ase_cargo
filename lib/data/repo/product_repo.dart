@@ -12,8 +12,9 @@ class ProductRepo {
     return (response.data as List).map((e) => BannerModel.fromJson(e)).toList();
   }
 
-  Future<List<StoryModel>> getStories() async {
-    return [];
+  Future<StoryPaginationModel> getStories() async {
+    final response = await _dio.get("v1/stories/");
+    return StoryPaginationModel.fromJson(response.data);
   }
 
   Future<String> storyViewed(int storyId) async {

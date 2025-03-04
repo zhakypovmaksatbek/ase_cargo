@@ -23,4 +23,5 @@ class AppConstants {
   final String appStoreUrl =
       'https://apps.apple.com/kg/app/steak-dream/id6738393977';
   static const String localePath = 'assets/translations';
+  final String userRole = 'userRole';
 }

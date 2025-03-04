@@ -108,7 +108,8 @@ class _RequestsViewState extends State<RequestsView> {
                     );
                   }
                   return SliverPadding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: const EdgeInsets.only(
+                        right: 16.0, left: 16, bottom: 60),
                     sliver: SliverList.separated(
                         itemCount: requests.length,
                         itemBuilder: (context, index) {

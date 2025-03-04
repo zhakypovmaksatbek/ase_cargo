@@ -1,10 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
+
 class DateTimeUtils {
   static String formatDate(String dateString, {String format = 'dd/MM/yyyy'}) {
     try {
-      DateTime dateTime = DateTime.parse(dateString).toLocal();
-      return _formatDateTime(dateTime, format);
+      // Tarihi doğru formatta parse et
+      DateTime dateTime = DateTime.parse(dateString);
+
+      // İstenen formata dönüştür
+      return DateFormat(format).format(dateTime);
     } catch (e) {
-      return 'Unknown Date';
+      return '-';
     }
   }
 

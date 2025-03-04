@@ -33,7 +33,6 @@ class StoriesWidget extends StatelessWidget {
                             return StoryCard(
                                 initialPage: index,
                                 storyList: stories,
-                                stories: stories[index].stories ?? [],
                                 story: stories[index]);
                           },
                         ),
@@ -52,12 +51,10 @@ class StoriesWidget extends StatelessWidget {
 class StoryCard extends StatelessWidget {
   const StoryCard({
     super.key,
-    required this.stories,
     required this.story,
     required this.storyList,
     required this.initialPage,
   });
-  final List<Stories> stories;
   final StoryModel story;
   final int initialPage;
   final List<StoryModel> storyList;
@@ -68,28 +65,26 @@ class StoryCard extends StatelessWidget {
       padding: const EdgeInsets.only(right: 8.0),
       child: GestureDetector(
         onTap: () {
-          if (story.stories != null && story.stories!.isNotEmpty) {
-            showMaterialModalBottomSheet(
-                useRootNavigator: true,
-                context: context,
-                builder: (context) => StoryScreenView(
-                      // stories: stories,
-                      storyList: storyList,
-                      initialPage: initialPage,
-                    ));
-          }
+          showMaterialModalBottomSheet(
+              useRootNavigator: true,
+              context: context,
+              builder: (context) => StoryScreenView(
+                    // stories: stories,
+                    storyList: storyList,
+                    initialPage: initialPage,
+                  ));
         },
         child: Column(
           children: [
             statusStory(
-              story.viewed ?? false,
+              story.isRead ?? false,
               story.id!,
               theme,
               SizedBox(
                 height: 88,
                 width: 88,
                 child: CashedImages(
-                  imageUrl: story.image ?? "",
+                  imageUrl: story.coverImg ?? "",
                   height: 88,
                   width: 88,
                   borderRadius: BorderRadius.circular(14),

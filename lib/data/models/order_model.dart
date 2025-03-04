@@ -11,7 +11,8 @@ class OrderModel {
   String? code;
   Address? address;
   String? orderStatus;
-  String? deliveryTypeName;
+  String? shipmentOptionName;
+  String? shipmentOptionPrice;
   int? totalWeight;
   String? price;
   List<AdditionServices>? additionServices;
@@ -24,7 +25,8 @@ class OrderModel {
       {this.code,
       this.address,
       this.orderStatus,
-      this.deliveryTypeName,
+      this.shipmentOptionName,
+      this.shipmentOptionPrice,
       this.totalWeight,
       this.price,
       this.additionServices,
@@ -38,7 +40,8 @@ class OrderModel {
     address =
         json['address'] != null ? Address.fromJson(json['address']) : null;
     orderStatus = json['order_status'];
-    deliveryTypeName = json['delivery_type_name'];
+    shipmentOptionName = json['shipment_option_name'];
+    shipmentOptionPrice = json['shipment_option_price'];
     totalWeight = json['total_weight'];
     price = json['price'];
     if (json['addition_services'] != null) {
@@ -62,7 +65,8 @@ class OrderModel {
       data['address'] = address!.toJson();
     }
     data['order_status'] = orderStatus;
-    data['delivery_type_name'] = deliveryTypeName;
+    data['shipment_option_name'] = shipmentOptionName;
+    data['shipment_option_price'] = shipmentOptionPrice;
     data['total_weight'] = totalWeight;
     data['price'] = price;
     if (additionServices != null) {

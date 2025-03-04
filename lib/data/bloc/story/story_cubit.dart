@@ -1,11 +1,11 @@
+import 'package:ase/core/app_manager.dart';
+import 'package:ase/data/models/story_model.dart';
 import 'package:ase/data/repo/product_repo.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ase/core/app_manager.dart';
-import 'package:ase/data/models/story_model.dart';
 
 part 'story_state.dart';
 
@@ -17,7 +17,7 @@ class StoryCubit extends Cubit<StoryState> {
     emit(StoryLoading());
     try {
       final stories = await _repo.getStories();
-      emit(StoryLoaded(stories: stories));
+      emit(StoryLoaded(stories: stories.results ?? []));
     } on DioException catch (e) {
       if (e.response?.statusCode == 401) {
         await AppManager.instance.setToken(accessToken: '');
