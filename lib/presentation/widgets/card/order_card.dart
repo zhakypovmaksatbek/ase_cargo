@@ -27,7 +27,7 @@ class OrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => router.push(OrderDetailRoute()),
+      onTap: () => router.push(OrderDetailRoute(orderId: order.code ?? "")),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         decoration: CustomBoxDecoration(),

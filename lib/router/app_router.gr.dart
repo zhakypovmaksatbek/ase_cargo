@@ -168,18 +168,39 @@ class OnlineChatRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [OrderDetailPage]
-class OrderDetailRoute extends PageRouteInfo<void> {
-  const OrderDetailRoute({List<PageRouteInfo>? children})
-    : super(OrderDetailRoute.name, initialChildren: children);
+class OrderDetailRoute extends PageRouteInfo<OrderDetailRouteArgs> {
+  OrderDetailRoute({
+    Key? key,
+    required String orderId,
+    List<PageRouteInfo>? children,
+  }) : super(
+         OrderDetailRoute.name,
+         args: OrderDetailRouteArgs(key: key, orderId: orderId),
+         initialChildren: children,
+       );
 
   static const String name = 'OrderDetailRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const OrderDetailPage();
+      final args = data.argsAs<OrderDetailRouteArgs>();
+      return OrderDetailPage(key: args.key, orderId: args.orderId);
     },
   );
+}
+
+class OrderDetailRouteArgs {
+  const OrderDetailRouteArgs({this.key, required this.orderId});
+
+  final Key? key;
+
+  final String orderId;
+
+  @override
+  String toString() {
+    return 'OrderDetailRouteArgs{key: $key, orderId: $orderId}';
+  }
 }
 
 /// generated route for

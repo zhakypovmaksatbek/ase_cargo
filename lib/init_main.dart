@@ -6,6 +6,7 @@ import 'package:ase/data/bloc/image/image_picker_cubit.dart';
 import 'package:ase/data/bloc/login/login_cubit.dart';
 import 'package:ase/data/bloc/news/news_cubit.dart';
 import 'package:ase/data/bloc/order/order_cubit.dart';
+import 'package:ase/data/bloc/order_detail/order_detail_cubit.dart';
 import 'package:ase/data/bloc/register/register_cubit.dart';
 import 'package:ase/data/bloc/request/request_cubit.dart';
 import 'package:ase/data/bloc/request_detail/request_detail_cubit.dart';
@@ -55,6 +56,7 @@ class InitMain {
       BlocProvider(create: (context) => RequestCubit(OrderRepo())),
       BlocProvider(create: (context) => CountryCubit(FormRepo())),
       BlocProvider(create: (context) => RequestDetailCubit()),
+      BlocProvider(create: (context) => OrderDetailCubit()),
     ];
   }
 }

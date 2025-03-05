@@ -105,13 +105,20 @@ class _RequestDetailState extends State<RequestDetail> {
                               [],
                           _infoCard(detail),
                           Divider(color: ColorConstants.dividerColor),
-                          _buildOrderInfo(
-                              title: LocaleKeys.general_service_price.tr(),
-                              subtitle: detail.shipmentOptionPrice ?? "0"),
-                          _buildOrderInfo(
-                              title: LocaleKeys.general_additional_service_price
-                                  .tr(),
-                              subtitle: detail.totalServicesPrice ?? "0"),
+                          if (detail.shipmentOptionPrice?.isNotEmpty ?? false)
+                            _buildOrderInfo(
+                                title: LocaleKeys.general_service_price.tr(),
+                                subtitle: detail.shipmentOptionPrice ?? "0"),
+                          if (detail.totalServicesPrice?.isNotEmpty ?? false)
+                            _buildOrderInfo(
+                                title: LocaleKeys
+                                    .general_additional_service_price
+                                    .tr(),
+                                subtitle: detail.totalServicesPrice ?? "0"),
+                          if (detail.price?.isNotEmpty ?? false)
+                            _buildOrderInfo(
+                                title: LocaleKeys.general_delivery_price.tr(),
+                                subtitle: detail.price ?? "0"),
                           SizedBox(height: 160)
                         ],
                       ),
