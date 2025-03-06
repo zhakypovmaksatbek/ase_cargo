@@ -25,6 +25,8 @@ class UserRepo implements IUserRepo {
 
     final userRole = _getUserRoleFromToken(token.access ?? "-");
     await AppManager.instance.setUserRole(role: userRole?.roles?.first ?? "");
+
+    await AppManager.instance.setUserId(userId: userRole?.userId ?? 0);
   }
 
   UserRoleModel? _getUserRoleFromToken(String token) {

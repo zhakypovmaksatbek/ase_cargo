@@ -1,3 +1,4 @@
+import 'package:ase/core/app_manager.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/main.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
@@ -28,8 +29,9 @@ class SupportPage extends StatelessWidget {
                 InkWell(
                   overlayColor:
                       WidgetStatePropertyAll(ColorConstants.backgroundLight),
-                  onTap: () {
-                    router.push(OnlineChatRoute());
+                  onTap: () async {
+                    int id = await AppManager.instance.getUserId() ?? 0;
+                    router.push(OnlineChatRoute(userId: id));
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),

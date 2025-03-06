@@ -23,6 +23,8 @@ class UserProfileImage extends StatelessWidget {
       ),
       child: CashedImages(
         imageUrl: avatar,
+        isSvg: true,
+        isUser: true,
         borderRadius: BorderRadius.circular(50),
         fit: BoxFit.cover,
       ),

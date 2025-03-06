@@ -152,18 +152,39 @@ class NewsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [OnlineChatPage]
-class OnlineChatRoute extends PageRouteInfo<void> {
-  const OnlineChatRoute({List<PageRouteInfo>? children})
-    : super(OnlineChatRoute.name, initialChildren: children);
+class OnlineChatRoute extends PageRouteInfo<OnlineChatRouteArgs> {
+  OnlineChatRoute({
+    Key? key,
+    required int userId,
+    List<PageRouteInfo>? children,
+  }) : super(
+         OnlineChatRoute.name,
+         args: OnlineChatRouteArgs(key: key, userId: userId),
+         initialChildren: children,
+       );
 
   static const String name = 'OnlineChatRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const OnlineChatPage();
+      final args = data.argsAs<OnlineChatRouteArgs>();
+      return OnlineChatPage(key: args.key, userId: args.userId);
     },
   );
+}
+
+class OnlineChatRouteArgs {
+  const OnlineChatRouteArgs({this.key, required this.userId});
+
+  final Key? key;
+
+  final int userId;
+
+  @override
+  String toString() {
+    return 'OnlineChatRouteArgs{key: $key, userId: $userId}';
+  }
 }
 
 /// generated route for

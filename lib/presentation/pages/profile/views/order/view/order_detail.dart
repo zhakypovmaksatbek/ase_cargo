@@ -5,6 +5,7 @@ import 'package:ase/data/models/request_model.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
+import 'package:ase/presentation/pages/profile/widgets/status_widget.dart';
 import 'package:ase/presentation/utils/order_utils.dart';
 import 'package:ase/presentation/widgets/app_bar/def_sliver_app_bar.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
@@ -62,7 +63,8 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                         spacing: 20,
                         children: [
                           _buildAddress(detail.address ?? Address()),
-                          _buildOrderStatus(),
+                          _buildOrderStatus(detail.statusRoad ?? [],
+                              detail.orderStatus ?? ""),
                           AppText(
                             title: LocaleKeys.general_delivery_info.tr(),
                             textType: TextType.body,
@@ -172,90 +174,76 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     );
   }
 
-  final List<OrderStatusModel> orderStatuses = [
-    OrderStatusModel(
-      title: "В процессе",
-      date: "12.01.2025",
-      icon: Icons.access_time,
-      status: OrderState.completed,
-    ),
-    OrderStatusModel(
-      title: "В пути",
-      date: "12.01.2025",
-      icon: Icons.local_shipping,
-      status: OrderState.completed,
-    ),
-    OrderStatusModel(
-      title: "У курьера",
-      date: "12.01.2025",
-      icon: Icons.person,
-      status: OrderState.active,
-    ),
-    OrderStatusModel(
-      title: "Доставлен",
-      date: "12.01.2025",
-      icon: Icons.check_circle,
-      status: OrderState.upcoming,
-    ),
-  ];
-
-  Widget _buildOrderStatus() {
+  Widget _buildOrderStatus(List<StatusRoad> road, String orderStatus) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 10,
       children: [
-        AppText(
-          title: LocaleKeys.general_status_order.tr(),
-          textType: TextType.body,
-          fontWeight: FontWeight.w500,
-        ),
-        Column(
-          spacing: 16,
-          children: orderStatuses.asMap().entries.map((entry) {
-            int index = entry.key;
-            var step = entry.value;
-            bool isLast = index == orderStatuses.length - 1;
+        orderStatus != "rejected"
+            ? AppText(
+                title: LocaleKeys.general_status_order.tr(),
+                textType: TextType.body,
+                fontWeight: FontWeight.w500,
+              )
+            : StatusWidget(
+                status: orderStatus,
+                title: LocaleKeys.general_status_order.tr(),
+                statusTextFunction: OrderUtils.orderStatus,
+                statusColorFunction: OrderUtils.orderStatusColor,
+                statusIconFunction: OrderUtils.orderStatusIcon,
+              ),
+        const SizedBox(height: 10),
+        if (orderStatus != "rejected")
+          Column(
+            children: List.generate(road.length, (index) {
+              final entry = road[index];
+              final OrderState step =
+                  OrderState.byName(entry.state ?? ""); // State'i belirle
+              final bool isLast = index == road.length - 1;
 
-            return Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 10,
-              children: [
-                Column(
-                  children: [
-                    Icon(
-                      step.status.icon,
-                      color: step.status.color,
-                    ),
-                    if (!isLast)
-                      Container(
-                        width: 2,
-                        height: 20,
-                        color: step.status.color,
-                      ),
-                  ],
-                ),
-                Column(
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppText(
-                      title: step.title ?? "",
-                      textType: TextType.body,
-                      fontWeight: FontWeight.bold,
-                      color: step.status.color,
+                    Column(
+                      children: [
+                        Icon(step.icon,
+                            color: step.color), // State'e göre ikon ve renk
+                        if (!isLast)
+                          Container(width: 2, height: 20, color: step.color),
+                      ],
                     ),
-                    AppText(
-                      title: step.date ?? "",
-                      textType: TextType.body,
-                      color: Colors.grey,
+                    const SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppText(
+                          title: entry.status ?? "",
+                          textType: TextType.body,
+                          fontWeight: FontWeight.bold,
+                          color: step.color, // State'e göre renk
+                        ),
+                        if (entry.time != null)
+                          AppText(
+                            title: formatTime(entry.time),
+                            textType: TextType.body,
+                            color: Colors.grey,
+                          ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            );
-          }).toList(),
-        ),
+              );
+            }),
+          ),
       ],
     );
+  }
+
+  String formatTime(String? time) {
+    if (time == null) return "";
+    return DateFormat("dd.MM.yyyy HH:mm")
+        .format(DateTime.parse(time).toLocal());
   }
 
   Row _buildAddress(Address address) {
@@ -321,4 +309,9 @@ enum OrderState {
   final IconData icon;
 
   const OrderState(this.icon, this.color);
+
+  static OrderState byName(String name) {
+    return OrderState.values.firstWhere((element) => element.name == name,
+        orElse: () => OrderState.upcoming);
+  }
 }

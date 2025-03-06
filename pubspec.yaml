@@ -75,6 +75,9 @@ dependencies:
   #Bloc
   flutter_bloc: ^9.1.0
 
+  # Web socket
+  web_socket_channel: ^3.0.2
+
   # Equatable
   equatable: ^2.0.7
   nested: ^1.0.0
