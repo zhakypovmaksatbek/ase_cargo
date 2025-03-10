@@ -18,6 +18,7 @@ class LoginCubit extends Cubit<LoginState> {
       await _userRepo.login(model);
       emit(LoginSuccess());
     } on DioException catch (e) {
+      print(e);
       if (e.type == DioExceptionType.connectionTimeout ||
           e.type == DioExceptionType.receiveTimeout ||
           e.type == DioExceptionType.sendTimeout ||
@@ -26,7 +27,13 @@ class LoginCubit extends Cubit<LoginState> {
             LoginErrorModel(detail: LocaleKeys.exception_no_internet.tr())));
         return;
       }
-      emit(LoginError(LoginErrorModel.fromJson(e.response?.data)));
+      if (e.response?.data != null &&
+          e.response!.data is Map<String, dynamic>) {
+        emit(LoginError(LoginErrorModel.fromJson(e.response!.data)));
+      } else {
+        // Eğer data null veya Map değilse, genel bir hata mesajı gösterin
+        emit(LoginError(LoginErrorModel(detail: e.toString())));
+      }
     }
   }
 }

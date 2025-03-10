@@ -164,6 +164,7 @@ abstract class  LocaleKeys {
   static const general_request_id = 'general.request_id';
   static const general_total_amount = 'general.total_amount';
   static const general_delivery_price = 'general.delivery_price';
+  static const general_sending_message = 'general.sending_message';
   static const general = 'general';
   static const navigation_verify = 'navigation.verify';
   static const navigation_reset_password = 'navigation.reset_password';

@@ -1,4 +1,6 @@
 import 'package:ase/core/app_manager.dart';
+import 'package:ase/core/dio_settings.dart';
+import 'package:ase/core/token_interceptor.dart';
 import 'package:ase/data/bloc/user_cubit/user_cubit.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
@@ -29,8 +31,7 @@ mixin ProfileMixin on State<ProfilePage> {
       onTap: (context) async {
         final bool? isExit = await AppDialogs.warningDialog(context);
         if (isExit ?? false) {
-          await AppManager.instance.setToken(accessToken: '');
-          await AppManager.instance.setIsLogin(false);
+          await AppManager.instance.clearTokens();
           if (context.mounted) {
             context.read<UserCubit>().getUser();
           }
@@ -39,7 +40,10 @@ mixin ProfileMixin on State<ProfilePage> {
     ),
     NavigateModel(
         title: LocaleKeys.button_delete_account.tr(),
-        onTap: (context) {},
+        onTap: (context) async {
+          await TokenInterceptor(tokenDio: DioSettings().dio)
+              .testRefreshToken();
+        },
         textColor: ColorConstants.red),
   ];
 }

@@ -1,12 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ase/data/models/chat_message_model.dart';
+import 'package:ase/data/provider/message_provider.dart';
+import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
 import 'package:ase/presentation/pages/profile/widgets/user_profile_image.dart';
+import 'package:ase/presentation/widgets/image/cashed_images.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChatBubble extends StatelessWidget {
-  final ChatMessage message;
+  final MessageData message;
   final int userId;
   const ChatBubble({
     super.key,
@@ -17,7 +23,8 @@ class ChatBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    bool isMe = message.data?.isUserMessage ?? false;
+    bool isMe = message.isUserMessage ?? false;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
       child: Row(
@@ -27,7 +34,7 @@ class ChatBubble extends StatelessWidget {
         children: [
           if (!isMe)
             UserProfileImage(
-              avatar: message.data?.sender?.avatar ?? "",
+              avatar: message.sender?.avatar ?? "",
               size: 35,
             ),
           ConstrainedBox(
@@ -51,21 +58,19 @@ class ChatBubble extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // if (message.data.attachments != null)
-                    //   Padding(
-                    //     padding: const EdgeInsets.only(bottom: 8.0),
-                    //     child: CashedImages(imageUrl: message.imageUrl!),
-                    //   ),
                     if (!isMe)
                       AppText(
-                        title: "Admin",
+                        title: message.sender?.firstName ?? "-",
                         textType: TextType.body,
                         color: ColorConstants.blue,
                         fontWeight: FontWeight.w600,
                       ),
-                    if (message.data?.text?.isNotEmpty ?? false)
+                    if (message.attachments != null &&
+                        message.attachments!.isNotEmpty)
+                      _imageWidget(message.attachments![0].file ?? ""),
+                    if (message.text?.isNotEmpty ?? false)
                       AppText(
-                        title: message.data?.text ?? "",
+                        title: message.text ?? "",
                         textType: TextType.body,
                       ),
                     const SizedBox(height: 4),
@@ -73,9 +78,41 @@ class ChatBubble extends StatelessWidget {
                       alignment: Alignment.bottomRight,
                       child: AppText(
                         title: _formatTime(
-                            DateTime.parse(message.data?.createdAt ?? "")),
+                            DateTime.parse(message.createdAt ?? "")),
                         textType: TextType.description,
                       ),
+                    ),
+                    Consumer<MessageProvider>(
+                      builder: (context, messageProvider, child) {
+                        final bool isUploading = messageProvider.isUploading &&
+                            (message.isUserMessage ?? false) &&
+                            message.localeMessageId != null;
+                        if (isUploading) {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 4.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SizedBox(
+                                  width: 12,
+                                  height: 12,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: ColorConstants.primary,
+                                  ),
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  LocaleKeys.general_sending_message.tr(),
+                                  style: TextStyle(
+                                      fontSize: 10, color: Colors.black54),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                        return const SizedBox.shrink();
+                      },
                     ),
                   ],
                 ),
@@ -83,9 +120,9 @@ class ChatBubble extends StatelessWidget {
             ),
           ),
           if (isMe)
-            CircleAvatar(
-              backgroundImage: NetworkImage(message.data?.sender?.avatar ?? ""),
-              radius: 18,
+            UserProfileImage(
+              avatar: message.sender?.avatar ?? "",
+              size: 35,
             ),
         ],
       ),
@@ -95,5 +132,26 @@ class ChatBubble extends StatelessWidget {
   String _formatTime(DateTime time) {
     final localTime = time.toLocal();
     return '${localTime.hour.toString().padLeft(2, '0')}:${localTime.minute.toString().padLeft(2, '0')}';
+  }
+
+  Widget _imageWidget(String imageUrl) {
+    if (kDebugMode) {
+      print(message.attachments.toString());
+    }
+    if (message.attachments != null && message.attachments!.isNotEmpty) {
+      final fileExtension =
+          message.attachments![0].file?.split('.').last.toLowerCase();
+      if (fileExtension == 'png' ||
+          fileExtension == 'jpg' ||
+          fileExtension == 'jpeg') {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: CashedImages(
+            imageUrl: message.attachments![0].file ?? "",
+          ),
+        );
+      }
+    }
+    return const SizedBox.shrink();
   }
 }

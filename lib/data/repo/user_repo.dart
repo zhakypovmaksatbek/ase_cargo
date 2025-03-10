@@ -19,13 +19,43 @@ class UserRepo implements IUserRepo {
       "v1/auth/token/",
       model.toJson(),
     );
+
+    if (kDebugMode) {
+      print('📱 Login yanıtı: ${response.data}');
+    }
+
     final token = TokenModel.fromJson(response.data);
+
+    // Access token kaydet
     await AppManager.instance.setToken(accessToken: token.access ?? "");
+
+    // Refresh token kontrolü ve kaydetme
+    if (token.refresh != null && token.refresh!.isNotEmpty) {
+      await AppManager.instance.setRefreshToken(refreshToken: token.refresh!);
+
+      if (kDebugMode) {
+        print('📱 Refresh token kaydedildi: ${token.refresh}');
+
+        // Doğrulama için hemen oku
+        final savedRefreshToken = await AppManager.instance.getRefreshToken();
+        print('📱 Kaydedilen refresh token okundu: $savedRefreshToken');
+      }
+    } else {
+      if (kDebugMode) {
+        print('⚠️ Refresh token bulunamadı veya boş!');
+        print('⚠️ Token yanıtı: ${response.data}');
+      }
+    }
+
+    // Token süresini hesapla ve kaydet
+    final expiresIn = token.expiresIn ?? 36; // Varsayılan 1 saat
+    final expiryTime = DateTime.now().add(Duration(seconds: expiresIn));
+    await AppManager.instance.setTokenExpiry(expiryTime: expiryTime);
+
     await AppManager.instance.setIsLogin(true);
 
     final userRole = _getUserRoleFromToken(token.access ?? "-");
     await AppManager.instance.setUserRole(role: userRole?.roles?.first ?? "");
-
     await AppManager.instance.setUserId(userId: userRole?.userId ?? 0);
   }
 
@@ -101,6 +131,24 @@ class UserRepo implements IUserRepo {
   Future<void> recoverySendCode(String phoneNumber) async {
     await dio.post("v1/auth/verification/otp/send", {"phone": phoneNumber});
   }
+
+  @override
+  Future<void> logout() async {
+    try {
+      // final refreshToken = await AppManager.instance.getRefreshToken();
+      // if (refreshToken != null && refreshToken.isNotEmpty) {
+      //   // Sunucuda token'ı iptal et (API'niz destekliyorsa)
+      //   await dio.post("v1/auth/logout/", {"refresh": refreshToken});
+      // }
+    } catch (e) {
+      if (kDebugMode) {
+        print("Logout hatası: $e");
+      }
+    } finally {
+      await AppManager.instance.clearTokens();
+      await AppManager.instance.setIsLogin(false);
+    }
+  }
 }
 
 abstract class IUserRepo {
@@ -114,4 +162,5 @@ abstract class IUserRepo {
   Future<void> updatePassword(String oldPassword, String newPassword);
 
   Future<void> recoverySendCode(String phoneNumber);
+  Future<void> logout();
 }

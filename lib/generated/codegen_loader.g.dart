@@ -180,7 +180,8 @@ class CodegenLoader extends AssetLoader{
     "packages_type": "Тип посылки:",
     "request_id": "Заявка {id}",
     "total_amount": "Общая сумма:",
-    "delivery_price": "Цена доставки:"
+    "delivery_price": "Цена доставки:",
+    "sending_message": "Отправляется..."
   },
   "navigation": {
     "verify": "Подтверждение",

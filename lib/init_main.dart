@@ -1,4 +1,5 @@
 import 'package:ase/data/bloc/banner_bloc/banner_cubit.dart';
+import 'package:ase/data/bloc/chat/chat_bloc.dart';
 import 'package:ase/data/bloc/country/country_cubit.dart';
 import 'package:ase/data/bloc/form/form_cubit.dart';
 import 'package:ase/data/bloc/form_detail/form_detail_cubit.dart';
@@ -19,18 +20,26 @@ import 'package:ase/data/bloc/update/update_user_cubit.dart';
 import 'package:ase/data/bloc/update_password/update_password_cubit.dart';
 import 'package:ase/data/bloc/user_cubit/user_cubit.dart';
 import 'package:ase/data/bloc/verify/verify_cubit.dart';
+import 'package:ase/data/provider/message_provider.dart';
 import 'package:ase/data/repo/form_repo.dart';
 import 'package:ase/data/repo/order_repo.dart';
 import 'package:ase/main.dart';
+import 'package:ase/services/web_socket_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nested/nested.dart';
+import 'package:provider/provider.dart';
 
 class InitMain {
   static Future<Widget> init() async {
     return MultiBlocProvider(
       providers: providers,
-      child: MyApp(),
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => MessageProvider()),
+        ],
+        child: MyApp(),
+      ),
     );
   }
 
@@ -57,6 +66,11 @@ class InitMain {
       BlocProvider(create: (context) => CountryCubit(FormRepo())),
       BlocProvider(create: (context) => RequestDetailCubit()),
       BlocProvider(create: (context) => OrderDetailCubit()),
+      BlocProvider(
+          create: (context) => ChatBloc(
+                context: context,
+                webSocketService: WebSocketService(),
+              )),
     ];
   }
 }

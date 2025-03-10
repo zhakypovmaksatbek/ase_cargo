@@ -2,6 +2,7 @@
 import "dart:async";
 
 import "package:ase/core/app_manager.dart";
+import "package:ase/core/token_interceptor.dart";
 import "package:ase/presentation/constants/app_constants.dart";
 import "package:cookie_jar/cookie_jar.dart";
 import "package:dio/dio.dart";
@@ -11,7 +12,26 @@ import "package:path_provider/path_provider.dart";
 
 class DioSettings {
   DioSettings() {
+    // Önce loglama interceptor'ı ekle
     dio.interceptors.add(DioLoggingInterceptor());
+    dio.interceptors.add(TokenInterceptor(tokenDio: dio));
+
+    // Token interceptor için ayrı bir Dio instance'ı oluştur
+    final tokenDio = Dio(
+      BaseOptions(
+        baseUrl: AppConstants.instance.baseUrl,
+        headers: {"Accept": "application/json"},
+        connectTimeout: const Duration(seconds: 20),
+        receiveTimeout: const Duration(seconds: 20),
+      ),
+    );
+
+    // TokenInterceptor'ı ekle
+    dio.interceptors.add(TokenInterceptor(tokenDio: tokenDio));
+
+    if (kDebugMode) {
+      print('🔧 DioSettings initialized with TokenInterceptor');
+    }
   }
 
   Dio dio = Dio(

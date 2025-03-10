@@ -1,4 +1,5 @@
 import 'package:ase/presentation/constants/app_constants.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,6 +20,29 @@ class AppManager {
     final prefs = await preferences();
     final token = prefs.getString(AppConstants.instance.accessToken);
     return token;
+  }
+
+  Future<void> setRefreshToken({required String refreshToken}) async {
+    final prefs = await preferences();
+    await prefs.setString(AppConstants.instance.refreshToken, refreshToken);
+  }
+
+  Future<String?> getRefreshToken() async {
+    final prefs = await preferences();
+    final token = prefs.getString(AppConstants.instance.refreshToken);
+    return token;
+  }
+
+  Future<void> setTokenExpiry({required DateTime expiryTime}) async {
+    final prefs = await preferences();
+    await prefs.setInt(
+        AppConstants.instance.tokenExpiry, expiryTime.millisecondsSinceEpoch);
+  }
+
+  Future<DateTime?> getTokenExpiry() async {
+    final prefs = await preferences();
+    final expiry = prefs.getInt(AppConstants.instance.tokenExpiry);
+    return expiry != null ? DateTime.fromMillisecondsSinceEpoch(expiry) : null;
   }
 
   Future<void> setDeviceToken({required String deviceToken}) async {
@@ -102,5 +126,31 @@ class AppManager {
     final prefs = await preferences();
     final userId = prefs.getInt(AppConstants.instance.chatId);
     return userId;
+  }
+
+  Future<void> clearTokens() async {
+    final prefs = await preferences();
+    await prefs.remove(AppConstants.instance.accessToken);
+    await prefs.remove(AppConstants.instance.refreshToken);
+    await prefs.remove(AppConstants.instance.tokenExpiry);
+    await setIsLogin(false);
+  }
+
+  Future<bool> isTokenExpired() async {
+    final expiry = await getTokenExpiry();
+    if (expiry == null) return true;
+
+    // Test için 20 saniye önce süresi dolmuş sayalım (güvenlik marjı)
+    final now = DateTime.now();
+    final isExpired = now.isAfter(expiry.subtract(const Duration(seconds: 20)));
+
+    if (kDebugMode && isExpired) {
+      print('⏰ Token süresi dolmuş veya dolmak üzere');
+      print('⏰ Şu anki zaman: ${now.toIso8601String()}');
+      print('⏰ Token süresi: ${expiry.toIso8601String()}');
+      print('⏰ Kalan süre: ${expiry.difference(now).inSeconds} saniye');
+    }
+
+    return isExpired;
   }
 }
