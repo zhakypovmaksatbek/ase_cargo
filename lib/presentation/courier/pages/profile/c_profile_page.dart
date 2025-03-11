@@ -3,11 +3,15 @@ import 'package:ase/core/dio_settings.dart';
 import 'package:ase/core/token_interceptor.dart';
 import 'package:ase/data/bloc/user_cubit/user_cubit.dart';
 import 'package:ase/generated/locale_keys.g.dart';
+import 'package:ase/main.dart';
+import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
 import 'package:ase/presentation/pages/profile/views/profile_page.dart';
 import 'package:ase/presentation/pages/profile/widgets/navigate_card.dart';
 import 'package:ase/presentation/pages/profile/widgets/profile_app_bar.dart';
+import 'package:ase/presentation/pages/profile/widgets/request_card_widget.dart';
 import 'package:ase/presentation/widgets/dialogs/app_dialogs.dart';
+import 'package:ase/router/app_router.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +36,7 @@ class _CProfilePageState extends State<CProfilePage> {
     context.read<UserCubit>().getUser();
   }
 
+  final router = getIt<AppRouter>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +50,15 @@ class _CProfilePageState extends State<CProfilePage> {
                 spacing: 20,
                 children: [
                   const SizedBox(),
+                  RequestCardWidget(
+                      icon: AssetConstants.request.svg,
+                      title: LocaleKeys.navigation_requests.tr(),
+                      backgroundColor: ColorConstants.primary,
+                      textColor: ColorConstants.white,
+                      onTap: () {
+                        router.push(RequestsRoute());
+                      },
+                      activateTrailingWidget: true),
                   NavigateCard(isCourier: true),
                   NavigateWithoutIconCard(
                     navigateModel: logoutNavigationList,
