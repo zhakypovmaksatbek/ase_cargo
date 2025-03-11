@@ -5,7 +5,7 @@ import 'package:ase/data/models/request_model.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
-import 'package:ase/presentation/utils/order_utils.dart';
+import 'package:ase/presentation/products/utils/order_utils.dart';
 import 'package:ase/presentation/widgets/app_bar/def_sliver_app_bar.dart';
 import 'package:ase/presentation/widgets/buttons/def_elevated_button.dart';
 import 'package:ase/presentation/widgets/card/request_card.dart';

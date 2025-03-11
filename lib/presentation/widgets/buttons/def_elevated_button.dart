@@ -9,9 +9,11 @@ class DefElevatedButton extends StatelessWidget {
     this.verticalPadding,
     this.horizontalPadding,
     this.radius,
+    this.backgroundColor,
   });
   final String text;
   final double? verticalPadding;
+  final Color? backgroundColor;
   final double? horizontalPadding;
   final double? radius;
   final VoidCallback? onPressed;
@@ -20,7 +22,7 @@ class DefElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: ColorConstants.primary,
+        backgroundColor: backgroundColor ?? ColorConstants.primary,
         overlayColor: ColorConstants.white,
         padding: EdgeInsets.symmetric(
             vertical: verticalPadding ?? 12,

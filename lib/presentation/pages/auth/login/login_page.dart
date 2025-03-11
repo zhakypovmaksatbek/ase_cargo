@@ -1,3 +1,4 @@
+import 'package:ase/core/app_manager.dart';
 import 'package:ase/data/bloc/login/login_cubit.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
@@ -130,7 +131,7 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
     );
   }
 
-  void listener(context, state) {
+  Future<void> listener(context, state) async {
     if (state is LoginError) {
       if (state.message.detail != null) {
         CherryToast.error(
@@ -140,7 +141,12 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
         ).show(context);
       }
     } else if (state is LoginSuccess) {
-      router.replaceAll([HomeRoute()]);
+      final role = await AppManager.instance.getUserRole();
+      if (role == "courier") {
+        router.replaceAll([CourierMainRoute()]);
+      } else {
+        router.replaceAll([HomeRoute()]);
+      }
     }
   }
 }

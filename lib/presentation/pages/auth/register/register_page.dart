@@ -4,7 +4,7 @@ import 'package:ase/data/models/verify_model.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/pages/auth/register/register_mixin.dart';
-import 'package:ase/presentation/utils/validation.dart';
+import 'package:ase/presentation/products/utils/validation.dart';
 import 'package:ase/presentation/widgets/buttons/def_elevated_button.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
 import 'package:ase/presentation/widgets/loading/loading_widget.dart';

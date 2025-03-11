@@ -2,7 +2,7 @@
 import 'package:ase/data/models/package_info_model.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/pages/order/widgets/first_step_content.dart';
-import 'package:ase/presentation/utils/validation.dart';
+import 'package:ase/presentation/products/utils/validation.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:ase/presentation/widgets/text_fields/def_text_field.dart';
 import 'package:easy_localization/easy_localization.dart';

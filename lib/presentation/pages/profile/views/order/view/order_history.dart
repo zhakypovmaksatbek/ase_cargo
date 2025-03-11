@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ase/generated/locale_keys.g.dart';
-import 'package:ase/presentation/constants/color_constants.dart';
 import 'package:ase/presentation/pages/profile/views/order/view/recipient_tab_view.dart';
 import 'package:ase/presentation/pages/profile/views/order/view/sender_tab_view.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
+import 'package:ase/presentation/widgets/tab_bar/custom_tab_bar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -46,28 +46,12 @@ class _OrderHistoryState extends State<OrderHistory>
           leading: BackButton(style: CustomBoxDecoration.backButtonStyle())),
       body: Column(
         children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
-            decoration: CustomBoxDecoration().copyWith(
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: TabBar(
-                labelPadding: EdgeInsets.zero,
-                indicatorPadding: EdgeInsets.zero,
-                labelColor: ColorConstants.white,
-                unselectedLabelColor: ColorConstants.grey,
-                indicator: BoxDecoration(
-                  color: ColorConstants.primary,
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                splashBorderRadius: BorderRadius.circular(14),
-                overlayColor: WidgetStateProperty.all(ColorConstants.primary),
-                indicatorSize: TabBarIndicatorSize.tab,
-                controller: controller,
-                tabs: [
-                  Tab(text: LocaleKeys.general_i_sender.tr()),
-                  Tab(text: LocaleKeys.general_i_recipient.tr()),
-                ]),
+          CustomTabBar(
+            controller: controller,
+            tabs: [
+              Tab(text: LocaleKeys.general_i_sender.tr()),
+              Tab(text: LocaleKeys.general_i_recipient.tr()),
+            ],
           ),
           Expanded(
             child: TabBarView(

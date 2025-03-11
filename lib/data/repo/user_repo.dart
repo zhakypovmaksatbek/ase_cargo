@@ -17,7 +17,7 @@ class UserRepo implements IUserRepo {
   Future<void> login(LoginModel model) async {
     final response = await dio.post(
       "v1/auth/token/",
-      model.toJson(),
+      data: model.toJson(),
     );
 
     if (kDebugMode) {
@@ -75,7 +75,7 @@ class UserRepo implements IUserRepo {
   Future<RegisterResponseModel> register(RegisterModel model) async {
     final response = await dio.post(
       "v1/auth/register/",
-      model.toJson(),
+      data: model.toJson(),
     );
     return RegisterResponseModel.fromJson(response.data);
   }
@@ -84,7 +84,7 @@ class UserRepo implements IUserRepo {
   Future<VerifyModel> verify(VerifyModel model) async {
     final response = await dio.post(
       "v1/auth/verification/otp/confirm/",
-      model.toJson(),
+      data: model.toJson(),
     );
     final token = TokenModel.fromJson(response.data);
     await AppManager.instance.setToken(accessToken: token.access ?? "");
@@ -96,7 +96,7 @@ class UserRepo implements IUserRepo {
   Future<RegisterResponseModel> resentCode(String phone) async {
     final response = await dio.post(
       "v1/auth/verification/otp/send/",
-      {"phone": phone},
+      data: {"phone": phone},
     );
     return RegisterResponseModel.fromJson(response.data);
   }
@@ -129,7 +129,8 @@ class UserRepo implements IUserRepo {
 
   @override
   Future<void> recoverySendCode(String phoneNumber) async {
-    await dio.post("v1/auth/verification/otp/send", {"phone": phoneNumber});
+    await dio
+        .post("v1/auth/verification/otp/send", data: {"phone": phoneNumber});
   }
 
   @override

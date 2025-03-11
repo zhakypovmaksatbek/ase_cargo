@@ -13,8 +13,9 @@ import "package:path_provider/path_provider.dart";
 class DioSettings {
   DioSettings() {
     // Önce loglama interceptor'ı ekle
-    dio.interceptors.add(DioLoggingInterceptor());
     dio.interceptors.add(TokenInterceptor(tokenDio: dio));
+
+    dio.interceptors.add(DioLoggingInterceptor());
 
     // Token interceptor için ayrı bir Dio instance'ı oluştur
     final tokenDio = Dio(
@@ -85,7 +86,7 @@ class DioSettings {
     return currentLanguage;
   }
 
-  Future<Response> post(String url, Object data) async {
+  Future<Response> post(String url, {Object? data}) async {
     final Options options = await _buildOptions();
     return dio.post(url, data: data, options: options);
   }
@@ -111,7 +112,7 @@ class DioSettings {
     return dio.patch(url, data: data, options: options);
   }
 
-  Future<Response> delete(String url, Object data) async {
+  Future<Response> delete(String url, {Object? data}) async {
     final Options options = await _buildOptions();
     return dio.delete(url, data: data, options: options);
   }

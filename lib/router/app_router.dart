@@ -1,4 +1,8 @@
 import 'package:ase/data/models/verify_model.dart';
+import 'package:ase/presentation/courier/pages/courier_main/courier_main_page.dart';
+import 'package:ase/presentation/courier/pages/home/c_home_page.dart';
+import 'package:ase/presentation/courier/pages/profile/c_profile_page.dart';
+import 'package:ase/presentation/courier/pages/scan/scan_page.dart';
 import 'package:ase/presentation/pages/auth/login/login_page.dart';
 import 'package:ase/presentation/pages/auth/register/register_page.dart';
 import 'package:ase/presentation/pages/auth/reset_password/reset_password.dart';
@@ -66,6 +70,14 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: PaymentRoute.page, path: "/payment_route"),
         AutoRoute(page: ChangePasswordRoute.page, path: "/change_password"),
         AutoRoute(page: RestoreAccessRoute.page, path: "/reset_access"),
+        AutoRoute(
+            page: CourierMainRoute.page,
+            path: "/courier_main",
+            children: [
+              AutoRoute(page: CHomeRoute.page, path: "c_home", initial: true),
+              AutoRoute(page: CProfileRoute.page, path: "c_profile"),
+              AutoRoute(page: ScanRoute.page, path: "scan"),
+            ]),
       ];
 }
 

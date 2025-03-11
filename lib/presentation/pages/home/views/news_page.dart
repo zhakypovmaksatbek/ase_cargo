@@ -6,7 +6,7 @@ import 'package:ase/main.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
-import 'package:ase/presentation/utils/date_time_utils.dart';
+import 'package:ase/presentation/products/utils/date_time_utils.dart';
 import 'package:ase/presentation/widgets/image/cashed_images.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
 import 'package:ase/presentation/widgets/loading/loading_widget.dart';

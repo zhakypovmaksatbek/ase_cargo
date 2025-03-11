@@ -4,7 +4,7 @@ import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
 import 'package:ase/presentation/pages/order/options/order_options.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
-import 'package:ase/presentation/utils/validation.dart';
+import 'package:ase/presentation/products/utils/validation.dart';
 import 'package:ase/presentation/widgets/card/package_card.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:ase/presentation/widgets/text_fields/def_text_field.dart';

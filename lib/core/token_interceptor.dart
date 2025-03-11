@@ -12,6 +12,7 @@ class TokenInterceptor extends Interceptor {
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
+    // Auth istekleri için token kontrolünü atla
     if (options.path.contains('v1/auth/token/') ||
         options.path.contains('v1/auth/token/refresh/')) {
       if (kDebugMode) {
@@ -19,31 +20,38 @@ class TokenInterceptor extends Interceptor {
       }
       return handler.next(options);
     }
-    // Token kontrolü
-    if (await _shouldRefreshToken()) {
-      try {
-        // Token yenile
-        await _refreshToken();
-      } catch (e) {
-        // Token yenileme başarısız, kullanıcıyı logout yap
-        await AppManager.instance.setIsLogin(false);
-        await AppManager.instance.clearTokens();
 
-        // Hata fırlat
-        return handler.reject(
-          DioException(
-            requestOptions: options,
-            error: 'Token yenileme başarısız',
-            type: DioExceptionType.unknown,
-          ),
-        );
+    // Kullanıcı giriş yapmış mı kontrol et
+    final isLogin = await AppManager.instance.getIsLogin() ?? false;
+
+    if (isLogin) {
+      // Token kontrolü
+      if (await _shouldRefreshToken()) {
+        try {
+          // Token yenile
+          await _refreshToken();
+        } catch (e) {
+          // Token yenileme başarısız, kullanıcıyı logout yap
+          await AppManager.instance.setIsLogin(false);
+          await AppManager.instance.clearTokens();
+
+          if (kDebugMode) {
+            print('❌ Token yenileme başarısız: $e');
+          }
+
+          // Token hatası olsa da isteğe devam et
+          return handler.next(options);
+        }
       }
-    }
 
-    // Güncel token'ı ekle
-    final token = await AppManager.instance.getToken();
-    if (token != null && token.isNotEmpty) {
-      options.headers['Authorization'] = 'Bearer $token';
+      // Güncel token'ı ekle
+      final token = await AppManager.instance.getToken();
+      if (token != null && token.isNotEmpty) {
+        options.headers['Authorization'] = 'Bearer $token';
+      } else {
+        // Token yoksa veya boşsa, token'ları temizle
+        await AppManager.instance.clearTokens();
+      }
     }
 
     // Dil ayarını ekle
@@ -102,7 +110,8 @@ class TokenInterceptor extends Interceptor {
       if (kDebugMode) {
         print('❌ Refresh token bulunamadı');
       }
-      throw Exception('Refresh token bulunamadı');
+      await AppManager.instance.setIsLogin(false);
+      // throw Exception('Refresh token bulunamadı');
     }
 
     try {

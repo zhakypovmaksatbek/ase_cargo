@@ -20,15 +20,12 @@ Future<void> main() async {
 }
 
 Future<void> initializeApp() async {
-  // Kullanıcı giriş yapmış mı kontrol et
   final isLoggedIn = await AppManager.instance.getIsLogin();
 
   if (isLoggedIn) {
-    // Token süresi dolmuş mu kontrol et
     final isExpired = await AppManager.instance.isTokenExpired();
 
     if (isExpired) {
-      // Token yenileme işlemini başlat
       try {
         final dioSettings = DioSettings();
         final refreshToken = await AppManager.instance.getRefreshToken();
@@ -42,7 +39,6 @@ Future<void> initializeApp() async {
           if (response.statusCode == 200) {
             final tokenModel = TokenModel.fromJson(response.data);
 
-            // Yeni tokenları kaydet
             await AppManager.instance
                 .setToken(accessToken: tokenModel.access ?? '');
 
@@ -61,8 +57,6 @@ Future<void> initializeApp() async {
           }
         }
       } catch (e) {
-        // Token yenileme başarısız, kullanıcıyı logout yap
-        await AppManager.instance.setIsLogin(false);
         await AppManager.instance.clearTokens();
 
         if (kDebugMode) {

@@ -24,9 +24,14 @@ class _SplashPageState extends State<SplashPage> {
   final router = getIt<AppRouter>();
   Future<void> _navigateToLogin() async {
     bool isLogin = await AppManager.instance.getIsLogin();
+    String? role = await AppManager.instance.getUserRole();
     await Future.delayed(const Duration(seconds: 3), () {
       if (isLogin) {
-        router.replace(const MainRoute());
+        if (role == "courier") {
+          router.replace(const CourierMainRoute());
+        } else {
+          router.replace(const MainRoute());
+        }
       } else {
         router.replace(const LoginRoute());
       }

@@ -1,15 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:ase/data/models/order_model.dart';
-import 'package:ase/data/models/request_model.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/main.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
 import 'package:ase/presentation/pages/order/options/order_options.dart';
+import 'package:ase/presentation/pages/profile/views/order/widgets/handle_address_widget.dart';
 import 'package:ase/presentation/pages/profile/widgets/status_widget.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
-import 'package:ase/presentation/utils/date_time_utils.dart';
-import 'package:ase/presentation/utils/order_utils.dart';
+import 'package:ase/presentation/products/utils/date_time_utils.dart';
+import 'package:ase/presentation/products/utils/order_utils.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:ase/router/app_router.dart';
@@ -54,35 +54,7 @@ class OrderCard extends StatelessWidget {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              spacing: 10,
-              children: [
-                CustomAssetImage(
-                  path: AssetConstants.location.svg,
-                  isSvg: true,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AppText(
-                        title: LocaleKeys.general_delivery_address.tr(),
-                        textType: TextType.subtitle,
-                        color: ColorConstants.lavenderBlue,
-                      ),
-                      AppText(
-                        title: OrderUtils.formatAddress(
-                            order.address ?? Address()),
-                        textType: TextType.body,
-                        color: ColorConstants.primary,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            HandleAddressWidget(address: order.address),
             StatusWidget(
               status: order.orderStatus,
               title: LocaleKeys.general_status_order.tr(),

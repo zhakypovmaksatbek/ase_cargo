@@ -1,4 +1,5 @@
 import 'package:ase/data/bloc/banner_bloc/banner_cubit.dart';
+import 'package:ase/data/bloc/box/box_cubit.dart';
 import 'package:ase/data/bloc/chat/chat_bloc.dart';
 import 'package:ase/data/bloc/country/country_cubit.dart';
 import 'package:ase/data/bloc/form/form_cubit.dart';
@@ -66,6 +67,7 @@ class InitMain {
       BlocProvider(create: (context) => CountryCubit(FormRepo())),
       BlocProvider(create: (context) => RequestDetailCubit()),
       BlocProvider(create: (context) => OrderDetailCubit()),
+      BlocProvider(create: (context) => BoxCubit()),
       BlocProvider(
           create: (context) => ChatBloc(
                 context: context,

@@ -133,6 +133,7 @@ class AppManager {
     await prefs.remove(AppConstants.instance.accessToken);
     await prefs.remove(AppConstants.instance.refreshToken);
     await prefs.remove(AppConstants.instance.tokenExpiry);
+
     await setIsLogin(false);
   }
 
@@ -140,9 +141,8 @@ class AppManager {
     final expiry = await getTokenExpiry();
     if (expiry == null) return true;
 
-    // Test için 20 saniye önce süresi dolmuş sayalım (güvenlik marjı)
     final now = DateTime.now();
-    final isExpired = now.isAfter(expiry.subtract(const Duration(seconds: 20)));
+    final isExpired = now.isAfter(expiry.subtract(const Duration(minutes: 20)));
 
     if (kDebugMode && isExpired) {
       print('⏰ Token süresi dolmuş veya dolmak üzere');

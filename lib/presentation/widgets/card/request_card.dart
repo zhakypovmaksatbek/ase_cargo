@@ -2,11 +2,11 @@
 import 'package:ase/data/models/request_model.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/main.dart';
-import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
+import 'package:ase/presentation/pages/profile/views/order/widgets/handle_address_widget.dart';
 import 'package:ase/presentation/pages/profile/widgets/status_widget.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
-import 'package:ase/presentation/utils/order_utils.dart';
+import 'package:ase/presentation/products/utils/order_utils.dart';
 import 'package:ase/presentation/widgets/buttons/def_elevated_button.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
@@ -39,35 +39,7 @@ class RequestCard extends StatelessWidget {
               textType: TextType.body,
               fontWeight: FontWeight.w500,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              spacing: 10,
-              children: [
-                CustomAssetImage(
-                  path: AssetConstants.location.svg,
-                  isSvg: true,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AppText(
-                        title: LocaleKeys.general_delivery_address.tr(),
-                        textType: TextType.subtitle,
-                        color: ColorConstants.lavenderBlue,
-                      ),
-                      AppText(
-                        title: OrderUtils.formatAddress(
-                            requestModel.address ?? Address()),
-                        textType: TextType.body,
-                        color: ColorConstants.primary,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            HandleAddressWidget(address: requestModel.address),
             StatusWidget(
               status: requestModel.status,
               title: LocaleKeys.general_status_order.tr(),

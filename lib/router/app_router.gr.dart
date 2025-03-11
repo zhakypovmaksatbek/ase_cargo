@@ -11,6 +11,38 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [CHomePage]
+class CHomeRoute extends PageRouteInfo<void> {
+  const CHomeRoute({List<PageRouteInfo>? children})
+    : super(CHomeRoute.name, initialChildren: children);
+
+  static const String name = 'CHomeRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CHomePage();
+    },
+  );
+}
+
+/// generated route for
+/// [CProfilePage]
+class CProfileRoute extends PageRouteInfo<void> {
+  const CProfileRoute({List<PageRouteInfo>? children})
+    : super(CProfileRoute.name, initialChildren: children);
+
+  static const String name = 'CProfileRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CProfilePage();
+    },
+  );
+}
+
+/// generated route for
 /// [ChangePasswordPage]
 class ChangePasswordRoute extends PageRouteInfo<void> {
   const ChangePasswordRoute({List<PageRouteInfo>? children})
@@ -22,6 +54,22 @@ class ChangePasswordRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const ChangePasswordPage();
+    },
+  );
+}
+
+/// generated route for
+/// [CourierMainPage]
+class CourierMainRoute extends PageRouteInfo<void> {
+  const CourierMainRoute({List<PageRouteInfo>? children})
+    : super(CourierMainRoute.name, initialChildren: children);
+
+  static const String name = 'CourierMainRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CourierMainPage();
     },
   );
 }
@@ -400,6 +448,22 @@ class RestoreAccessRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const RestoreAccessPage();
+    },
+  );
+}
+
+/// generated route for
+/// [ScanPage]
+class ScanRoute extends PageRouteInfo<void> {
+  const ScanRoute({List<PageRouteInfo>? children})
+    : super(ScanRoute.name, initialChildren: children);
+
+  static const String name = 'ScanRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ScanPage();
     },
   );
 }

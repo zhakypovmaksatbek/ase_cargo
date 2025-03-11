@@ -13,8 +13,10 @@ import 'package:flutter/material.dart';
 class NavigateCard extends StatelessWidget {
   const NavigateCard({
     super.key,
+    this.isCourier = false,
   });
   static final router = getIt<AppRouter>();
+  final bool isCourier;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,12 +44,14 @@ class NavigateCard extends StatelessWidget {
           Divider(
             color: ColorConstants.dividerColor,
           ),
-          _navigateWidget(context,
-              title: LocaleKeys.navigation_my_reviews.tr(),
-              icon: AssetConstants.myReview.svg),
-          Divider(
-            color: ColorConstants.dividerColor,
-          ),
+          if (!isCourier)
+            _navigateWidget(context,
+                title: LocaleKeys.navigation_my_reviews.tr(),
+                icon: AssetConstants.myReview.svg),
+          if (!isCourier)
+            Divider(
+              color: ColorConstants.dividerColor,
+            ),
           _navigateWidget(
             context,
             title: LocaleKeys.navigation_notifications.tr(),

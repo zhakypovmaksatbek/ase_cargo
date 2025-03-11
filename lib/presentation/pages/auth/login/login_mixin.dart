@@ -1,7 +1,7 @@
 import 'package:ase/data/bloc/login/login_cubit.dart';
 import 'package:ase/data/models/login_model.dart';
 import 'package:ase/main.dart';
-import 'package:ase/presentation/utils/validation.dart';
+import 'package:ase/presentation/products/utils/validation.dart';
 import 'package:ase/router/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

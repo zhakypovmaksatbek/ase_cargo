@@ -1,4 +1,4 @@
-import 'package:ase/presentation/utils/validation.dart';
+import 'package:ase/presentation/products/utils/validation.dart';
 import 'package:flutter/material.dart';
 
 mixin UserInfoMixin {

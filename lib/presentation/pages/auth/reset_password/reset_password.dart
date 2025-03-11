@@ -1,5 +1,5 @@
 import 'package:ase/generated/locale_keys.g.dart';
-import 'package:ase/presentation/utils/validation.dart';
+import 'package:ase/presentation/products/utils/validation.dart';
 import 'package:ase/presentation/widgets/buttons/def_elevated_button.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:ase/presentation/widgets/text_fields/password_text_filed.dart';

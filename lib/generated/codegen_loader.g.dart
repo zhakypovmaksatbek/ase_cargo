@@ -45,7 +45,15 @@ class CodegenLoader extends AssetLoader{
     "filters": "Фильтры",
     "next_step": "Далее",
     "upload_check": "Загрузить чек",
-    "get_code": "Получить код"
+    "get_code": "Получить код",
+    "return_from_canceled": "Вернуть из отмененных",
+    "delivered": "Доставлен",
+    "take": "Забрать",
+    "scan_qr": "Наведите камеру на QR или штрих код",
+    "choose_from_gallery": "Выбрать из галереи",
+    "who_receive": "Кто получает?",
+    "delivered_package": "Посылка доставлена",
+    "delivered_package_description": "Посылка доставлена, загрузите ФИО, роспись, и фото получателя с паспортом!"
   },
   "form": {
     "phone_number": "Номер телефона",
@@ -131,7 +139,9 @@ class CodegenLoader extends AssetLoader{
     "want_to_exit_page": "Хотите выйти из страницы?",
     "exit_description": "Если вы покинете страницу, все введенные данные будут удалены и не сохранены.",
     "not_found_requests": "У вас нет заявок...",
-    "not_found_address": "Адресная информация отсутствует"
+    "not_found_address": "Адресная информация отсутствует",
+    "cancel_delivery": "Вы отменяете доставку посылки!",
+    "cancel_delivery_description": "Для отмены напишите причину отмены!"
   },
   "general": {
     "seconds": "сек",
@@ -209,7 +219,9 @@ class CodegenLoader extends AssetLoader{
     "additional": "Дополнительное",
     "online_chat": "Онлайн чат",
     "payment": "Оплата",
-    "change_password": "Изменение пароля"
+    "change_password": "Изменение пароля",
+    "i_have": "У меня",
+    "canceled": "Отмененные"
   },
   "status": {
     "awaiting_process": "Ожидает обработки",

@@ -1,7 +1,7 @@
 import 'package:ase/data/bloc/update_password/update_password_cubit.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/main.dart';
-import 'package:ase/presentation/utils/validation.dart';
+import 'package:ase/presentation/products/utils/validation.dart';
 import 'package:ase/presentation/widgets/app_bar/def_sliver_app_bar.dart';
 import 'package:ase/presentation/widgets/buttons/def_elevated_button.dart';
 import 'package:ase/presentation/widgets/loading/loading_widget.dart';

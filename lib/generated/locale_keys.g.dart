@@ -33,6 +33,14 @@ abstract class  LocaleKeys {
   static const button_next_step = 'button.next_step';
   static const button_upload_check = 'button.upload_check';
   static const button_get_code = 'button.get_code';
+  static const button_return_from_canceled = 'button.return_from_canceled';
+  static const button_delivered = 'button.delivered';
+  static const button_take = 'button.take';
+  static const button_scan_qr = 'button.scan_qr';
+  static const button_choose_from_gallery = 'button.choose_from_gallery';
+  static const button_who_receive = 'button.who_receive';
+  static const button_delivered_package = 'button.delivered_package';
+  static const button_delivered_package_description = 'button.delivered_package_description';
   static const button = 'button';
   static const form_phone_number = 'form.phone_number';
   static const form_password = 'form.password';
@@ -116,6 +124,8 @@ abstract class  LocaleKeys {
   static const notification_exit_description = 'notification.exit_description';
   static const notification_not_found_requests = 'notification.not_found_requests';
   static const notification_not_found_address = 'notification.not_found_address';
+  static const notification_cancel_delivery = 'notification.cancel_delivery';
+  static const notification_cancel_delivery_description = 'notification.cancel_delivery_description';
   static const notification = 'notification';
   static const general_seconds = 'general.seconds';
   static const general_create_new_password = 'general.create_new_password';
@@ -192,6 +202,8 @@ abstract class  LocaleKeys {
   static const navigation_online_chat = 'navigation.online_chat';
   static const navigation_payment = 'navigation.payment';
   static const navigation_change_password = 'navigation.change_password';
+  static const navigation_i_have = 'navigation.i_have';
+  static const navigation_canceled = 'navigation.canceled';
   static const navigation = 'navigation';
   static const status_awaiting_process = 'status.awaiting_process';
   static const status_wait_payment = 'status.wait_payment';
