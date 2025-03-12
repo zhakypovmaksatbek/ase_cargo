@@ -7,28 +7,51 @@ class BoxPaginationModel extends PaginationModel<BoxModel> {
 }
 
 class BoxModel {
-  String? code;
-  String? address;
-  String? zipcode;
-  String? addedAt;
   Sender? sender;
   Sender? recipient;
+  String? code;
+  String? action;
+  String? address;
+  String? zipcode;
+  String? createdAt;
+  String? reason;
 
   BoxModel(
-      {this.code,
+      {this.sender,
+      this.recipient,
+      this.code,
+      this.action,
       this.address,
       this.zipcode,
-      this.addedAt,
-      this.sender,
-      this.recipient});
+      this.createdAt,
+      this.reason});
 
   BoxModel.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
-    address = json['address'];
-    zipcode = json['zipcode'];
-    addedAt = json['added_at'];
     sender = json['sender'] != null ? Sender.fromJson(json['sender']) : null;
     recipient =
         json['recipient'] != null ? Sender.fromJson(json['recipient']) : null;
+    code = json['code'];
+    action = json['action'];
+    address = json['address'];
+    zipcode = json['zipcode'];
+    createdAt = json['created_at'];
+    reason = json['reason'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (sender != null) {
+      data['sender'] = sender!.toJson();
+    }
+    if (recipient != null) {
+      data['recipient'] = recipient!.toJson();
+    }
+    data['code'] = code;
+    data['action'] = action;
+    data['address'] = address;
+    data['zipcode'] = zipcode;
+    data['created_at'] = createdAt;
+    data['reason'] = reason;
+    return data;
   }
 }

@@ -1,8 +1,9 @@
 import 'package:ase/presentation/constants/color_constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class AppBottomSheet {
+class FilterBottomSheet {
   Future<T?> filterBottomSheet<T>({
     required BuildContext context,
     required List<T> values,
@@ -35,7 +36,7 @@ class AppBottomSheet {
                         ? BorderSide(color: ColorConstants.primary)
                         : BorderSide.none,
                   ),
-                  title: Text(titleBuilder(value)),
+                  title: Text(titleBuilder(value).tr()),
                   onChanged: (newValue) {
                     Navigator.pop(context, newValue);
                   },

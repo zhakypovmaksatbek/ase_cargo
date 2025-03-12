@@ -1,5 +1,6 @@
 import 'package:ase/core/dio_settings.dart';
 import 'package:ase/data/models/box_model.dart';
+import 'package:ase/data/models/signature_model.dart';
 
 final class CourierRepo extends ICourierRepo {
   final dio = DioSettings();
@@ -36,14 +37,18 @@ final class CourierRepo extends ICourierRepo {
   }
 
   @override
-  Future<void> doneOrder(String orderCode) async {
-    final response = await dio.post("v1/courier/box/set-order-done/$orderCode");
+  Future<void> doneOrder(String orderCode, SignatureModel signature) async {
+    final formData = await signature.toFormData();
+    final response = await dio.post("v1/courier/box/set-order-done/$orderCode/",
+        data: formData, isFormData: true);
     return response.data;
   }
 
   @override
-  Future<BoxPaginationModel> getOrderHistory() async {
-    final response = await dio.get("v1/courier/history/");
+  Future<BoxPaginationModel> getOrderHistory({int page = 1}) async {
+    final response = await dio.get("v1/courier/history/", queryParameters: {
+      "page": page,
+    });
     return BoxPaginationModel.fromJson(response.data);
   }
 
@@ -59,8 +64,8 @@ abstract class ICourierRepo {
   Future<void> addOrder(String boxCode);
   Future<void> deleteOrder(String boxCode, String reason);
   Future<void> cancelOrder(String orderCode, String reason);
-  Future<void> doneOrder(String orderCode);
-  Future<BoxPaginationModel> getOrderHistory();
+  Future<void> doneOrder(String orderCode, SignatureModel signature);
+  Future<BoxPaginationModel> getOrderHistory({int page});
   Future<BoxModel> searOrder(String orderCode);
 }
 

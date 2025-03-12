@@ -51,14 +51,14 @@ class _CProfilePageState extends State<CProfilePage> {
                 children: [
                   const SizedBox(),
                   RequestCardWidget(
-                      icon: AssetConstants.request.svg,
-                      title: LocaleKeys.navigation_requests.tr(),
-                      backgroundColor: ColorConstants.primary,
-                      textColor: ColorConstants.white,
-                      onTap: () {
-                        router.push(RequestsRoute());
-                      },
-                      activateTrailingWidget: true),
+                    icon: AssetConstants.history.svg,
+                    title: LocaleKeys.navigation_order_history.tr(),
+                    backgroundColor: ColorConstants.primary,
+                    textColor: ColorConstants.white,
+                    onTap: () {
+                      router.push(COrderHistoryRoute());
+                    },
+                  ),
                   NavigateCard(isCourier: true),
                   NavigateWithoutIconCard(
                     navigateModel: logoutNavigationList,

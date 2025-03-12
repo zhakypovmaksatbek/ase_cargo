@@ -24,6 +24,23 @@ final class OrderUtils {
     }
   }
 
+  static String courierOrderStatus(String status) {
+    switch (status) {
+      case "awaiting_process":
+        return LocaleKeys.status_awaiting_process.tr();
+      case "wait_payment":
+        return LocaleKeys.status_wait_payment.tr();
+      case "accepted":
+        return LocaleKeys.status_accepted.tr();
+      case "canceled":
+        return LocaleKeys.status_canceled.tr();
+      case "denied":
+        return LocaleKeys.status_denied.tr();
+      default:
+        return status;
+    }
+  }
+
   static String preOrderStatusIcon(String status) {
     switch (status) {
       case "awaiting_process":

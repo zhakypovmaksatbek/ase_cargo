@@ -9,6 +9,7 @@ import 'package:ase/data/bloc/login/login_cubit.dart';
 import 'package:ase/data/bloc/news/news_cubit.dart';
 import 'package:ase/data/bloc/order/order_cubit.dart';
 import 'package:ase/data/bloc/order_detail/order_detail_cubit.dart';
+import 'package:ase/data/bloc/order_history/order_history_cubit.dart';
 import 'package:ase/data/bloc/register/register_cubit.dart';
 import 'package:ase/data/bloc/request/request_cubit.dart';
 import 'package:ase/data/bloc/request_detail/request_detail_cubit.dart';
@@ -18,6 +19,7 @@ import 'package:ase/data/bloc/shipment/shipment_cubit.dart';
 import 'package:ase/data/bloc/story/story_cubit.dart';
 import 'package:ase/data/bloc/story_view/story_view_cubit.dart';
 import 'package:ase/data/bloc/update/update_user_cubit.dart';
+import 'package:ase/data/bloc/update_order_status/update_order_status_cubit.dart';
 import 'package:ase/data/bloc/update_password/update_password_cubit.dart';
 import 'package:ase/data/bloc/user_cubit/user_cubit.dart';
 import 'package:ase/data/bloc/verify/verify_cubit.dart';
@@ -68,6 +70,8 @@ class InitMain {
       BlocProvider(create: (context) => RequestDetailCubit()),
       BlocProvider(create: (context) => OrderDetailCubit()),
       BlocProvider(create: (context) => BoxCubit()),
+      BlocProvider(create: (context) => UpdateOrderStatusCubit()),
+      BlocProvider(create: (context) => OrderHistoryCubit()),
       BlocProvider(
           create: (context) => ChatBloc(
                 context: context,

@@ -51,9 +51,7 @@ class CodegenLoader extends AssetLoader{
     "take": "Забрать",
     "scan_qr": "Наведите камеру на QR или штрих код",
     "choose_from_gallery": "Выбрать из галереи",
-    "who_receive": "Кто получает?",
-    "delivered_package": "Посылка доставлена",
-    "delivered_package_description": "Посылка доставлена, загрузите ФИО, роспись, и фото получателя с паспортом!"
+    "clear": "Очистить"
   },
   "form": {
     "phone_number": "Номер телефона",
@@ -115,7 +113,15 @@ class CodegenLoader extends AssetLoader{
     "select_delivery_type": "Выберите способ доставки:",
     "package": "Посылка",
     "choice_country": "Выберите страну",
-    "me": "(вами)"
+    "me": "(вами)",
+    "upload_approve_image": "Загрузите фотографию подтверждения",
+    "upload_signature_image": "Загрузите фотографию подписи",
+    "signature": "Подпись",
+    "approve": "Подтверждение",
+    "required_signature": "Требуется подпись",
+    "who_receive": "Кто получает?",
+    "delivered_package": "Посылка доставлена",
+    "delivered_package_description": "Посылка доставлена, загрузите ФИО, роспись, и фото получателя с паспортом!"
   },
   "exception": {
     "cannot_be_empty": "Не может быть пустым",
@@ -141,7 +147,9 @@ class CodegenLoader extends AssetLoader{
     "not_found_requests": "У вас нет заявок...",
     "not_found_address": "Адресная информация отсутствует",
     "cancel_delivery": "Вы отменяете доставку посылки!",
-    "cancel_delivery_description": "Для отмены напишите причину отмены!"
+    "cancel_delivery_description": "Для отмены напишите причину отмены!",
+    "upload_photo_description": "Выберите один из вариантов",
+    "not_found_order": "У вас нет заказов..."
   },
   "general": {
     "seconds": "сек",
@@ -221,7 +229,8 @@ class CodegenLoader extends AssetLoader{
     "payment": "Оплата",
     "change_password": "Изменение пароля",
     "i_have": "У меня",
-    "canceled": "Отмененные"
+    "canceled": "Отмененные",
+    "delivered_order": "Заказ доставлен"
   },
   "status": {
     "awaiting_process": "Ожидает обработки",
@@ -235,7 +244,12 @@ class CodegenLoader extends AssetLoader{
     "awaiting_pickup": "Ожидает забора",
     "rejected": "Отклонён",
     "done": "Выполнен",
-    "en_route": "Проездом"
+    "en_route": "Проездом",
+    "add": "Добавлено",
+    "remove": "Удалено",
+    "set_done": "Выполнено",
+    "set_cancelled": "Отменено",
+    "pending_delivery": "Ожидает доставки"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ru": _ru};

@@ -2,8 +2,10 @@
 import 'package:ase/data/bloc/box/box_cubit.dart';
 import 'package:ase/data/models/box_model.dart';
 import 'package:ase/data/repo/courier_repo.dart';
+import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/courier/widgets/card/c_order_card.dart';
 import 'package:ase/presentation/widgets/loading/loading_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,6 +42,9 @@ class _CanceledTabContentState extends State<CanceledTabContent> {
         builder: (context, state) {
           if (state is BoxLoading) {
             return Center(child: const LoadingWidget());
+          } else if (boxList.isEmpty) {
+            return Center(
+                child: Text(LocaleKeys.notification_not_found_order.tr()));
           }
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),

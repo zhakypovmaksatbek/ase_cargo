@@ -27,6 +27,22 @@ class CHomeRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [COrderHistoryPage]
+class COrderHistoryRoute extends PageRouteInfo<void> {
+  const COrderHistoryRoute({List<PageRouteInfo>? children})
+    : super(COrderHistoryRoute.name, initialChildren: children);
+
+  static const String name = 'COrderHistoryRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const COrderHistoryPage();
+    },
+  );
+}
+
+/// generated route for
 /// [CProfilePage]
 class CProfileRoute extends PageRouteInfo<void> {
   const CProfileRoute({List<PageRouteInfo>? children})
@@ -550,6 +566,43 @@ class ServiceDetailRouteArgs {
   @override
   String toString() {
     return 'ServiceDetailRouteArgs{key: $key, slug: $slug, image: $image}';
+  }
+}
+
+/// generated route for
+/// [SignaturePage]
+class SignatureRoute extends PageRouteInfo<SignatureRouteArgs> {
+  SignatureRoute({
+    Key? key,
+    required BoxModel box,
+    List<PageRouteInfo>? children,
+  }) : super(
+         SignatureRoute.name,
+         args: SignatureRouteArgs(key: key, box: box),
+         initialChildren: children,
+       );
+
+  static const String name = 'SignatureRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<SignatureRouteArgs>();
+      return SignaturePage(key: args.key, box: args.box);
+    },
+  );
+}
+
+class SignatureRouteArgs {
+  const SignatureRouteArgs({this.key, required this.box});
+
+  final Key? key;
+
+  final BoxModel box;
+
+  @override
+  String toString() {
+    return 'SignatureRouteArgs{key: $key, box: $box}';
   }
 }
 

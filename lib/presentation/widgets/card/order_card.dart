@@ -112,21 +112,24 @@ class OrderCard extends StatelessWidget {
             ReminderMessageWidget(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Expanded(
                   flex: 1,
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     spacing: 10,
                     children: [
                       Icon(
                         Icons.date_range_outlined,
                         color: Colors.grey,
+                        size: 16,
                       ),
                       Flexible(
                         child: AppText(
                           title: LocaleKeys.general_date.tr(),
-                          textType: TextType.subtitle,
+                          textType: TextType.description,
                           color: ColorConstants.grey,
                         ),
                       ),
@@ -137,18 +140,20 @@ class OrderCard extends StatelessWidget {
                   flex: 1,
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     spacing: 10,
                     children: [
                       CustomAssetImage(
                         path: AssetConstants.send.svg,
                         isSvg: true,
+                        height: 16,
                       ),
                       Flexible(
                         child: AppText(
                           title: DateTimeUtils.formatDate(
                               order.deadlines?.departureTime ?? "-",
                               format: "dd.MM.yyyy"),
-                          textType: TextType.subtitle,
+                          textType: TextType.description,
                           color: ColorConstants.grey,
                         ),
                       ),
@@ -160,16 +165,19 @@ class OrderCard extends StatelessWidget {
                   child: Row(
                     spacing: 10,
                     mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CustomAssetImage(
                         path: AssetConstants.get.svg,
                         isSvg: true,
+                        height: 16,
                       ),
                       Flexible(
                         child: AppText(
                           title: DateTimeUtils.formatDate(
-                              order.deadlines?.departureTime ?? "-"),
-                          textType: TextType.subtitle,
+                              order.deadlines?.departureTime ?? "-",
+                              format: "dd.MM.yyyy"),
+                          textType: TextType.description,
                           color: ColorConstants.grey,
                         ),
                       ),

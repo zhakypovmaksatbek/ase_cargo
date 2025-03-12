@@ -79,6 +79,10 @@ class ImagePickerCubit extends Cubit<FeedbackImagePickerState> {
         state.recipientBackFile = null;
         emit(state.copyWith(recipientBackFile: state.recipientBackFile));
         break;
+      case ImageType.signature:
+        state.pickedFile = null;
+        emit(state.copyWith(pickedFile: state.pickedFile));
+        break;
     }
   }
 
@@ -245,6 +249,9 @@ class ImagePickerCubit extends Cubit<FeedbackImagePickerState> {
       case ImageType.recipientBackFile:
         emit(state.copyWith(recipientBackFile: file));
         break;
+      case ImageType.signature:
+        emit(state.copyWith(pickedFile: file));
+        break;
     }
   }
 
@@ -312,4 +319,5 @@ enum ImageType {
   backFile,
   recipientFrontFile,
   recipientBackFile,
+  signature,
 }

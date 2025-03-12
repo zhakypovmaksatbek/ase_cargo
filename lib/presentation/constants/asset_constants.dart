@@ -14,6 +14,7 @@ enum AssetConstants {
   support,
   profile,
   add,
+  uploadImage,
   request,
   history,
   myReview,

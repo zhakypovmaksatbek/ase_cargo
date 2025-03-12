@@ -38,9 +38,7 @@ abstract class  LocaleKeys {
   static const button_take = 'button.take';
   static const button_scan_qr = 'button.scan_qr';
   static const button_choose_from_gallery = 'button.choose_from_gallery';
-  static const button_who_receive = 'button.who_receive';
-  static const button_delivered_package = 'button.delivered_package';
-  static const button_delivered_package_description = 'button.delivered_package_description';
+  static const button_clear = 'button.clear';
   static const button = 'button';
   static const form_phone_number = 'form.phone_number';
   static const form_password = 'form.password';
@@ -102,6 +100,14 @@ abstract class  LocaleKeys {
   static const form_package = 'form.package';
   static const form_choice_country = 'form.choice_country';
   static const form_me = 'form.me';
+  static const form_upload_approve_image = 'form.upload_approve_image';
+  static const form_upload_signature_image = 'form.upload_signature_image';
+  static const form_signature = 'form.signature';
+  static const form_approve = 'form.approve';
+  static const form_required_signature = 'form.required_signature';
+  static const form_who_receive = 'form.who_receive';
+  static const form_delivered_package = 'form.delivered_package';
+  static const form_delivered_package_description = 'form.delivered_package_description';
   static const form = 'form';
   static const exception_cannot_be_empty = 'exception.cannot_be_empty';
   static const exception_password_min_character = 'exception.password_min_character';
@@ -126,6 +132,8 @@ abstract class  LocaleKeys {
   static const notification_not_found_address = 'notification.not_found_address';
   static const notification_cancel_delivery = 'notification.cancel_delivery';
   static const notification_cancel_delivery_description = 'notification.cancel_delivery_description';
+  static const notification_upload_photo_description = 'notification.upload_photo_description';
+  static const notification_not_found_order = 'notification.not_found_order';
   static const notification = 'notification';
   static const general_seconds = 'general.seconds';
   static const general_create_new_password = 'general.create_new_password';
@@ -204,6 +212,7 @@ abstract class  LocaleKeys {
   static const navigation_change_password = 'navigation.change_password';
   static const navigation_i_have = 'navigation.i_have';
   static const navigation_canceled = 'navigation.canceled';
+  static const navigation_delivered_order = 'navigation.delivered_order';
   static const navigation = 'navigation';
   static const status_awaiting_process = 'status.awaiting_process';
   static const status_wait_payment = 'status.wait_payment';
@@ -217,6 +226,11 @@ abstract class  LocaleKeys {
   static const status_rejected = 'status.rejected';
   static const status_done = 'status.done';
   static const status_en_route = 'status.en_route';
+  static const status_add = 'status.add';
+  static const status_remove = 'status.remove';
+  static const status_set_done = 'status.set_done';
+  static const status_set_cancelled = 'status.set_cancelled';
+  static const status_pending_delivery = 'status.pending_delivery';
   static const status = 'status';
 
 }

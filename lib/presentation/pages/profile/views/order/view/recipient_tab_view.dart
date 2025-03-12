@@ -4,7 +4,7 @@ import 'package:ase/data/models/order_model.dart';
 import 'package:ase/data/repo/order_repo.dart';
 import 'package:ase/presentation/pages/order/options/order_options.dart';
 import 'package:ase/presentation/pages/profile/views/order/options/order_options.dart';
-import 'package:ase/presentation/pages/profile/views/order/widgets/filter_bottom_sheet.dart';
+import 'package:ase/presentation/widgets/bottom_sheet/filter_bottom_sheet.dart';
 import 'package:ase/presentation/widgets/buttons/filter_button.dart';
 import 'package:ase/presentation/widgets/card/order_card.dart';
 import 'package:ase/presentation/widgets/error/custom_error_widget.dart';
@@ -98,7 +98,8 @@ class _RecipientTabViewState extends State<RecipientTabView>
                 Padding(
                   padding: const EdgeInsets.only(left: 16.0),
                   child: FilterButton(onTap: () async {
-                    selectedStatus = await AppBottomSheet().filterBottomSheet(
+                    selectedStatus =
+                        await FilterBottomSheet().filterBottomSheet(
                       context: context,
                       selectedValue: selectedStatus,
                       titleBuilder: (value) => value.name,

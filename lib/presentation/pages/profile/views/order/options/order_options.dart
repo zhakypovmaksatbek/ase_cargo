@@ -6,7 +6,7 @@ enum OrderStatus {
   awaitingPickup('awaiting_pickup', LocaleKeys.status_awaiting_pickup),
   rejected('rejected', LocaleKeys.status_rejected),
   enRoute('en_route', LocaleKeys.status_en_route),
-  pendingDelivery('pending_delivery', LocaleKeys.status_en_route),
+  pendingDelivery('pending_delivery', LocaleKeys.status_pending_delivery),
   done('done', LocaleKeys.status_done);
 
   final String value;

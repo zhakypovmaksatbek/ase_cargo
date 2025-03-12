@@ -4,9 +4,9 @@ import 'package:ase/presentation/constants/color_constants.dart';
 import 'package:ase/presentation/courier/widgets/general/order_detail_content.dart';
 import 'package:ase/presentation/pages/profile/views/order/widgets/handle_address_widget.dart';
 import 'package:ase/presentation/products/decoration/custom_decorations.dart';
+import 'package:ase/presentation/widgets/bottom_sheet/def_bottom_sheet.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:flutter/material.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class COrderCard extends StatelessWidget {
   const COrderCard({
@@ -20,17 +20,8 @@ class COrderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        showBarModalBottomSheet(
-            context: context,
-            bounce: true,
-            shape: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(14),
-            ),
-            barrierColor: ColorConstants.black.withValues(alpha: .4),
-            builder: (context) {
-              return COrderDetailContent(box: box);
-            });
+        AppBottomSheet.showDefBottomSheet(
+            context, COrderDetailContent(box: box));
       },
       child: Container(
         decoration: CustomBoxDecoration(),

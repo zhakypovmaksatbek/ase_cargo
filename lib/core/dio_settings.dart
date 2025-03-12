@@ -59,6 +59,22 @@ class DioSettings {
         : Options(headers: {'Accept-Language': currentLanguage});
   }
 
+  Future<Options> _buildFormOptions() async {
+    final String? token = await AppManager.instance.getToken();
+    final currentLanguage = await getCurrentLanguage();
+    if (kDebugMode) {
+      print("====Language ---====");
+      //  print(currentLanguage);
+    }
+    return token != null && token.isNotEmpty
+        ? Options(headers: {
+            'Authorization': 'Bearer $token',
+            'Accept-Language': currentLanguage,
+            'Content-Type': 'multipart/form-data',
+          })
+        : Options(headers: {'Accept-Language': currentLanguage});
+  }
+
   Future<Options> _defBuildOptions() async {
     String? currentLanguage = await getCurrentLanguage();
 
@@ -86,8 +102,10 @@ class DioSettings {
     return currentLanguage;
   }
 
-  Future<Response> post(String url, {Object? data}) async {
-    final Options options = await _buildOptions();
+  Future<Response> post(String url,
+      {Object? data, bool? isFormData = false}) async {
+    final Options options =
+        isFormData == true ? await _buildFormOptions() : await _buildOptions();
     return dio.post(url, data: data, options: options);
   }
 
