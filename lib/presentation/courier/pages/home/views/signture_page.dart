@@ -2,10 +2,12 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 
+import 'package:ase/data/bloc/box/box_cubit.dart';
 import 'package:ase/data/bloc/image/image_picker_cubit.dart';
 import 'package:ase/data/bloc/update_order_status/update_order_status_cubit.dart';
 import 'package:ase/data/models/box_model.dart';
 import 'package:ase/data/models/signature_model.dart';
+import 'package:ase/data/repo/courier_repo.dart';
 import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/main.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
@@ -144,6 +146,9 @@ class _SignaturePageState extends State<SignaturePage> {
                               UpdateOrderStatusState>(
                             listener: (context, state) {
                               if (state is UpdateOrderStatusSuccess) {
+                                context
+                                    .read<BoxCubit>()
+                                    .getBox(CourierOrderStatus.active);
                                 router.back();
                               } else if (state is UpdateOrderStatusError) {
                                 CherryToast.error(

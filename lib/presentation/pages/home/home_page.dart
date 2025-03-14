@@ -1,5 +1,6 @@
 import 'package:ase/data/bloc/banner_bloc/banner_cubit.dart';
 import 'package:ase/data/bloc/news/news_cubit.dart';
+import 'package:ase/data/bloc/reviews/reviews_cubit.dart';
 import 'package:ase/data/bloc/service/service_cubit.dart';
 import 'package:ase/data/bloc/story/story_cubit.dart';
 import 'package:ase/data/bloc/user_cubit/user_cubit.dart';
@@ -36,6 +37,7 @@ class _HomePageState extends State<HomePage> {
     context.read<NewsCubit>().getNews(1);
     context.read<ServiceCubit>().getService(1);
     context.read<UserCubit>().getUser();
+    context.read<ReviewsCubit>().getReviews(1);
   }
 
   @override

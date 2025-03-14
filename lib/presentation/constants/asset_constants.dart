@@ -8,6 +8,7 @@ enum AssetConstants {
   noImage,
   notification,
   date,
+  delete,
   ratingStar,
   home,
   search,
@@ -35,7 +36,8 @@ enum AssetConstants {
   whatsapp,
   upload,
   lock,
-  done
+  done,
+  enRoute
 }
 
 extension AssetConstantsExtension on AssetConstants {

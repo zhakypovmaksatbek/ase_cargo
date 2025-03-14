@@ -6,6 +6,7 @@ import 'package:ase/data/bloc/form/form_cubit.dart';
 import 'package:ase/data/bloc/form_detail/form_detail_cubit.dart';
 import 'package:ase/data/bloc/image/image_picker_cubit.dart';
 import 'package:ase/data/bloc/login/login_cubit.dart';
+import 'package:ase/data/bloc/my_reviews/my_reviews_cubit.dart';
 import 'package:ase/data/bloc/news/news_cubit.dart';
 import 'package:ase/data/bloc/order/order_cubit.dart';
 import 'package:ase/data/bloc/order_detail/order_detail_cubit.dart';
@@ -14,10 +15,14 @@ import 'package:ase/data/bloc/register/register_cubit.dart';
 import 'package:ase/data/bloc/request/request_cubit.dart';
 import 'package:ase/data/bloc/request_detail/request_detail_cubit.dart';
 import 'package:ase/data/bloc/resent_code/resent_code_cubit.dart';
+import 'package:ase/data/bloc/review_action/review_action_cubit.dart';
+import 'package:ase/data/bloc/reviews/reviews_cubit.dart';
+import 'package:ase/data/bloc/search_box/search_box_cubit.dart';
 import 'package:ase/data/bloc/service/service_cubit.dart';
 import 'package:ase/data/bloc/shipment/shipment_cubit.dart';
 import 'package:ase/data/bloc/story/story_cubit.dart';
 import 'package:ase/data/bloc/story_view/story_view_cubit.dart';
+import 'package:ase/data/bloc/take_order/take_order_cubit.dart';
 import 'package:ase/data/bloc/update/update_user_cubit.dart';
 import 'package:ase/data/bloc/update_order_status/update_order_status_cubit.dart';
 import 'package:ase/data/bloc/update_password/update_password_cubit.dart';
@@ -72,11 +77,14 @@ class InitMain {
       BlocProvider(create: (context) => BoxCubit()),
       BlocProvider(create: (context) => UpdateOrderStatusCubit()),
       BlocProvider(create: (context) => OrderHistoryCubit()),
+      BlocProvider(create: (context) => SearchBoxCubit()),
+      BlocProvider(create: (context) => TakeOrderCubit()),
       BlocProvider(
-          create: (context) => ChatBloc(
-                context: context,
-                webSocketService: WebSocketService(),
-              )),
+          create: (context) =>
+              ChatBloc(context: context, webSocketService: WebSocketService())),
+      BlocProvider(create: (context) => MyReviewsCubit()),
+      BlocProvider(create: (context) => ReviewActionCubit()),
+      BlocProvider(create: (context) => ReviewsCubit()),
     ];
   }
 }

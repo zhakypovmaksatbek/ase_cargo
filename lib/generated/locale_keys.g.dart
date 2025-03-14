@@ -39,6 +39,8 @@ abstract class  LocaleKeys {
   static const button_scan_qr = 'button.scan_qr';
   static const button_choose_from_gallery = 'button.choose_from_gallery';
   static const button_clear = 'button.clear';
+  static const button_refresh = 'button.refresh';
+  static const button_send = 'button.send';
   static const button = 'button';
   static const form_phone_number = 'form.phone_number';
   static const form_password = 'form.password';
@@ -134,6 +136,14 @@ abstract class  LocaleKeys {
   static const notification_cancel_delivery_description = 'notification.cancel_delivery_description';
   static const notification_upload_photo_description = 'notification.upload_photo_description';
   static const notification_not_found_order = 'notification.not_found_order';
+  static const notification_cancel_delivery_reason_1 = 'notification.cancel_delivery_reason_1';
+  static const notification_cancel_delivery_reason_2 = 'notification.cancel_delivery_reason_2';
+  static const notification_cancel_delivery_reason_3 = 'notification.cancel_delivery_reason_3';
+  static const notification_cancel_delivery_reason_4 = 'notification.cancel_delivery_reason_4';
+  static const notification_you_have_not_reviewed_yet = 'notification.you_have_not_reviewed_yet';
+  static const notification_delete_review_description = 'notification.delete_review_description';
+  static const notification_review_sent = 'notification.review_sent';
+  static const notification_success = 'notification.success';
   static const notification = 'notification';
   static const general_seconds = 'general.seconds';
   static const general_create_new_password = 'general.create_new_password';
@@ -183,6 +193,8 @@ abstract class  LocaleKeys {
   static const general_total_amount = 'general.total_amount';
   static const general_delivery_price = 'general.delivery_price';
   static const general_sending_message = 'general.sending_message';
+  static const general_price = 'general.price';
+  static const general_scan_barcode = 'general.scan_barcode';
   static const general = 'general';
   static const navigation_verify = 'navigation.verify';
   static const navigation_reset_password = 'navigation.reset_password';
@@ -213,6 +225,8 @@ abstract class  LocaleKeys {
   static const navigation_i_have = 'navigation.i_have';
   static const navigation_canceled = 'navigation.canceled';
   static const navigation_delivered_order = 'navigation.delivered_order';
+  static const navigation_rate_and_review = 'navigation.rate_and_review';
+  static const navigation_rate = 'navigation.rate';
   static const navigation = 'navigation';
   static const status_awaiting_process = 'status.awaiting_process';
   static const status_wait_payment = 'status.wait_payment';

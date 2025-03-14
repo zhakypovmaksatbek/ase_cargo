@@ -89,6 +89,10 @@ final class OrderUtils {
         return ColorConstants.red;
       case "denied":
         return ColorConstants.red;
+      case "en_route":
+        return ColorConstants.blue;
+      case "delivered":
+        return ColorConstants.green;
       default:
         return ColorConstants.darkBlue;
     }
@@ -106,6 +110,10 @@ final class OrderUtils {
         return AssetConstants.cancel.svg;
       case "denied":
         return AssetConstants.cancel.svg;
+      case "en_route":
+        return AssetConstants.enRoute.svg;
+      case "delivered":
+        return AssetConstants.done.svg;
       default:
         return AssetConstants.process.svg;
     }
@@ -123,6 +131,10 @@ final class OrderUtils {
         return LocaleKeys.status_awaiting_pickup.tr();
       case "rejected":
         return LocaleKeys.status_rejected.tr();
+      case "en_route":
+        return LocaleKeys.status_en_route.tr();
+      case "delivered":
+        return LocaleKeys.button_delivered.tr();
 
       case "done":
         return LocaleKeys.status_done.tr();

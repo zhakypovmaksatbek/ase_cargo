@@ -33,6 +33,7 @@ class _StarRatingSelectorState extends State<StarRatingSelector> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      spacing: 8,
       children: List.generate(5, (index) {
         return GestureDetector(
           onTap: () {

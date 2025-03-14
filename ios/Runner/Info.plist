@@ -30,6 +30,8 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Доступ к камере необходим для сканирования QR-кодов</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Доступ к микрофону необходим для эффективного использования функций камеры.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

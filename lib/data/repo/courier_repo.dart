@@ -14,14 +14,14 @@ final class CourierRepo extends ICourierRepo {
 
   @override
   Future<void> addOrder(String boxCode) async {
-    final response = await dio.post("v1/courier/box/add/$boxCode");
+    final response = await dio.post("v1/courier/box/add-order/$boxCode/");
     return response.data;
   }
 
   @override
   Future<void> cancelOrder(String orderCode, String reason) async {
     final response = await dio.post(
-      "v1/courier/box/cancel-order/$orderCode",
+      "v1/courier/box/cancel-order/$orderCode/",
       data: {"reason": reason},
     );
     return response.data;
@@ -30,7 +30,7 @@ final class CourierRepo extends ICourierRepo {
   @override
   Future<void> deleteOrder(String boxCode, String reason) async {
     final response = await dio.delete(
-      "v1/courier/box/remove-order/$boxCode",
+      "v1/courier/box/remove-order/$boxCode/",
       data: {"reason": reason},
     );
     return response.data;
@@ -48,13 +48,14 @@ final class CourierRepo extends ICourierRepo {
   Future<BoxPaginationModel> getOrderHistory({int page = 1}) async {
     final response = await dio.get("v1/courier/history/", queryParameters: {
       "page": page,
+      "page_size": 10,
     });
     return BoxPaginationModel.fromJson(response.data);
   }
 
   @override
-  Future<BoxModel> searOrder(String orderCode) async {
-    final response = await dio.get("v1/courier/search-orders/$orderCode");
+  Future<BoxModel> searchOrder(String orderCode) async {
+    final response = await dio.get("v1/courier/search-orders/$orderCode/");
     return BoxModel.fromJson(response.data);
   }
 }
@@ -66,7 +67,7 @@ abstract class ICourierRepo {
   Future<void> cancelOrder(String orderCode, String reason);
   Future<void> doneOrder(String orderCode, SignatureModel signature);
   Future<BoxPaginationModel> getOrderHistory({int page});
-  Future<BoxModel> searOrder(String orderCode);
+  Future<BoxModel> searchOrder(String orderCode);
 }
 
 enum CourierOrderStatus { active, cancelled }

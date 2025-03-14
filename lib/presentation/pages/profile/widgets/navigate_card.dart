@@ -47,7 +47,8 @@ class NavigateCard extends StatelessWidget {
           if (!isCourier)
             _navigateWidget(context,
                 title: LocaleKeys.navigation_my_reviews.tr(),
-                icon: AssetConstants.myReview.svg),
+                icon: AssetConstants.myReview.svg,
+                onTap: () => router.push(MyReviewsRoute())),
           if (!isCourier)
             Divider(
               color: ColorConstants.dividerColor,

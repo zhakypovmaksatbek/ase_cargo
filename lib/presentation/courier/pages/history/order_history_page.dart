@@ -62,13 +62,15 @@ class _COrderHistoryPageState extends State<COrderHistoryPage> {
           },
           child: CustomScrollView(
             controller: scrollController,
+            physics: BouncingScrollPhysics(),
             slivers: [
               DefSliverAppBar(title: LocaleKeys.navigation_order_history.tr()),
               BlocConsumer<OrderHistoryCubit, OrderHistoryState>(
                 listener: (context, state) {
                   if (state is OrderHistoryLoaded) {
                     isLoading = false;
-                    totalPages = state.data.totalPages ?? 1;
+                    totalPages = state.data.totalPages ??
+                        ((state.data.count ?? 1) ~/ 10);
                     orders.addAll(state.data.results ?? []);
                   } else if (state is OrderHistoryLoading) {
                     isLoading = true;

@@ -5,7 +5,8 @@ import 'package:ase/presentation/courier/pages/history/order_history_page.dart';
 import 'package:ase/presentation/courier/pages/home/c_home_page.dart';
 import 'package:ase/presentation/courier/pages/home/views/signture_page.dart';
 import 'package:ase/presentation/courier/pages/profile/c_profile_page.dart';
-import 'package:ase/presentation/courier/pages/scan/scan_page.dart';
+import 'package:ase/presentation/courier/pages/scan/views/scan_detail_page.dart';
+import 'package:ase/presentation/courier/pages/scan/views/scan_page.dart';
 import 'package:ase/presentation/pages/auth/login/login_page.dart';
 import 'package:ase/presentation/pages/auth/register/register_page.dart';
 import 'package:ase/presentation/pages/auth/reset_password/reset_password.dart';
@@ -20,8 +21,10 @@ import 'package:ase/presentation/pages/main/main_page.dart';
 import 'package:ase/presentation/pages/order/create_order_page.dart';
 import 'package:ase/presentation/pages/order/options/order_options.dart';
 import 'package:ase/presentation/pages/order/view/sender_form_view.dart';
+import 'package:ase/presentation/pages/profile/views/my_reviews/my_reviews_page.dart';
 import 'package:ase/presentation/pages/profile/views/order/view/order_detail.dart';
 import 'package:ase/presentation/pages/profile/views/order/view/order_history.dart';
+import 'package:ase/presentation/pages/profile/views/order/view/rate_and_review_page.dart';
 import 'package:ase/presentation/pages/profile/views/profile_page.dart';
 import 'package:ase/presentation/pages/profile/views/requests/payment_page.dart';
 import 'package:ase/presentation/pages/profile/views/requests/request_detail.dart';
@@ -76,14 +79,20 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: SignatureRoute.page, path: "/signature"),
         AutoRoute(
             page: COrderHistoryRoute.page, path: "/c_order_history_courier"),
+        AutoRoute(page: ScanRoute.page, path: "/scan", fullscreenDialog: true),
+        AutoRoute(
+            page: ScanDetailRoute.page,
+            path: "/scan_detail",
+            fullscreenDialog: true),
         AutoRoute(
             page: CourierMainRoute.page,
             path: "/courier_main",
             children: [
               AutoRoute(page: CHomeRoute.page, path: "c_home", initial: true),
               AutoRoute(page: CProfileRoute.page, path: "c_profile"),
-              AutoRoute(page: ScanRoute.page, path: "scan"),
             ]),
+        AutoRoute(page: MyReviewsRoute.page, path: "/my_reviews"),
+        AutoRoute(page: RateAndReviewRoute.page, path: "/rate_and_review"),
       ];
 }
 

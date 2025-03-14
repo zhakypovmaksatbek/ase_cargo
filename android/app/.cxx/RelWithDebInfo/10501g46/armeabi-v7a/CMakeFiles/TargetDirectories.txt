@@ -1,0 +1,2 @@
+/Users/turdumamatov/Desktop/ase_cargo/android/app/.cxx/RelWithDebInfo/10501g46/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/turdumamatov/Desktop/ase_cargo/android/app/.cxx/RelWithDebInfo/10501g46/armeabi-v7a/CMakeFiles/rebuild_cache.dir

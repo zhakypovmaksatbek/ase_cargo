@@ -35,7 +35,9 @@
         "take":"Забрать",
         "scan_qr":"Наведите камеру на QR или штрих код",
         "choose_from_gallery":"Выбрать из галереи",
-        "clear":"Очистить"
+        "clear":"Очистить",
+        "refresh":"Обновить",
+        "send":"Отправить"
         
     },
     "form": {
@@ -135,9 +137,15 @@
         "cancel_delivery":"Вы отменяете доставку посылки!",
         "cancel_delivery_description":"Для отмены напишите причину отмены!",
         "upload_photo_description":"Выберите один из вариантов",
-        "not_found_order":"У вас нет заказов..."
-
-
+        "not_found_order":"У вас нет заказов...",
+        "cancel_delivery_reason_1":"Неверный номер телефона",
+        "cancel_delivery_reason_2":"Неверный адрес",
+        "cancel_delivery_reason_3":"Переадресация",
+        "cancel_delivery_reason_4":"Не смог связаться с клиентом",
+        "you_have_not_reviewed_yet":"Вы ещё не оставили отзыв",
+        "delete_review_description":"Вы действительно хотите удалить отзыв?",
+        "review_sent":"Отзыв отправлен",
+        "success":"Успешно"
     },
     "general": {
         "seconds": "сек",
@@ -187,7 +195,9 @@
         "request_id":"Заявка {id}",
         "total_amount":"Общая сумма:",
         "delivery_price":"Цена доставки:",
-        "sending_message":"Отправляется..."
+        "sending_message":"Отправляется...",
+        "price":"Цена:",
+        "scan_barcode":"Наведите камеру на штрих код"
     },
     "navigation": {
         "verify": "Подтверждение",
@@ -218,7 +228,9 @@
         "change_password":"Изменение пароля",
         "i_have":"У меня",
         "canceled":"Отмененные",
-        "delivered_order":"Заказ доставлен"
+        "delivered_order":"Заказ доставлен",
+        "rate_and_review":"Оценить и оставить отзыв",
+        "rate":"Оценить"
     },
     "status":{
         "awaiting_process":"Ожидает обработки",
@@ -232,7 +244,7 @@
         "awaiting_pickup":"Ожидает забора",
         "rejected":"Отклонён",
         "done":"Выполнен",
-        "en_route":"Проездом",
+        "en_route":"Доставляется",
         "add":"Добавлено",
         "remove":"Удалено",
         "set_done":"Выполнено",

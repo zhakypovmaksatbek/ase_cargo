@@ -13,6 +13,7 @@ class BoxModel {
   String? action;
   String? address;
   String? zipcode;
+  String? price;
   String? createdAt;
   String? reason;
 
@@ -24,7 +25,8 @@ class BoxModel {
       this.address,
       this.zipcode,
       this.createdAt,
-      this.reason});
+      this.reason,
+      this.price});
 
   BoxModel.fromJson(Map<String, dynamic> json) {
     sender = json['sender'] != null ? Sender.fromJson(json['sender']) : null;
@@ -36,6 +38,7 @@ class BoxModel {
     zipcode = json['zipcode'];
     createdAt = json['created_at'];
     reason = json['reason'];
+    price = json['price'];
   }
 
   Map<String, dynamic> toJson() {

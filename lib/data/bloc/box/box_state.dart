@@ -13,11 +13,12 @@ final class BoxLoading extends BoxState {}
 
 final class BoxLoaded extends BoxState {
   final BoxPaginationModel box;
-
-  const BoxLoaded(this.box);
+  final bool isRefresh;
+  final CourierOrderStatus status;
+  const BoxLoaded(this.box, this.status, {this.isRefresh = false});
 
   @override
-  List<Object> get props => [box];
+  List<Object> get props => [box, isRefresh, status];
 }
 
 final class BoxError extends BoxState {

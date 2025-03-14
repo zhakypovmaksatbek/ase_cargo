@@ -109,7 +109,7 @@ class OrderCard extends StatelessWidget {
                     textType: TextType.body),
               ],
             ),
-            ReminderMessageWidget(),
+            if (order.orderStatus == "in_process") ReminderMessageWidget(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.min,

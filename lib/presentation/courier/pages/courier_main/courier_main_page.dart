@@ -1,4 +1,5 @@
 import 'package:ase/generated/locale_keys.g.dart';
+import 'package:ase/main.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
 import 'package:ase/router/app_router.dart';
@@ -18,7 +19,6 @@ class CourierMainPage extends StatefulWidget {
 class _CourierMainPageState extends State<CourierMainPage> {
   List<PageRouteInfo<dynamic>> get routes => [
         const CHomeRoute(),
-        const ScanRoute(),
         const CProfileRoute(),
       ];
   void onTap(int index, TabsRouter tabsRouter) {
@@ -29,11 +29,18 @@ class _CourierMainPageState extends State<CourierMainPage> {
     }
   }
 
+  final router = getIt<AppRouter>();
+
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       routes: routes,
       homeIndex: 0,
+      curve: Curves.easeInOut,
+      duration: const Duration(milliseconds: 600),
+      transitionBuilder: (context, child, animation) {
+        return FadeTransition(opacity: animation, child: child);
+      },
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
         return Scaffold(
@@ -41,9 +48,7 @@ class _CourierMainPageState extends State<CourierMainPage> {
           floatingActionButtonLocation:
               FloatingActionButtonLocation.miniCenterDocked,
           floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              onTap(1, tabsRouter);
-            },
+            onPressed: () => router.push(const ScanRoute()),
             backgroundColor: ColorConstants.primary,
             child: const Icon(Icons.qr_code_scanner_outlined,
                 size: 40, color: Colors.white),
@@ -66,7 +71,7 @@ class _CourierMainPageState extends State<CourierMainPage> {
                     LocaleKeys.navigation_home.tr(), 0, tabsRouter),
                 const SizedBox(width: 50),
                 _buildNavItem(AssetConstants.profile.svg,
-                    LocaleKeys.navigation_cabinet.tr(), 2, tabsRouter),
+                    LocaleKeys.navigation_cabinet.tr(), 1, tabsRouter),
               ],
             ),
           ),

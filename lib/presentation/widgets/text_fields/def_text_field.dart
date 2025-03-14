@@ -13,6 +13,7 @@ class DefTextField extends StatelessWidget {
   final void Function(String)? onChanged;
   final bool? enabled;
   final int? maxLines;
+  final int? minLines;
   final void Function()? onTap;
 
   const DefTextField(
@@ -28,6 +29,7 @@ class DefTextField extends StatelessWidget {
       this.onChanged,
       this.enabled,
       this.maxLines,
+      this.minLines,
       this.onTap});
 
   @override
@@ -36,6 +38,7 @@ class DefTextField extends StatelessWidget {
       controller: controller,
       enabled: enabled,
       maxLines: maxLines,
+      minLines: minLines,
       onChanged: onChanged,
       keyboardType: keyboardType,
       textInputAction: textInputAction,

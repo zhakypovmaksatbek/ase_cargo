@@ -15,6 +15,7 @@ final class AppBottomSheet {
     await showBarModalBottomSheet(
       context: context,
       bounce: true,
+      isDismissible: true,
       shape: OutlineInputBorder(
         borderSide: BorderSide.none,
         borderRadius: BorderRadius.circular(14),

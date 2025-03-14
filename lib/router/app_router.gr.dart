@@ -155,6 +155,22 @@ class MainRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MyReviewsPage]
+class MyReviewsRoute extends PageRouteInfo<void> {
+  const MyReviewsRoute({List<PageRouteInfo>? children})
+    : super(MyReviewsRoute.name, initialChildren: children);
+
+  static const String name = 'MyReviewsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const MyReviewsPage();
+    },
+  );
+}
+
+/// generated route for
 /// [NewsDetailPage]
 class NewsDetailRoute extends PageRouteInfo<NewsDetailRouteArgs> {
   NewsDetailRoute({
@@ -353,6 +369,43 @@ class ProfileRouterRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [RateAndReviewPage]
+class RateAndReviewRoute extends PageRouteInfo<RateAndReviewRouteArgs> {
+  RateAndReviewRoute({
+    Key? key,
+    required String code,
+    List<PageRouteInfo>? children,
+  }) : super(
+         RateAndReviewRoute.name,
+         args: RateAndReviewRouteArgs(key: key, code: code),
+         initialChildren: children,
+       );
+
+  static const String name = 'RateAndReviewRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<RateAndReviewRouteArgs>();
+      return RateAndReviewPage(key: args.key, code: args.code);
+    },
+  );
+}
+
+class RateAndReviewRouteArgs {
+  const RateAndReviewRouteArgs({this.key, required this.code});
+
+  final Key? key;
+
+  final String code;
+
+  @override
+  String toString() {
+    return 'RateAndReviewRouteArgs{key: $key, code: $code}';
+  }
+}
+
+/// generated route for
 /// [RegisterPage]
 class RegisterRoute extends PageRouteInfo<void> {
   const RegisterRoute({List<PageRouteInfo>? children})
@@ -466,6 +519,43 @@ class RestoreAccessRoute extends PageRouteInfo<void> {
       return const RestoreAccessPage();
     },
   );
+}
+
+/// generated route for
+/// [ScanDetailPage]
+class ScanDetailRoute extends PageRouteInfo<ScanDetailRouteArgs> {
+  ScanDetailRoute({
+    Key? key,
+    required String orderCode,
+    List<PageRouteInfo>? children,
+  }) : super(
+         ScanDetailRoute.name,
+         args: ScanDetailRouteArgs(key: key, orderCode: orderCode),
+         initialChildren: children,
+       );
+
+  static const String name = 'ScanDetailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ScanDetailRouteArgs>();
+      return ScanDetailPage(key: args.key, orderCode: args.orderCode);
+    },
+  );
+}
+
+class ScanDetailRouteArgs {
+  const ScanDetailRouteArgs({this.key, required this.orderCode});
+
+  final Key? key;
+
+  final String orderCode;
+
+  @override
+  String toString() {
+    return 'ScanDetailRouteArgs{key: $key, orderCode: $orderCode}';
+  }
 }
 
 /// generated route for

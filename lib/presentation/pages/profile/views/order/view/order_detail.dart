@@ -3,13 +3,17 @@ import 'package:ase/data/bloc/order_detail/order_detail_cubit.dart';
 import 'package:ase/data/models/order_detail_model.dart';
 import 'package:ase/data/models/request_model.dart';
 import 'package:ase/generated/locale_keys.g.dart';
+import 'package:ase/main.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/constants/color_constants.dart';
+import 'package:ase/presentation/pages/profile/views/order/options/order_options.dart';
 import 'package:ase/presentation/pages/profile/widgets/status_widget.dart';
 import 'package:ase/presentation/products/utils/order_utils.dart';
 import 'package:ase/presentation/widgets/app_bar/def_sliver_app_bar.dart';
+import 'package:ase/presentation/widgets/buttons/def_elevated_button.dart';
 import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
 import 'package:ase/presentation/widgets/text/app_text.dart';
+import 'package:ase/router/app_router.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +35,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
 
   @override
   void initState() {
+    super.initState();
     orderDetailCubit = OrderDetailCubit();
     orderDetailCubit.getOrderDetail(widget.orderId);
-    // OrderRepo().getOrderDetail(widget.orderId);
-    super.initState();
   }
 
   @override
@@ -55,70 +58,87 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
               child: BlocBuilder<OrderDetailCubit, OrderDetailState>(
                 builder: (context, state) {
                   if (state is OrderDetailSuccess) {
-                    final OrderDetailModel detail = state.orderDetail;
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        spacing: 20,
-                        children: [
-                          _buildAddress(detail.address ?? Address()),
-                          _buildOrderStatus(detail.statusRoad ?? [],
-                              detail.orderStatus ?? ""),
-                          AppText(
-                            title: LocaleKeys.general_delivery_info.tr(),
-                            textType: TextType.body,
-                            color: ColorConstants.lavenderBlue,
-                          ),
-                          if (detail.packages != null)
-                            ...detail.packages?.map((e) => Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        if (e.name != null)
-                                          AppText(
-                                            title: e.name ?? "",
-                                            textType: TextType.header,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        if (e.description != null)
-                                          AppText(
-                                            title: e.description ?? "",
-                                            textType: TextType.body,
-                                          ),
-                                      ],
-                                    )) ??
-                                [],
-                          _infoCard(detail),
-                          Divider(color: ColorConstants.dividerColor),
-                          if (detail.shipmentOptionPrice != "0.00")
-                            _buildOrderInfo(
-                                title: LocaleKeys.general_service_price.tr(),
-                                subtitle: detail.shipmentOptionPrice ?? "0.00"),
-                          if (detail.totalServicesPrice != "0.00")
-                            _buildOrderInfo(
-                                title: LocaleKeys
-                                    .general_additional_service_price
-                                    .tr(),
-                                subtitle: detail.totalServicesPrice ?? "0"),
-                          if (detail.price?.isNotEmpty ?? false)
-                            _buildOrderInfo(
-                                title: LocaleKeys.general_delivery_price.tr(),
-                                subtitle: detail.price ?? "0"),
-                          SizedBox(height: 60)
-                        ],
-                      ),
-                    );
+                    final detail = state.orderDetail;
+                    return _buildOrderDetailContent(detail);
                   } else {
-                    return SizedBox();
+                    return const SizedBox();
                   }
                 },
               ),
-            )
+            ),
           ],
         ),
       ),
     );
+  }
+
+  final router = getIt<AppRouter>();
+  Widget _buildOrderDetailContent(OrderDetailModel detail) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 10,
+        children: [
+          _buildAddress(detail.address ?? Address()),
+          _buildOrderStatus(detail.statusRoad ?? [], detail.orderStatus ?? ""),
+          AppText(
+            title: LocaleKeys.general_delivery_info.tr(),
+            textType: TextType.body,
+            color: ColorConstants.lavenderBlue,
+          ),
+          if (detail.packages != null)
+            ..._buildPackageDetails(detail.packages!),
+          _infoCard(detail),
+          const Divider(color: ColorConstants.dividerColor),
+          if (detail.shipmentOptionPrice != "0.00")
+            _buildOrderInfo(
+              title: LocaleKeys.general_service_price.tr(),
+              subtitle: detail.shipmentOptionPrice ?? "0.00",
+            ),
+          if (detail.totalServicesPrice != "0.00")
+            _buildOrderInfo(
+              title: LocaleKeys.general_additional_service_price.tr(),
+              subtitle: detail.totalServicesPrice ?? "0",
+            ),
+          if (detail.price?.isNotEmpty ?? false)
+            _buildOrderInfo(
+              title: LocaleKeys.general_delivery_price.tr(),
+              subtitle: detail.price ?? "0",
+            ),
+          SizedBox(
+              width: double.infinity,
+              child: DefElevatedButton(
+                text: LocaleKeys.navigation_rate_and_review.tr(),
+                onPressed: () {
+                  router.push(RateAndReviewRoute(code: detail.code ?? ""));
+                },
+              )),
+          const SizedBox(height: 60),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> _buildPackageDetails(List<Packages> packages) {
+    return packages
+        .map((e) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (e.name != null)
+                  AppText(
+                    title: e.name ?? "",
+                    textType: TextType.header,
+                    fontWeight: FontWeight.w500,
+                  ),
+                if (e.description != null)
+                  AppText(
+                    title: e.description ?? "",
+                    textType: TextType.body,
+                  ),
+              ],
+            ))
+        .toList();
   }
 
   Column _infoCard(OrderDetailModel detail) {
@@ -126,24 +146,29 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
       spacing: 10,
       children: [
         _buildOrderInfo(
-            title: LocaleKeys.general_weight.tr(),
-            subtitle: "${detail.totalWeight ?? 0} kg"),
+          title: LocaleKeys.general_weight.tr(),
+          subtitle: "${detail.totalWeight ?? 0} kg",
+        ),
         if (detail.additionServices?.isNotEmpty ?? false)
           _buildOrderInfo(
-              title: LocaleKeys.general_delivery_type.tr(),
-              subtitle: detail.shipmentOptionName ?? ""),
+            title: LocaleKeys.general_delivery_type.tr(),
+            subtitle: detail.shipmentOptionName ?? "",
+          ),
         if (detail.additionServices?.isNotEmpty ?? false)
           _buildOrderInfo(
-              title: LocaleKeys.general_additional_services.tr(),
-              subtitle: detail.additionServices?.join(", ") ?? ""),
+            title: LocaleKeys.general_additional_services.tr(),
+            subtitle: detail.additionServices?.join(", ") ?? "",
+          ),
         _buildOrderInfo(
-            title: LocaleKeys.general_sender.tr(),
-            subtitle:
-                "${detail.sender?.name ?? ""} (${detail.sender?.city ?? ""})"),
+          title: LocaleKeys.general_sender.tr(),
+          subtitle:
+              "${detail.sender?.name ?? ""} (${detail.sender?.city ?? ""})",
+        ),
         _buildOrderInfo(
-            title: LocaleKeys.general_recipient.tr(),
-            subtitle:
-                "${detail.recipient?.name ?? ""} (${detail.recipient?.city ?? ""})"),
+          title: LocaleKeys.general_recipient.tr(),
+          subtitle:
+              "${detail.recipient?.name ?? ""} (${detail.recipient?.city ?? ""})",
+        ),
       ],
     );
   }
@@ -169,7 +194,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
             fontWeight: FontWeight.w500,
             textAlign: TextAlign.end,
           ),
-        )
+        ),
       ],
     );
   }
@@ -196,9 +221,8 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           Column(
             children: List.generate(road.length, (index) {
               final entry = road[index];
-              final OrderState step =
-                  OrderState.byName(entry.state ?? ""); // State'i belirle
-              final bool isLast = index == road.length - 1;
+              final step = OrderState.byName(entry.state ?? "");
+              final isLast = index == road.length - 1;
 
               return Padding(
                 padding: const EdgeInsets.only(bottom: 16),
@@ -207,8 +231,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   children: [
                     Column(
                       children: [
-                        Icon(step.icon,
-                            color: step.color), // State'e göre ikon ve renk
+                        Icon(step.icon, color: step.color),
                         if (!isLast)
                           Container(width: 2, height: 20, color: step.color),
                       ],
@@ -218,14 +241,16 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AppText(
-                          title: entry.status ?? "",
+                          title: OrderStatus.fromString(entry.status ?? "")
+                              .name
+                              .tr(),
                           textType: TextType.body,
                           fontWeight: FontWeight.bold,
-                          color: step.color, // State'e göre renk
+                          color: step.color,
                         ),
                         if (entry.time != null)
                           AppText(
-                            title: formatTime(entry.time),
+                            title: _formatTime(entry.time),
                             textType: TextType.body,
                             color: Colors.grey,
                           ),
@@ -240,7 +265,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     );
   }
 
-  String formatTime(String? time) {
+  String _formatTime(String? time) {
     if (time == null) return "";
     return DateFormat("dd.MM.yyyy HH:mm")
         .format(DateTime.parse(time).toLocal());
@@ -249,12 +274,12 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   Row _buildAddress(Address address) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      spacing: 10,
       children: [
         CustomAssetImage(
           path: AssetConstants.location.svg,
           isSvg: true,
         ),
+        const SizedBox(width: 10),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -301,7 +326,7 @@ class OrderStatusModel {
 
 enum OrderState {
   active(Icons.radio_button_checked_sharp, ColorConstants.blue),
-  completed(Icons.check_circle, ColorConstants.green),
+  completed(Icons.check_circle_outline, ColorConstants.green),
   upcoming(Icons.access_time, ColorConstants.grey),
   canceled(Icons.cancel, ColorConstants.red);
 

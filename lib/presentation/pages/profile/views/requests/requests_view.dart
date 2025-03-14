@@ -5,9 +5,8 @@ import 'package:ase/generated/locale_keys.g.dart';
 import 'package:ase/presentation/constants/asset_constants.dart';
 import 'package:ase/presentation/widgets/app_bar/def_sliver_app_bar.dart';
 import 'package:ase/presentation/widgets/card/request_card.dart';
-import 'package:ase/presentation/widgets/image/custom_asset_image.dart';
+import 'package:ase/presentation/widgets/empty/custom_empty_widget.dart';
 import 'package:ase/presentation/widgets/loading/loading_widget.dart';
-import 'package:ase/presentation/widgets/text/app_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -93,17 +92,9 @@ class _RequestsViewState extends State<RequestsView> {
                     );
                   } else if (requests.isEmpty) {
                     return SliverFillRemaining(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 20,
-                        children: [
-                          CustomAssetImage(
-                              path: AssetConstants.empty.svg, isSvg: true),
-                          AppText(
-                              title: LocaleKeys.notification_not_found_requests
-                                  .tr(),
-                              textType: TextType.body),
-                        ],
+                      child: CustomEmptyWidget(
+                        title: LocaleKeys.notification_not_found_requests.tr(),
+                        svgImage: AssetConstants.empty.svg,
                       ),
                     );
                   }

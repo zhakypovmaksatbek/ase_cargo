@@ -30,8 +30,7 @@ class UserCubit extends Cubit<UserState> {
       }
       if (e.response != null) {
         if (e.response?.statusCode == 401) {
-          await AppManager.instance.setToken(accessToken: '');
-          await AppManager.instance.setIsLogin(false);
+          await AppManager.instance.clearTokens();
           emit(UserUnauthorized());
           _router.replaceAll([LoginRoute()]);
           return;
